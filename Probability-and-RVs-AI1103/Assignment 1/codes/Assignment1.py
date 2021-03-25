@@ -13,7 +13,7 @@ import numpy as np
 #end if
 
 #Sample size
-simlen = int(2e2)
+simlen = int(2e2)#Simlen size can be increased to increase accuracy
 
 #Sample space
 S = 2
