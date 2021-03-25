@@ -134,7 +134,7 @@ Download all python codes from
 https://github.com/Taha-Adeel/AI1103/tree/main/Assignment%201/codes
 \end{lstlisting}
 %
-and LaTeX codes from 
+and latex-tikz codes from 
 %
 \begin{lstlisting}
 https://github.com/Taha-Adeel/AI1103/tree/main/Assignment%201
@@ -143,26 +143,36 @@ https://github.com/Taha-Adeel/AI1103/tree/main/Assignment%201
 %%(gvv_ncert_prob.pdf 4.13.) \\
 In a musical chair game, the person playing the music has been advised to stop playing the music at any time within 2 minutes after she starts playing. What is the probability that the music will stop within the first half-minute after starting?
 \section{Solution (4.13)}
-Our sample space S consists of 2 minutes time after the person starts playing.
+Let the random variable  $X\in\mathbb{R^+} $ represent the time between starting the music and stopping in minutes
+For a uniform probability distribution, the Probability Density Function(pdf) is given by
 \begin{align}
-    S = 2 \text{ minutes}
+  p_{X}(x) =
+  \begin{cases}
+  \dfrac{1}{b-a} = \dfrac{1}{2} & \text{if $0 \leq x \leq 2$}\\ \vspace{-0.1cm}
+  0 & \text{otherwise} 
+  \end{cases}
 \end{align}
-The event size E is the first half-minute after starting
+The probability that the music will stop within the first half-minute after starting
 \begin{align}
-    E = 0.5 \text{ minutes}
+    \pr{X=x \,\,|\,\, 0 \leq x \leq 0.5} = \int_0^{\frac{1}{2}} \frac{1}{2} dx = \frac{1}{4} =0.25
 \end{align}
-\\The probability that the music will stop within the first half-minute after starting is
-\begin{align}
-    \pr{E} = \dfrac{E}{S} = \dfrac{0.5}{2} = 0.25
-\end{align}
-
-\begin{figure}[h]
+\begin{figure}[h!]
       \centering
-      \includegraphics[width=\columnwidth]{Figures/musical_chairs.png}
-  \end{figure}
-  \par \vspace{0.3cm} The python code is available in 
+      \includegraphics[width=\columnwidth]{Figures/pdf.png}
+\end{figure}
+\par \vspace{6cm}
+The python code for the pdf is available in 
   \begin{lstlisting}
-  https://github.com/Taha-Adeel/AI1103/tree/main/Assignment%201/codes
+  https://github.com/Taha-Adeel/AI1103/blob/main/Assignment%201/codes/pdf.py
+  \end{lstlisting}
+
+\begin{figure}[h!]
+    \centering
+      \includegraphics[width=\columnwidth]{Figures/musical_chairs.png}
+\end{figure}
+  The python code is available in 
+  \begin{lstlisting}
+  https://github.com/Taha-Adeel/AI1103/blob/main/Assignment%201/codes/Assignment1.py
   \end{lstlisting}
   The python code generates 200 uniform random points in time that are less than 2 minutes and checks for the number of points in time that are within the first half-minute. The ratio of this is close to $0.25$, which is the theoretical value. Note that each time the code is run, the ratio will change, but it will still be close to 0.25
 \end{document}
