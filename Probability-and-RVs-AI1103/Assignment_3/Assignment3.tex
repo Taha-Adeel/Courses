@@ -30,6 +30,7 @@
 \usepackage{tkz-euclide}
 
 \usetikzlibrary{calc,math}
+\usetikzlibrary{automata, positioning}
 \usepackage{listings}
     \usepackage{color}                                            %%
     \usepackage{array}                                            %%
@@ -153,40 +154,88 @@ Given that Aishwarya studies computer science on Monday, what is the probablity 
 \end{multicols}
 \end{enumerate}
 \section{Solution}
-Let the random variable $X_i \in \{ 0,1 \}$ , $i=0,1,2, \cdots$ represent her studying CS(Computer Science) or mathematics respectively on the $i$th day.
-\begin{table}[h]
-    \centering
-    \begin{tabular}[width=\columnwidth]{|c|c|c|c|}
-         \hline
-        \textbf{Subject}&\textbf{X$_i$}&\textbf{$\pr{X_i | X_{i-1}=0}$} &\textbf{$\pr{X_i | X_{i-1}=1}$} \\
-        \hline    
-         CS&0&x (Ref \eqref{x})&0.4\\
-         \hline
-         Maths&1&0.6&y (Ref \eqref{y})\\
-         \hline
-    \end{tabular}
-\end{table}
+Let the random variables $X_i \in \{ 1,2 \}$ , $i=0,1,2, \cdots$ represent her studying CS(Computer Science) or mathematics respectively on the $i$th day. The transition matrix $P$ for the markov chain \{$X$\} (where $P_{ij}=\pr{X_t=j\, |\, X_{t-1}=i}$) is :-
+\begin{align}
+P=\begin{bmatrix}
+x & 0.6 \\
+0.4 & y 
+\end{bmatrix}
+\end{align}
 \par As $X_i=0 \text{ and } X_i=1$ are mutually exclusive, we can easily calculate $x$ and $y$.
 \begin{align}
-    x=\pr{X_{i} = 0 \,|\, X_{i-1}=0} &= 1-\pr{X_{i} = 1 \,|\, X_{i-1}=0}\nonumber
+   x=\pr{X_{i} = 0 \,|\, X_{i-1}=0} &= 1-\pr{X_{i} = 1 \,|\, X_{i-1}=0}\nonumber
     \\&= 0.4 \label{x}\\
     y=\pr{X_{i} = 1 \,|\, X_{i-1}=1} &= 1-\pr{X_{i} = 0 \,|\, X_{i-1}=1}\nonumber
     \\&= 0.6 \label{y}
-\end{align} 
-\begin{align}
-    \therefore \pr{X_i=0}&=\pr{X_{i} = 0 \,|\, X_{i-1}=0}\times \pr{ X_{i-1}=0}\nonumber\\
-    &+ \pr{X_{i} = 0 \,|\, X_{i-1}=1}\times \pr{ X_{i-1}=1}  \nonumber\\
-&=0.4\times\left( \pr{ X_{i-1}=0}+\pr{ X_{i-1}=1} \right) \nonumber\\
-&=0.4 \times 1 = 0.4
 \end{align}
-Therefore, the probability that Aishwarya studies computer science on any day is $0.4$. So, the probability she studies computer science on Wednesday is also 0.4\\
- (\textbf{Ans: Option (C)})\\
-\par Alternatively, the probability she studies CS on Wednesday($i=2$) can be found by($\because X_0=0$) :
+\begin{figure}[h]
+    \centering
+     \begin{tikzpicture}[
+roundnode/.style={circle, draw=black!90, fill=black!7, very thick, minimum size=7mm},
+]
+%Nodes
+\node[roundnode]        (Computer_Science)        {1};
+\node[roundnode]        (Mathematics)       [right=4cm of Computer_Science] {2};
+
+%Lines
+ \draw[every loop,
+        auto=right,
+        line width=0.7mm,
+        >=latex,
+        draw=orange,
+        fill=orange]
+            (Computer_Science) edge[bend right, auto=left]  node {0.6} (Mathematics)
+            (Mathematics) edge[bend right, auto=right] node {0.4} (Computer_Science)
+            (Computer_Science) edge[loop above]             node {0.4} (Computer_Science)
+            (Mathematics) edge[loop above]             node {0.6} (Mathematics);
+\end{tikzpicture}
+    \par{Markov Diagram}
+
+\end{figure}
+\par The $\pr{X_{0+t}=i | X_{0}=j}$ is the $(i,j)$th position of $P^{\,t}$. Therefore $\pr{X_{2}=1 | X_{0}=1}$ is the $(1,1)$th position of $P^2$.
 \begin{align}
-    \pr{X_2=0}&= \pr{X_1=0|X_0=0}\times \pr{X_2=0|X_1\hspace{-0.1cm}=\hspace{-0.1cm}0}\nonumber\\
-    &+  \pr{X_1=1|X_0=0}\times \pr{X_2=0|X_1\hspace{-0.1cm}=1\hspace{-0.1cm}}\\
-     &= 0.4\times 0.4 + 0.6\times0.4\\
-     &=0.4
- \end{align}
- (\textbf{Ans: Option (C)})
+    P^2=\begin{bmatrix}
+0.4 & 0.6 \\
+0.4 & 0.6
+\end{bmatrix}\times
+\begin{bmatrix}
+0.4 & 0.6 \\
+0.4 & 0.6 
+\end{bmatrix}=
+\begin{bmatrix}
+0.4 & 0.6 \\
+0.4 & 0.6 
+\end{bmatrix}
+\end{align}
+\par $\therefore$ The probability she studies computer science on Wednesday is $P_{1\,1}^{\,2} = 0.4$.\\
+(\textbf{Ans: Option (C)})
+%%\begin{table}[h]
+%%    \centering
+%%    \begin{tabular}[width=\columnwidth]{|c|c|c|c|}
+%%         \hline
+%%        \textbf{Subject}&\textbf{X$_i$}&\textbf{$\pr{X_i | X_{i-1}=0}$} &\textbf{$\pr{X_i | X_{i-1}=1}$} \\
+%%        \hline    
+%%         CS&0&x (Ref \eqref{x})&0.4\\
+%%         \hline
+%%         Maths&1&0.6&y (Ref \eqref{y})\\
+%%         \hline
+%%    \end{tabular}
+%%\end{table}
+ 
+%%\begin{align}
+%%    \therefore \pr{X_i=0}&=\pr{X_{i} = 0 \,|\, X_{i-1}=0}\times \pr{ X_{i-1}=0}\nonumber\\
+%%    &+ \pr{X_{i} = 0 \,|\, X_{i-1}=1}\times \pr{ X_{i-1}=1}  \nonumber\\
+%%    &=0.4\times\left( \pr{ X_{i-1}=0}+\pr{ X_{i-1}=1} \right) \nonumber\\
+%%    &=0.4 \times 1 = 0.4
+%%\end{align}
+%Therefore, the probability that Aishwarya studies computer science on any day is $0.4$. So, the probability she studies computer science on Wednesday is also 0.4\\
+% (\textbf{Ans: Option (C)})\\
+%%\par Alternatively, the probability she studies CS on Wednesday($i=2$) can be found by($\because X_0=0$) :
+%%\begin{align}
+%%    \pr{X_2=0}&= \pr{X_1=0|X_0=0}\times \pr{X_2=0|X_1\hspace{-0.1cm}=\hspace{-0.1cm}0}\nonumber\\
+%%    &+  \pr{X_1=1|X_0=0}\times \pr{X_2=0|X_1\hspace{-0.1cm}=1\hspace{-0.1cm}}\\
+%%     &= 0.4\times 0.4 + 0.6\times0.4\\
+%%     &=0.4
+%% \end{align}
+%%(\textbf{Ans: Option (C)})
 \end{document}
