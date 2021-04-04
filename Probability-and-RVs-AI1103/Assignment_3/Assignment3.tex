@@ -167,22 +167,24 @@ Consider the following parameters
          \hline
          {$\{X_0, X_1, \dots\}$}& \multicolumn{2}{p{5.8cm}|}{Random variables(which form a markov chain) where $X_i \in S$ represents her studying CS or maths on the $i$th day(i=0 for Monday)}\\
          \hline
-         P& {The one \nolinebreak step state \nolinebreak transition  matrix (The elements $p_{ij}\nolinebreak=\nolinebreak\text{Pr}(X_{n+1}$ $= j\, |\, X_{n}=i)$ )}& {\vspace{-6mm}\begin{align*}
-        \hspace{2em}\,\,\overbrace{
+         P& {The one \nolinebreak step state \nolinebreak transition  matrix (The elements $p_{ij}\nolinebreak=\nolinebreak\text{Pr}(X_{n+1}$ $= j\, |\, X_{n}=i)$ )}& {\vspace{-4mm}\begin{align}
+        \hspace{3em}\,\,\,\,\overbrace{
          \begin{matrix}
         1 & \,\,\,2
-        \end{matrix}}^{X_{n+1}}
-        \end{align*}
+        \end{matrix}}^{X_{n+1}}\nonumber
+        \end{align}
         \vspace{-1cm}
-        \begin{align*}
-        P=\scriptstyle{X_n} \bigg\{ \begin{matrix} 1\\ 2\end{matrix}
+        \begin{align}
+        P=\,\scriptstyle{X_n}\, \bigg\{ \,\begin{matrix} 1\\ 2\end{matrix}\,
         \begin{bmatrix}
         x & \hspace{-3mm}0.6 \\
         0.4 & \hspace{-3mm}y 
-        \end{bmatrix}\hspace{0.6cm}
-        \end{align*}}\\
+        \end{bmatrix}
+    	\label{transition_matrix}
+        \end{align}}\\
          \hline
     \end{tabular}
+    \label{Parameters}
 \end{table}
 
 
@@ -193,12 +195,12 @@ Consider the following parameters
 %%\end{align}% , where $X_n$ represents her studying CS or mathematics on the $n$th day. 
 %%with initial distribution $\alpha = (\alpha_1 , \alpha_2) =(1,0)$ ($\because\alpha_i = \pr{X_0=i}$).\\
 %%The state transition matrix $P=(p_{ij})$ for the markov chain (where $p_{ij}=\pr{X_{n+1}=j\, |\, X_{n}=i}$) is :-
-%%\begin{align*}
+%%\begin{align}
 %%\hspace{3.3em}\overbrace{
 %% \begin{matrix}
 %%1 & \,\,\,\,\,\,2
-%%\end{matrix}}^{X_{n+1}}
-%%\end{align*}
+%%\end{matrix}\nonumber}^{X_{n+1}}\nonumber
+%%\end{align}
 %%\vspace{-1cm}
 %%\begin{align}
 %%P\,\,=\,\,\,\,\scriptstyle{X_n\,\,} \bigg\{ \, \begin{matrix} 1\\ %%2\end{matrix}\,\,\,
