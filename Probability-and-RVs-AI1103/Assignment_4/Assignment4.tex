@@ -147,18 +147,18 @@ $$Z_n = -\log_e \left( \Prod_{i=1}^n (2-X_i) \right)^\frac{1}{n}.
 $$
 Then, as $n \to \infty$, the sequence $\{ Z_n \}_{n \geq 1}$ converges almost surely to \rule{1cm}{0.15mm} (Round of to 2 decimal places).
 \section{Solution (GATE 2021 (ST) Q.19)}
-Let $X$ and $Z$ be random variables. $X$ follows a uniform distribution from 0 to 2.
-\begin{align}
-    X &\sim \mathcal{U}[0,2],\\
-    \text{and let }    Z&=-\log_e (2-X)
-\end{align}
 Simplifying $Z_n$, we have
 \begin{align}
     Z_n &= -\log_e \left( \Prod_{i=1}^n (2-X_i) \right)^\frac{1}{n}\\
         &= -\frac{1}{n}\cdot \log_e \left( \Prod_{i=1}^n (2-X_i) \right)\\
         &= \frac{1}{n}\cdot\left( \sum\limits_{i=1}^n (-\log_e \left( 2-X_i )\right) \right)
 \end{align}
-As $n \to \infty$, the sequence $\{Z_n\} $(Average value of $-\ln{(2-X_i)}$) tends to the expectation value of the continuous distribution of $Z$.
+Let $X$ and $Z$ be random variables. $X$ follows a uniform distribution from 0 to 2.
+\begin{align}
+    X &\sim \mathcal{U}[0,2],\\
+    \text{and let }    Z&=-\log_e (2-X)
+\end{align}
+In our question, we are generating $n$ independent and identically distributed random variables, $X_i , \text{where } i \leq n$ from $X \sim \mathcal{U}[0,2]$ and $Z_n$ finds the average value of $-\log_e (2-X_i)$ . \textbf{The Law of Large Numbers} states that for large number of trials($n$ here), the average obtained (avg. of $-\log_e (2-X_i)$ here) is close to the expected value ($E(-\log_e (2-X))=E(Z)$ here), with the precision increasing as more trials are taken. Hence as $n \to \infty$, the sequence $\{Z_n\} $ tends to the expectation value of the continuous distribution of $Z$.
 \begin{align}
     \therefore \lim\limits_{n \to \infty}Z_n&=E(Z)
     \label{Zn_and_Z}
@@ -195,11 +195,6 @@ F_X\brak{2- \exp(-z)} =
 1 & 2- \exp(-z) > 2
 \end{cases}
 \end{multline}
-\begin{figure}[H]
-    \centering
-      \includegraphics[width=\columnwidth]{Figures/CDF_Z.png}
-     \caption{$F_Z(z)$}
-\end{figure}
 After some algebra, the above conditions yield
 \begin{align}
 F_Z(z) &= 
@@ -215,6 +210,11 @@ F_Z(z) &=
 \end{cases}
 \label{PDF_Z_Final}
 \end{align}
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=\columnwidth]{Figures/CDF_Z.png}
+     \caption{$F_Z(z)$}
+\end{figure}
 Now calculating the expectation value for $Z$, we have
 \begin{align}
     E(Z)&=\int\limits_{-\ln{2}}^{\infty}z\,f_Z(z)\,dz\\
