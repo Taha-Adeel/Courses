@@ -158,7 +158,7 @@ Let $X$ and $Z$ be random variables. $X$ follows a uniform distribution from 0 t
     X &\sim \mathcal{U}[0,2],\\
     \text{and let }    Z&=-\log_e (2-X)
 \end{align}
-In our question, we are generating $n$ independent and identically distributed random variables, $X_i , \text{where } i \leq n$ from $X \sim \mathcal{U}[0,2]$ and $Z_n$ finds the average value of $-\log_e (2-X_i)$ . \textbf{The Law of Large Numbers} states that for large number of trials($n$ here), the average obtained (avg. of $-\log_e (2-X_i)$ here) is close to the expected value ($E(-\log_e (2-X))=E(Z)$ here), with the precision increasing as more trials are taken. Hence as $n \to \infty$, the sequence $\{Z_n\} $ tends to the expectation value of the continuous distribution of $Z$.
+In our question, we are generating $n$ independent and identically distributed random variables, $X_i , \text{where } i \leq n$ from $X \sim \mathcal{U}[0,2]$ and $Z_n$ finds the average value of $-\log_e (2-X_i)$ . \textbf{The Law of Large Numbers} states that for large number of trials($n$ here), the average obtained (of $-\log_e (2-X_i)$ here) should be close to the expected value (of $-\log_e (2-X)=E(Z)$ here), and will tend to become closer to the expected value as more trials are performed.. Hence as $n \to \infty$, the sequence $\{Z_n\} $ tends to the expectation value of the continuous distribution of $Z$.
 \begin{align}
     \therefore \lim\limits_{n \to \infty}Z_n&=E(Z)
     \label{Zn_and_Z}
