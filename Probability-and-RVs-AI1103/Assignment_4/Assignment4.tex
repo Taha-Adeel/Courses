@@ -158,12 +158,13 @@ Let $X$ and $Z$ be random variables. $X$ follows a uniform distribution from 0 t
     X &\sim \mathcal{U}[0,2],\\
     \text{and let }    Z&=-\log_e (2-X)
 \end{align}
-In our question, we are generating $n$ independent and identically distributed random variables, $X_i , \text{where } i \leq n$ from $X \sim \mathcal{U}[0,2]$ and $Z_n$ finds the average value of $-\log_e (2-X_i)$ . \textbf{The Law of Large Numbers} states that for large number of trials($n$ here), the average obtained (of $-\log_e (2-X_i)$ here) should be close to the expected value (of $-\log_e (2-X)=E(Z)$ here), and will tend to become closer to the expected value as more trials are performed.. Hence as $n \to \infty$, the sequence $\{Z_n\} $ tends to the expectation value of the continuous distribution of $Z$.
+In our question, we are generating $n$ independent and identically distributed random variables, $X_i , \text{where } i \leq n$ from $X \sim \mathcal{U}[0,2]$ and $Z_n$ finds the average value of $-\log_e (2-X_i)$ . \textbf{The Law of Large Numbers} states that for large number of trials($n$ here), the average obtained (of $-\log_e (2-X_i)$ here) should be close to the expected value (of $-\log_e (2-X)=E(Z)$ here), and will tend to become closer to the expected value as more trials are performed. 
 \begin{align}
-    \therefore \lim\limits_{n \to \infty}Z_n&=E(Z)
+    \therefore \pr{\lim\limits_{n \to \infty}Z_n=E(Z)}=1
     \label{Zn_and_Z}
 \end{align}
-The CDF of $Z$ is defined as 
+\textbf{If \pr{\lim_{n \to \infty}Y_n=Y}=1, we say that $Y_n$ almost surely converges to $Y$.} Therefore, by \eqref{Zn_and_Z} as $n \to \infty$, $Z_n$ almost surely converges to $E(Z)$.\\
+\par The CDF of $Z$ is defined as 
 \begin{align}
     F_Z(z) &= \pr{Z \leq z} \\
            &= \pr{ -\log_e(2-X)\leq z} \\
@@ -223,6 +224,6 @@ Now calculating the expectation value for $Z$, we have
     &=1-\ln{(2)}\\
     &\approx0.3068
 \end{align}
-\par From \eqref{Zn_and_Z}, we have as $n \to \infty$, $Z_n \to E(Z)=0.3068\approx0.31$(Rounded to 2 decimal places).\\
+\par From \eqref{Zn_and_Z}, we have as $n \to \infty$, $Z_n$  almost surely converges to $ E(Z)=0.3068\approx0.31$(Rounded to 2 decimal places).\\
 \textbf{Ans: 0.31}
 \end{document}
