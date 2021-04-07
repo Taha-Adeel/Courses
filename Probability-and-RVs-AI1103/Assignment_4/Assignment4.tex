@@ -151,18 +151,26 @@ Simplifying $Z_n$, we have
 \begin{align}
     Z_n &= -\log_e \left( \Prod_{i=1}^n (2-X_i) \right)^\frac{1}{n}\\
         &= -\frac{1}{n}\cdot \log_e \left( \Prod_{i=1}^n (2-X_i) \right)\\
-        &= \frac{1}{n}\cdot\left( \sum\limits_{i=1}^n (-\log_e \left( 2-X_i )\right) \right)
+        &= \sum\limits_{i=1}^n \left( (-\log_e \left( 2-X_i )\right)\cdot\frac{1}{n} \right)\\
+        &= E\left(-\log_e \left( 2-X_i \right)\right)
 \end{align}
 Let $X$ and $Z$ be random variables. $X$ follows a uniform distribution from 0 to 2.
 \begin{align}
     X &\sim \mathcal{U}[0,2],\\
     \text{and let }    Z&=-\log_e (2-X)
 \end{align}
-In our question, we are generating $n$ independent and identically distributed random variables, $X_i , \text{where } i \leq n$ from $X \sim \mathcal{U}[0,2]$ and $Z_n$ finds the average value of $-\log_e (2-X_i)$ . \textbf{The Law of Large Numbers} states that for large number of trials($n$ here), the average obtained (of $-\log_e (2-X_i)$ here) should be close to the expected value (of $-\log_e (2-X)=E(Z)$ here), and will tend to become closer to the expected value as more trials are performed. 
+The sequence $X_n$ converges in distribution to $X$. i.e.
 \begin{align}
-    \therefore \pr{\lim\limits_{n \to \infty}Z_n=E(Z)}=1
+    \lim _{n\to \infty }F_{X_n}(x)=F_X(x),
+\end{align}
+%The \textbf{The Law of Large Numbers} states that for large number of trials, the average obtained should be close to the expected value, and will tend to become closer to the expected value as more trials are performed.\\Therefore,
+From \textbf{The Law of Large Numbers}, we have that %Keep either line 166 or 167
+ for large $n$, $Z_n=E\left(-\log_e \left( 2-X_i \right)\right)$ should be close to $E\left(-\log_e \left( 2-X_i \right)\right)=E(Z)$. i.e.
+\begin{align}
+    \pr{\lim\limits_{n \to \infty}Z_n=E(Z)}=1
     \label{Zn_and_Z}
 \end{align}
+
 \textbf{If \pr{\lim_{n \to \infty}Y_n=Y}=1, we say that $Y_n$ almost surely converges to $Y$.} Therefore, by \eqref{Zn_and_Z} as $n \to \infty$, $Z_n$ almost surely converges to $E(Z)$.\\
 \par The CDF of $Z$ is defined as 
 \begin{align}
