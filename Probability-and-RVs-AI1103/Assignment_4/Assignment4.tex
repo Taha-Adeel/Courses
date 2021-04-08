@@ -106,7 +106,7 @@ columns=fullflexible
 	%\newcommand{\solution}[2]{\textbf{Solution:}{#1}}
 \newcommand{\solution}{\noindent \textbf{Solution: }}
 \newcommand{\cosec}{\,\text{cosec}\,}
-\newcommand{\Prod}{\prod\limits}
+
 \providecommand{\dec}[2]{\ensuremath{\overset{#1}{\underset{#2}{\gtrless}}}}
 \newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 \newcommand{\mydet}[1]{\ensuremath{\begin{vmatrix}#1\end{vmatrix}}}
@@ -143,14 +143,14 @@ https://github.com/Taha-Adeel/AI1103/tree/main/Assignment_4
 \section{Problem (GATE 2021 (ST) Q.19)}
 %%(GATE 2021 (ST) Q.19 ( statistics section)) \\
 Let $\{ X_n \}_{n \geq 1}$ be a sequence of independent and identically distributed random variables each having uniform distribution on (0,2). For $n \geq 1$, let 
-$$Z_n = -\log_e \left( \Prod_{i=1}^n (2-X_i) \right)^\frac{1}{n}.
+$$Z_n = -\log_e \left( \prod\limits_{i=1}^n (2-X_i) \right)^\frac{1}{n}.
 $$
 Then, as $n \to \infty$, the sequence $\{ Z_n \}_{n \geq 1}$ converges almost surely to \rule{1cm}{0.15mm} (Round of to 2 decimal places).
 \section{Solution (GATE 2021 (ST) Q.19)}
 Simplifying $Z_n$, we have
 \begin{align}
-    Z_n &= -\log_e \left( \Prod_{i=1}^n (2-X_i) \right)^\frac{1}{n}\\
-        &= -\frac{1}{n}\cdot \log_e \left( \Prod_{i=1}^n (2-X_i) \right)\\
+    Z_n &= -\log_e \left( \prod\limits_{i=1}^n (2-X_i) \right)^\frac{1}{n}\\
+        &= -\frac{1}{n}\cdot \log_e \left( \prod\limits_{i=1}^n (2-X_i) \right)\\
         &= \sum\limits_{i=1}^n \left( (-\log_e \left( 2-X_i )\right)\cdot\frac{1}{n} \right)\\
         &= E\left(-\log_e \left( 2-X_i \right)\right)
 \end{align}
