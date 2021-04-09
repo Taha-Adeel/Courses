@@ -89,7 +89,7 @@ Let $\{ X_0,X_1,X_2\dots\}$ be a sequence of discrete random variables, where ea
         \vspace{-5mm}
         \begin{align}
             \pr{X_{2}=j | X_0=i}&=\sum\limits_{k=0}^\ell \pr{X_{2}=j | X_{1}=k, X_0=i}\pr{X_{1}=k | X_0=i}\\
-            &=\sum\limits_{k=0}^\ell \pr{X_{2}=j | X_{1}=k,}\pr{X_{1}=k | X_0=i}\\
+            &=\sum\limits_{k=0}^\ell \pr{X_{2}=j | X_{1}=k}\pr{X_{1}=k | X_0=i}\\
             &=\sum\limits_{k=0}^\ell p_{kj}p_{ik}\\
             &=\sum\limits_{k=0}^\ell p_{ik}p_{kj}       =(P^2)_{ij}\\
             \pr{X_{2}=j | X_0=i}&=\pr{X_{n+2}=j | X_n=i}=(P^2)_{ij}
@@ -143,11 +143,11 @@ x & 0.6 \\
 \end{bmatrix}
 \end{align}
 \end{block}
-As $X_n=0 \text{ and } X_n=1$ are mutually exclusive, we can easily calculate $x$ and $y$.
+As $X_n=1 \text{ and } X_n=2$ are mutually exclusive, we can easily calculate $x$ and $y$.
 \begin{align}
-   x=\pr{X_{n+1} = 0 |\, X_{n}=0} &= 1-\pr{X_{n+1} = 1 \,| X_{n}=0}\nonumber
+   x=\pr{X_{n+1} = 1 |\, X_{n}=2} &= 1-\pr{X_{n+1} = 2 \,| X_{n}=1}\nonumber
     \\&= 0.4 \label{x}\\
-    y=\pr{X_{n+1} = 1 |\, X_{n}=1} &= 1-\pr{X_{n+1} = 0 \,| X_{n}=1}\nonumber
+    y=\pr{X_{n+1} = 2 |\, X_{n}=2} &= 1-\pr{X_{n+1} = 1 \,| X_{n}=2}\nonumber
     \\&= 0.6 \label{y}
 \end{align}
 \end{frame}
