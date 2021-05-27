@@ -1,0 +1,207 @@
+\documentclass[journal,12pt,twocolumn]{IEEEtran}
+
+\usepackage{setspace}
+%\usepackage{gensymb}
+\singlespacing
+\usepackage[cmex10]{amsmath}
+
+\usepackage{amsthm}
+
+\usepackage{mathrsfs}
+\usepackage{txfonts}
+\usepackage{stfloats}
+\usepackage{bm}
+\usepackage{cite}
+\usepackage{cases}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{multirow}
+
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{steinmetz}
+\usepackage{tikz}
+%\usepackage{circuitikz}
+\usepackage{verbatim}
+\usepackage{tfrupee}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{tkz-euclide}
+
+\usetikzlibrary{calc,math}
+\usepackage{listings}
+    \usepackage{color}                                            %%
+    \usepackage{array}                                            %%
+    \usepackage{longtable}                                        %%
+    \usepackage{calc}                                             %%
+    \usepackage{multirow}                                         %%
+    \usepackage{hhline}                                           %%
+    \usepackage{ifthen}                                           %%
+    \usepackage{lscape}     
+\usepackage{multicol}
+\usepackage{chngcntr}
+
+\DeclareMathOperator*{\Res}{Res}
+
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+\renewcommand\thesectiondis{\arabic{section}}
+\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
+\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}                                 %%
+
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\begin{document}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}{Example}[section]
+\newtheorem{definition}[problem]{Definition}
+
+\newcommand{\BEQA}{\begin{eqnarray}}
+\newcommand{\EEQA}{\end{eqnarray}}
+\newcommand{\define}{\stackrel{\triangle}{=}}
+\bibliographystyle{IEEEtran}
+\raggedbottom
+\setlength{\parindent}{0pt}
+\providecommand{\mbf}{\mathbf}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\qfunc}[1]{\ensuremath{Q\left(#1\right)}}
+\providecommand{\sbrak}[1]{\ensuremath{{}\left[#1\right]}}
+\providecommand{\lsbrak}[1]{\ensuremath{{}\left[#1\right.}}
+\providecommand{\rsbrak}[1]{\ensuremath{{}\left.#1\right]}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\lbrak}[1]{\ensuremath{\left(#1\right.}}
+\providecommand{\rbrak}[1]{\ensuremath{\left.#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\providecommand{\lcbrak}[1]{\ensuremath{\left\{#1\right.}}
+\providecommand{\rcbrak}[1]{\ensuremath{\left.#1\right\}}}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newcommand{\sgn}{\mathop{\mathrm{sgn}}}
+\providecommand{\abs}[1]{(\vert#1)\vert}
+\providecommand{\res}[1]{\Res\displaylimits_{#1}} 
+\providecommand{\norm}[1]{(\lVert#1)\rVert}
+%\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\mtx}[1]{\mathbf{#1}}
+\providecommand{\mean}[1]{E([ #1 )]}
+\providecommand{\fourier}{\overset{\mathcal{F}}{ \rightleftharpoons}}
+%\providecommand{\hilbert}{\overset{\mathcal{H}}{ \rightleftharpoons}}
+\providecommand{\system}{\overset{\mathcal{H}}{ \longleftrightarrow}}
+	%\newcommand{\solution}[2]{\textbf{Solution:}{#1}}
+\newcommand{\solution}{\noindent \textbf{Solution: }}
+\newcommand{\cosec}{\,\text{cosec}\,}
+\providecommand{\dec}[2]{\ensuremath{\overset{#1}{\underset{#2}{\gtrless}}}}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\newcommand{\mydet}[1]{\ensuremath{\begin{vmatrix}#1\end{vmatrix}}}
+\numberwithin{equation}{subsection}
+\makeatletter
+\@addtoreset{figure}{problem}
+\makeatother
+\let\StandardTheFigure\thefigure
+\let\vec\mathbf
+\renewcommand{\thefigure}{\theproblem}
+\def\putbox#1#2#3{\makebox[0in][l]{\makebox[#1][l]{}\raisebox{\baselineskip}[0in][0in]{\raisebox{#2}[0in][0in]{#3}}}}
+     \def\rightbox#1{\makebox[0in][r]{#1}}
+     \def\centbox#1{\makebox[0in]{#1}}
+     \def\topbox#1{\raisebox{-\baselineskip}[0in][0in]{#1}}
+     \def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
+\vspace{3cm}
+\title{Assignment 5}
+\author{Taha Adeel Mohammed - CS20BTECH11052}
+\maketitle
+\newpage
+\bigskip
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+Download all python codes from 
+\begin{lstlisting}
+https://github.com/Taha-Adeel/AI1103/tree/main/Assignment_5/Codes
+\end{lstlisting}
+%
+and latex-tikz codes from 
+%
+\begin{lstlisting}
+https://github.com/Taha-Adeel/AI1103/tree/main/Assignment_5
+\end{lstlisting}
+\section{Problem (UGC/Math (mathA\_Dec 2017) Q.119)}
+%%(UGC/MATH (mathA_Dec 2017), Q.119)) \\
+Arrival of customers in a shop is a Poisson process with intensity $\lambda =2$. Let $X$ the number of customers entering during the time interval $(1,2)$, and let $Y$ the number of customers entering during the time interval $(5,10)$. Which of the following is true?
+\begin{enumerate}[label=(\Alph*)]
+    \item$X$ and $Y$ are independent.\\
+    \item$X+Y$ is a Poisson with parameter $6$. \\
+    \item$X-Y$ is a Poisson with parameter $8$.\\
+    \item$\pr{X=0\mid X+Y=12}=\left(\dfrac{5}{6}\right)^{12}$
+\end{enumerate}
+\section{Solution}
+\begin{enumerate}[label=\textbf{(\Alph*)}]
+    \item In a Poisson process, the occurrences/frequencies of the event do not depend on past or future occurrences. Therefore $X$ and $Y$ are independent, by definition of Poisson process.
+    %Alternatively, using memorylessness property for exponential distributions, we can prove that $X$ and $Y$ are independent.
+
+    Hence option (A) is \textbf{correct.\\}
+
+    \item $X$ and $Y$ are Poisson distributions with parameters $\mu_1 = \lambda \, \tau_1 = 2 \times 1$ and $\mu_2 = \lambda \, \tau_2 = 2 \times 5$ respectively($\tau$ is time-interval). 
+    Hence the PMFs (Probability Mass Function) of random variables $X$ and $Y$ are given by:
+    \begin{align}
+        p_X(x) &= \dfrac{e^{-\mu_1}\mu_1^{x}}{x!}, & \text{for } x=0,1,2,\dots\\
+        &= \dfrac{e^{-2}\cdot 2^{x}}{x!}\label{pmf(X)}
+    \end{align}
+    \begin{align}
+        p_Y(y) &= \dfrac{e^{-\mu_2}\mu_2^{y}}{y!}, & \text{for } y=0,1,2,\dots\\
+        &= \dfrac{e^{-10}\cdot 10^{y}}{y!}\label{pmf(Y)}
+    \end{align}
+    As X and Y are independent, we have for $k \geq 0$, the distribution function $p_{X+Y}(k)$ is a convolution of distribution functions $p_X(x)$ and $p_Y(y)$: 
+    \begin{align}
+       p_{X+Y}(k) &= \pr{X+ Y = k} = \pr{Y = k - X}\\
+       &= \sum_{i}\pr{Y = k - i| X=i}\times p_X(i)\label{p_(x+y)}
+    \end{align}
+    As X and Y are independent: 
+    \begin{align}
+        \pr{Y\! =\! k - i \mid X=i} = \pr{Y\! = \! k - i} = p_Y(k-i)
+    \end{align}
+    Simplifying \eqref{p_(x+y)}
+    \begin{align}
+        p_{X+Y}(k) &= \sum_{i=0}^k p_Y(k-i) \times p_X(i)\\
+        &= \sum_{i=0}^k e^{-\mu_2}\frac{\mu_2^{k-i}}{(k-i)!}e^{-\mu_1}\frac{\mu_1^i}{i!}\\
+        &= e^{-(\mu_1 + \mu_2)}\frac 1{k!}\sum_{i=0}^k \frac{k!}{i!(k-i)!}\,\mu_1^i\,\mu_2^{k-i}\\
+        &= e^{-(\mu_1 + \mu_2)}\frac 1{k!}\sum_{i=0}^k {k\choose i}\, \mu_1^i\,\mu_2^{k-i}\\
+        p_{X+Y}(k) &= \frac{e^{-(\mu_1 + \mu_2)} \cdot (\mu_1 + \mu_2)^k}{k!} \\
+        \therefore p_{X+Y}(k) &= \frac{e^{-(12)} \cdot (12)^k}{k!}\label{pmf(X+Y)}
+    \end{align}
+    $\Rightarrow$  $X+ Y$ is a Poisson with parameter $\mu_1 + \mu_2 = 12 \neq 6$. Hence option (B) is \textbf{incorrect.}\\
+    \item The distribution function for $X - Y$ no longer remains Poisson, as $X - Y$ will also attain negative values.
+    %More precisely, pmf of $X-Y$ is given by \eqref{pmf(X-Y)}, which is a Skellam distribution. 
+    %\begin{align}
+    %\pr{X-Y=k}=p_{X-Y}(k)=\sum_{i\,=\,-\infty}^\infty p_X(k+i) \times p_Y(i)\label{pmf(X-Y)}
+    %\end{align}
+    Hence option (C) is \textbf{incorrect.}
+
+    \item \begin{align}
+        \pr{X=0\mid X+Y=12} = \dfrac{\pr{X=0, Y=12}}{X+Y=12}
+    \end{align}
+    As $X$ and $Y$ are independent, and using \eqref{pmf(X)}, \eqref{pmf(Y)}, and \eqref{pmf(X+Y)}, we have:
+    \begin{align}
+        \pr{X\!=\!0\mid X\!+\!Y\!=\!12} &= \frac{\pr{X\!=\!0} \cdot \pr{Y\!=\!12}}{\pr{X+Y=12}} \\
+        &= \frac{\dfrac{e^{-2}\times 2^{0}}{0!} \times \dfrac{e^{-10}\times10^{12}}{12!}}{\dfrac{e^{-12}\times12^{12}}{12!}}\\
+        &= \left(\dfrac{5}{6}\right)^{12}
+    \end{align}
+    Hence option (D) is \textbf{correct.}
+\end{enumerate}
+\textbf{Ans: (A), (D)}
+
+\end{document}
