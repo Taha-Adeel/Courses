@@ -155,13 +155,7 @@ Arrival of customers in a shop is a Poisson process with intensity $\lambda =2$.
         p_X(x) &= \dfrac{e^{-2}\cdot 2^{x}}{x!}, & \text{for } x=0,1,2,\dots \label{pmf(X)}\\
         p_Y(y) &= \dfrac{e^{-10}\cdot 10^{y}}{y!}, & \text{for } y=0,1,2,\dots \label{pmf(Y)}
     \end{align}
-\begin{enumerate}[label=\textbf{(\Alph*)}]
-    \item In a Poisson process, the occurrences/frequencies of the event do not depend on past or future occurrences. Therefore $X$ and $Y$ are independent, by definition of Poisson process.
-    %Alternatively, using memorylessness property for exponential distributions, we can prove that $X$ and $Y$ are independent.
-
-    Hence option (A) is \textbf{correct.\\}
-
-    \item \begin{lemma}\label{lemma_X+Y}
+    \begin{lemma}\label{lemma_X+Y}
         If $X$ and $Y$ are two independent Poisson distributions with parameters $\mu_1$ and $\mu_2$ respectively, then the distribution of $X+Y$ is also Poisson with parameter $\mu_1 + \mu_2$. 
     \end{lemma}
     \begin{proof}
@@ -184,7 +178,13 @@ Arrival of customers in a shop is a Poisson process with intensity $\lambda =2$.
     \end{align}
     \end{proof}
     
-    \par As $X$ and $Y$ are independent Poisson distributions, using lemma \eqref{lemma_X+Y}, $X+ Y$ is a Poisson with parameter $\mu_1 + \mu_2 = 12 \neq 6$. Hence option (B) is \textbf{incorrect.}
+\begin{enumerate}[label=\textbf{(\Alph*)}]
+    \item In a Poisson process, the occurrences/frequencies of the event do not depend on past or future occurrences. Therefore $X$ and $Y$ are independent, by definition of Poisson process.
+    %Alternatively, using memorylessness property for exponential distributions, we can prove that $X$ and $Y$ are independent.
+
+    Hence option (A) is \textbf{correct.\\}
+
+    \item As $X$ and $Y$ are independent Poisson distributions, using lemma \eqref{lemma_X+Y}, $X+ Y$ is a Poisson with parameter $\mu_1 + \mu_2 = 12 \neq 6$. Hence option (B) is \textbf{incorrect.}
     \begin{align}
          p_{X+Y}(k) &= \frac{e^{-(12)} \cdot (12)^k}{k!}\label{pmf(X+Y)}
     \end{align}
