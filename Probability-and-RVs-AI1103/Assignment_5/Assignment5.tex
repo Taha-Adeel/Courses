@@ -206,9 +206,11 @@ $\therefore$ The distribution of the number of arrivals in any interval depends 
     \begin{align}
         p_{X-Y}(k) &= \sum_{i=max(0, -k)}^\infty p_X(k+i) \times p_Y(i)\\
         &=\sum_{i=max(0, -k)}^\infty e^{-\mu_1}\frac{\mu_1^{k+i}}{(k+i)!}e^{-\mu_2}\frac{\mu_2^i}{i!}\\
-        &= e^{-(\mu_1 + \mu_2)}\sum_{i=max(0, -k)}^\infty \dfrac{\mu _{1}^{k+i}\mu _{2}^{i}}{n!(k+i)!}\label{pmf(X-Y)}
+        &= e^{-(\mu_1 + \mu_2)}\sum_{i=max(0, -k)}^\infty \dfrac{\mu _{1}^{k+i}\mu _{2}^{i}}{i!(k+i)!}\label{pmf(X-Y)}
     \end{align}
-    Hence we can see from \eqref{pmf(X-Y)} that X - Y is not a Poisson distribution.
+    Hence we can see from \eqref{pmf(X-Y)} that X - Y is not a Poisson distribution.\\
+    
+    \par \textbf{Note: } This result is valid only for independent Poisson distributions. We may have dependent Poisson distributions whose difference is also Poisson. For example let $Z$ be the random variable with distribution $X + Y$, where $X$ and $Y$ are independent Poisson distributions. From lemma \eqref{lemma_X+Y}, Z is Poisson. And, $Z - Y = X$ is also Poisson by definition, as $Z$ is always at least as great as $Y$ ($i.e.$ not independent).\\
     \end{proof}
     
     
@@ -221,6 +223,11 @@ $\therefore$ The distribution of the number of arrivals in any interval depends 
          p_{X+Y}(k) &= \frac{e^{-(12)} \cdot (12)^k}{k!}\label{pmf(X+Y)}
     \end{align}\\
     \item  As $X$ and $Y$ are independent Poisson distributions, using lemma \eqref{lemma_X-Y}, $X-Y$ is not Poisson. Hence option (C) is \textbf{incorrect.}\\
+    \begin{figure}[h!]\label{graph_X-Y}
+    \centering
+      \includegraphics[width=\columnwidth]{Figures/pmf(X-Y).png}
+     \caption{$p_{X-Y}(k)$, with $\mu_1=2$ and $\mu_2=10$}
+\end{figure}
 
     \item \begin{align}
         \pr{X=0\mid X+Y=12} = \dfrac{\pr{X=0, Y=12}}{\pr{X+Y=12}}
