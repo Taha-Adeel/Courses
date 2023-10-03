@@ -1,0 +1,17 @@
+SELECT 'short' AS length , count(TrackId)
+FROM (SELECT TrackId
+	  FROM tracks
+	  WHERE tracks.Milliseconds < 60000
+	 )
+UNION
+SELECT 'medium' AS length , count(TrackId)
+FROM (SELECT TrackId
+	  FROM tracks
+	  WHERE tracks.Milliseconds BETWEEN 60000 AND 300000
+	 )
+UNION
+SELECT 'long' AS length , count(TrackId)
+FROM (SELECT TrackId
+	  FROM tracks
+	  WHERE tracks.Milliseconds >= 300000
+	 )

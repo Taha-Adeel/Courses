@@ -1,0 +1,319 @@
+% Documentation of the scheme proposed for the mini-project paper
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{biblatex}
+
+\newcommand{\rIn}{\xleftarrow{R}}
+\newcommand{\PK}[2]{\ensuremath{PK\{(#1): #2\}}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\addbibresource{references.bib}
+
+\begin{document}
+
+\title{Anonymous Authentication with Revocation and Encryption Scheme for V2X}
+\author{Taha Adeel Mohammed}
+
+\makeatletter
+\begin{center}
+	\vspace*{-1.8cm}
+	\par\noindent\rule{\textwidth}{0.6pt}\\[0.2cm]
+	\LARGE{\@title}\\[0.4cm]
+	\large{\@author}\\[0.3cm]
+	\large{\@date}\\[0cm]
+	\par\noindent\rule{\textwidth}{0.6pt}
+\end{center}
+\makeatother
+
+\section{Introduction}
+Below we describe a scheme that allows registered users to authenticate themselves with an RSU, and once succesfully authenticated, derive a symmetric key with the help of the RSU and communicate with its adjacent peers using CAMs encrypted using that key. \\
+
+\par We also describe a way in which the RSU/IA can revoke the authentication of a user in a privacy preserving manner if it suspects that the user is malicious.
+
+
+
+\section{Previous Works}
+This schemes builds on the Anonymous Authentication and Encryption Scheme proposed by Kanchan\cite*{Kanchan}, and adds anonymous revocation to it by integrating and adapting the PEREA\cite*{perea} scheme into it.
+
+
+
+\section{High Level Overview}
+The user has secret $\alpha, \beta$ in $\mathbb{Z}_q^*$, which it uses to register with the IA, getting credentials $(a, b, c, d)$, which can be used for authentication and deriving the symmetric key for CAMs during authentication.\\
+
+\par Additionally, to support revocation of misbehaving users, we have the user also present a fresh ticket $t_k$ to the RSU for each authentication, and maintain a queue of the past $K$ tickets it used for authentication. And we have the RSU maintain a blacklist of tickets belonging to misbehaving users. \\
+
+\par During authentication, we have the user prove in zero-knowledge that the last $K$ tickets in its queue haven't been blacklisted by the IA. We also have the user prove in zero knowledge that the queue of last $K$ tickets is correctly formed. After verifying the user's credentials, the integrity of the queue, and that the user hasn't been blacklisted, the RSU computes a witness for the ticket $t_k$ and a signature on the queue and shares it with the user. The user can then use this signature and witness during its next authentication to prove to the RSU in zero-knowledge of the validity of his credentials.
+
+
+
+\section{Building Blocks}
+\subsection{Preliminaries}
+\subsubsection*{Notation}
+\begin{itemize}
+	\item $a \rIn X :$ Denotes that a is chosen uniformly at random from the set X
+	\item $\mathbb{Z}_q :$ Set of integers modulo q
+	\item $\Lambda_l :$ Set of integers of size atmost l-bits.
+	\item $\Pi_l :$ Set of primes of size atmost l-bits.
+	\item $\Delta(l, \delta) :$ The set of integers $\{2^{l-1}, \dots , 2^{l-1}+2^{\delta}-1 \}$ 
+	\item \textit{Safe Prime}: $p$ such that $p$ and $\frac{p-1}{2}$ are both prime.
+	\item \textit{l-bit safe prime product}: Product of two $\lfloor\frac{l}{2}\rfloor$-bit safe primes.
+	\item $QR_N :$ Set of quadratic residues modulo $N$.
+	\item $\phi(N) :$ Euler's totient of $N$.
+\end{itemize}
+
+\subsubsection*{Hardness Assumptions}
+The security of the accumulator, signature scheme, and ZKPoKs used for the revocation depends on the below hardness assumptions. Let $N$ be a random $\lambda$-bit safe prime product.
+\begin{itemize}
+	\item The \textbf{Strong RSA Assumption} says that there exists no PPT algorithm which, on input $N$ and $u \in \mathbb{Z}_N^* $ , returns $e > 1$ and $v$ such that $v^ e = u \Mod{N}$, with non-negligible probability (in $\lambda$).
+	
+	\item The \textbf{Decisional Diffie-Hellman(DDH) Assumption} says that there exists no PPT algorithm which, on input quadruple $(g, g^a, g^b, g^c) \in QR_N^4,$, where $a, b \rIn \mathbb{Z}_{|QR_N |}$, and $c \rIn Z_{|QR_N|}$ or $c = ab$ with equal probability, correctly distinguishes which is the case with probability non-negligibly (in $\lambda$) greater than $1/2$.
+\end{itemize}
+
+\subsubsection*{ZKPoK Protocols}
+A \textit{Zero-Knowledge Proof-of-Knowledge (ZKPoK)} protocol is a protocol in which a prover convinces a verifier that some statement is true without the verifier learning anything except the truth of the statement.\\
+
+\par The notation notation introduced by Camenisch and Stradler\cite*{Camenisch} is used to describe the ZKPoK protocols used in our scheme. For example, $\PK{x}{y = g^x}$ denotes a ZKPoK protocol that proves knowledge of an integer $x$ such that $y = g^x$ holds, without revealing $x$.
+
+
+\subsection{Tickets and Queues}
+The user picks a ticket uniformly at random from the set $\Pi_{l_t}$, where $l_t = 166$. i.e $t \rIn \Pi_{l_t}$. As $|\Pi_{l_t}| > 2^{160}$, the probability of two randomly chosen tickets being equal is atmost $2^{-80}$, which is negligible. The ticket domain is set as $ \mathcal{T} = \{ -2^{l_T}+1, \dots , 2^{l_T}-1 \}$, where $l_T = 330$. Setting $\mathcal{T} \supsetneq \Pi_{l_t}$ allows the users who know a ticket in $\Pi_{l_t}$ to efficiently prove in zero knowledge that they know some ticket in $\mathcal{T}$. \\
+
+\par The user maintains a queue $Q$ of the last $K$ tickets it used for authentication, where $K$ is the revocation window size. The queue supports enqueueing (\texttt{Enq}) and dequing (\texttt{Deq}) operations. We have $Q[i]$ denote the $i^{th}$ least ticket recently enqueued ticket in the queue $Q$. The domain of $Q$ is $\mathcal{Q} = \mathcal{T}^{K+1}$.
+
+
+\subsection{Accumulator Scheme for Tickets}
+We require that the users should be able to successfully prove that they have not been blacklisted by the IA, without revealing their tickets. Hence for this, we make use of Universal Dynamic Accumulators (UDAs) introduced by Li et al.\cite*{Li}, which allows for an efficient zero-knowledge proof of non-membership, in time independent of number of accumulated values. \\
+
+\par Below we describe a construction of UDAs adapted for our requirements and notation. We call the modified scheme \texttt{TicketAcc}.
+
+\subsubsection*{Key Generation}
+\begin{itemize}
+	\item Input security parameter: $\texttt{param}_{acc} = l_N$ ( = 1024 recommended).
+	\item Pick $N = pq$, an $l_N$-bit safe prime product, and $g \rIn QR_N$
+	\item Output the accumulator's public key $pk_{acc} = (l_N, N, g)$ and secret key $sk_{acc} = \phi(N)$.
+\end{itemize}
+
+\subsubsection*{Accumulating Tickets}
+\begin{itemize}
+	\item For ticket $t \in \mathcal{T}$ and accumalator value $V$, we have
+		\begin{align} Accumulate(V, t) \rightarrow V' = V^t \Mod{N} \end{align}
+	\item Similarly, for set $S_T = \{t_1, t_2, \dots, t_L \}$ and accumulator value $V$, we have
+		\begin{align} Accumulate(V, S_T) \rightarrow V' = V^{t_1 \cdot t_2 \cdot \dots \cdot t_L} \Mod{N} \end{align}
+	\item The accumalator value is initallyg. Hence we define 
+		\begin{align} Accumulate(S_T) = Accumulate(g, S_T) = g^{t_1 \cdot t_2 \cdot \dots \cdot t_L} \Mod{N} \end{align}
+\end{itemize}
+
+\subsubsection*{Non-membership Witnesses}
+\begin{itemize}
+	\item If $V = Accumulate(S_T)$ for some $S_T \subset \mathcal{T}$ and $t \in \mathcal{T}\setminus S_t$, then there exists a non-membership witness $w = (a, d) \in \mathbb{Z}_{\lfloor N/4 \rfloor} \times QR_N$ for $t$ with respect to $V$ such that $1 = IsNonMember(t, V, w)$ holds, where
+	\begin{align}
+		IsNonMember(t, V, w) = \begin{cases}
+			\ 1 & \text{if } V^{a} \equiv d^t g\\
+			\ 0 & \text{otherwise}
+		\end{cases} 
+	\end{align}
+	\item The computation of such a witness can be done using knowledge of $sk_{acc}$ as
+	\begin{align}
+		 ComputeWitness(t, V, sk_{acc}) \rightarrow w
+	\end{align}
+	Refer to \cite*{Li} for the implementation details and unforgeability proof of above function.
+	\item A valid prover can convince a verifier that $t$ was not accumulated in $V$ using $w$, without revealing $t$ or $w$, by conducting
+	\begin{align}
+		\PK{t, w}{1 = IsNonMember(t, V, w)} 
+	\end{align}
+	The construction of above protocol and its security proof have been given by Li et al.\cite*{Li}. The construction of above ZKPoK has a complexity of $O(1)$, i.e. independent of the number of accumulated values. 
+\end{itemize}
+
+\subsubsection*{Update of Non-membership Witnesses}
+\begin{itemize}
+	\item Given witness $w$ for ticket $t$ such that $1 = IsNonMember(t, V, w)$ holds, when the accumulator value $V$ is updated via the accumulation of a new ticket $t' \in \mathcal{T}\setminus \{t\}$ into it, one can compute, without knowledge of $sk_{acc}$, an updated witness $w'$ for $t$ such that $IsNonMember(t, V', w') = 1$ holds, as
+	\begin{align} 
+		UpdateWitness(w, t, V, t') \rightarrow w' 
+	\end{align}
+	Again, refer to \cite*{Li} for the implementation details of above function.
+	\item Similarly, for a set $S_T \subset \mathcal{T}\setminus \{t\}$, we define 
+	\begin{align} 
+		UpdateWitness(w, t, V, S_T) \rightarrow w' 
+	\end{align}
+	to denote the repetitive invocation of $UpdateWitness$
+	to update $w$ for $t$ when tickets in $S_T$ are accumulated into $V$, one at a time, in any order.
+	\item Hence the complexity of $UpdateWitness$ is $O(|S_T|)$, i.e linear in the number of new values added to the accumulator.
+\end{itemize}
+
+
+\subsection{Protocol for Queue Signing}
+The RSU needs to verify the integrity of the queue, since otherwise a user can circumvent revocation by fabricating a queue with an incorrect set of K tickets. For this, the RSU signs the queue on a succesful authentication so that it can be convinced of its integrity during the next authentication. \\
+
+\par This must be done without revealing the queue or the signature, as otherwise the user's actions can be linked. Hence for this, we use the signature scheme given by Camenisch and Lysyanskaya\cite*{CL} for blocks of messages, adapted for our notation, given by \texttt{QueueSig} below.
+
+\subsubsection*{Key Generation}
+\begin{itemize}
+	\item Input security parameter: $\texttt{param}_{sig} = (l_N, l_s, l_e, l_T, l, \delta_r)$.
+	\item Pick $N = pq$, an $l_N$-bit safe prime product, and $b, c, g_0, \dots, g_K \rIn QR_N$
+	\item Output the signature schemes's public key $pk_{sig} = (param_{sig}, N, b, c, (g_i)_{i=0}^K)$ and secret key $sk_{acc} = \phi(N)$.
+\end{itemize}
+
+\subsubsection*{Request for Signature}
+To request a signature on a commited queue $Q = (t_i)_{i=0}^K \in \mathcal{Q}$, the user picks $r \rIn \Delta(l_N, \delta_r)$ and commits Q as:
+\begin{align} \label{eq:commit}
+	Commit(Q,r) \rightarrow C = c^r \prod_{i=0}^K g_i^{t_i} \Mod{N}   
+\end{align}
+and sends the commitment $C$ to the RSU.\\
+
+\textbf{\textit{Proof of Correctness:}} The user then proves to the RSU that $C$ is a valid commitment on $Q$ by conducting the below protocol. The RSU proceeds only if the protocol is successful.
+\begin{align} \label{eq:commit_zkpok}
+	\PK{Q, r}{C = Commit(Q, r)\ \land\ Q \in \mathcal{Q} \ \land\ r \in \Delta(l_N, \delta_r)}
+\end{align}
+This protocol can be constructed using standard protocols for proving relations among components of a discrete logarithm representation of a group of elements.
+
+\subsubsection*{Signing}
+The RSU signs and returns to the user a signature $\tilde{\sigma}$ on $C$ usign its private key $sk_{sig}$ as:
+\begin{align} 
+	Sign(sk_{sig}, C) \rightarrow \tilde{\sigma} &= (r', e, v), 
+\end{align}
+where $r' \rIn \Lambda_{l_s} , \ e \rIn \Lambda_{l_e}, \text{ and } v = (bc^{r'}C)^{1/e \Mod{\phi(N)}} \Mod{N}$
+
+\subsubsection*{Finalizing}
+The user finalizes the signature $\tilde{\sigma} = (r', e, v)$ on the commitment $C$ into a signature $\sigma$ on the queue $Q$ as:
+\begin{align} 
+	Finalize(\tilde{\sigma}, r) \rightarrow \sigma &= (r+r', e, v)
+\end{align}
+
+The user proceeds only if the signature verifies, i.e $Verify(Q, \sigma) = 1$ holds, where
+\begin{align} 
+	Verify(Q, \sigma) &= \begin{cases} 
+		\ 1 & \text{if } v^e \equiv bc^s \prod_{i=0}^K g_i^{t_i} \ \land\ e > 2^{l_e - 1}\\ 
+		\ 0 & \text{otherwise} 
+	\end{cases}
+\end{align}
+
+\subsubsection{Security and Complexity Analysis}
+The construction of above protocol has an $O(K)$ computational and communication complexity between the user and RSU. Additionally, we require that the signatures are unforgeable and that the RSU can't deduce the tickets in the queue or the users identity during the protocol. When $l_N \geq 1024, l \geq 160, l_e > l_T + 2, l_s = l_N + l_T + l$ and $ \delta_r = \lfloor \frac{l_N - 1}{\epsilon} - l \rfloor$ for some $1 < \epsilon \in \mathbb{R}$, the security properties of the scheme hold under the strong RSA assumption, as shown in the original CL signature scheme on blocks of messages. \cite*{CL}.
+
+\subsubsection{Proof of Knowledge of a signed queue}
+The below protocol allows a user to prove to the RSU the possession of a valid signature without revealing the queue and signature themselves.
+\begin{align}
+	\PK{Q, \sigma}{1 = Verify(Q, \sigma) \ \land\ Q \in \mathcal{Q}}
+\end{align}
+The original CL signature scheme on blocks of messages \cite*{CL} can be referred to for the construction and security proof of above protocol.
+
+\subsubsection{Proof of relation between two queues}
+During authentication, the user updates his queue from $Q'$ to $Q = Q'.Enq(t*).Deq()$ for use during the next authentication, where $t^*$ is the new ticket. The below protocol allows the user to prove to the RSU that the new queue $Q$ is a valid update of the old queue $Q'$.
+\begin{align}
+	\PK{Q', Q, t^*}{Q = Q'.Enq(t*).Deq() \ \land\ Q' \in \mathcal{Q} \ \land\ t^* \in \mathcal{T}}
+\end{align}
+This protocol can be constructed as follows. The user picks $r_0, r_1 \rIn \Delta(l_N, \delta_r)$ and commits both $Q'$ and $Q$ using eq. \ref{eq:commit} and conduct the below protocol with the RSU, which can be done similarly to protocol \ref{eq:commit_zkpok}.
+\begin{align}
+	\PK{r_0, r_1, (t_i)_{i=0}^{K+1}}{\ \land_{b=0,1}\ C_b \equiv c^{r_b} \prod_{i=0}^{K} g_i^{t_i+b}}
+\end{align}
+
+
+
+\section{Construction}
+Below we describe the construction of the Anonymous Authentication with Revocation and Encryption Scheme using the building blocks described in the previous section.
+
+
+\subsection{Setup}
+For the randomizable signatures using bilinear pairings, the IA, given security parameter $k$, outputs the Type-3 bilinear pairing parameters $(e, g_1, g_2, g, G_1,\\ G_2, G) \rIn Gen(1^k)$. The IA then generates $sk_{bp} = (x, y) \rIn \mathbb{Z}_q^*$ and $pk_{bp} = (X = g_2^x, Y = g_2^y)$. \\
+
+The IA decides on an appropriate revocation window size $K$, and on input parameters $param_{acc}$ and $param_{sig}$, generates $(sk_{acc}, pk{acc})$ and $(sk_{sig}, pk_{sig})$ respectively, according to the schemes in previous section. The IA also picks a prime $\hat{t} \rIn \Pi_{l_t}$ to be used as the default value to fill the user's queue during registration. Then the IA initializes its blacklist as $BL = \phi$, accumalator value as $V = g$ and ticket-list as $TL = \phi$.\\
+
+Finally, the IA creates its private key as $sk_{IA} = (sk_{bp}, sk_{acc}, sk_{sig})$ and publishes its public key as $pk_{IA} = (pk_{bp}, pk_{acc}, pk_{sig}, K, \hat{t})$.
+
+
+\subsection{Registration}
+The user has secrets $(\alpha, \beta) \rIn \mathbb{Z}_q^*$ and sends $req = (a = g_1^\beta, b = a^\alpha)$ to the issuer. The issuer verifies the vehicle and uses $sk_{bp}$ to compute $(c, d) = (a^x, (b\cdot c)^y)$ and outputs the signature $\sigma_{bp} = (a,b,c,d)$ to the user.\\
+
+\noindent Additionally, to support revocation \vspace*{-3mm}
+\begin{itemize}
+	\item \texttt{(Request for credential)}: The user picks $t^* \rIn \Pi_{l_t}$ and initializes their queue $Q'$ as $Q' = \{ \hat{t}, \hat{t}, \dots, \hat{t}, t \}$. Then the user sends $C = Commit(Q', r)$, where $r \rIn \Delta(l_N, \delta_r)$, to the IA.
+	\item \texttt{(Proof of correctness)}: The user then engages in the below protocol with the IA to prove that $Q'$ was initialized correctly, and that the commitment $C$ was correctly computed. (Construction can be done similarly to protocol \ref{eq:commit_zkpok})
+	\begin{align}
+		\PK{Q', r}{\land_{i=0}^{K-1}\ \hat{t} = Q'[i] \ \land\ C = Commit(Q', r) \ \land\ Q' \in \mathcal{Q}}
+	\end{align}
+	\item \texttt{(Credential issuing)}: The IA computes $\tilde{\sigma}_q = Sign(C, sk_{acc})$ and $\hat{w} = ComputeWitness(\hat{t}, V', sk_{acc})$, where $V' = Accumulate(BL')$.  The IA returns $(\tilde{\sigma}_q, \hat{w}, BL', V')$ to the user.
+	\item \texttt{(Credential finalizing)}: The user computes $\sigma_q = Finalize(\tilde{\sigma}_q, r)$ and proceeds only if $V' = Accumulate(BL')$, $1 = Verify(Q', \sigma_q)$ and $1 = IsNonMember(\hat{t}, V', \hat{w})$ hold.
+\end{itemize}
+
+\noindent The user then stores its credentials as
+\begin{align}
+	cred = (\sigma_{bp}, Q', \sigma_q, (w'_i = \hat{w})_{i=0}^{K-1}, BL', V')
+\end{align}
+
+
+\subsection{Authentication}
+We now describe the authentication protocol between the user and the RSU.
+
+\subsubsection*{\textit{Randamizable Signature Check:}}\vspace*{-2mm}
+The user shares $\sigma_{bp}^r = (a^r, b^r, c^r, d^r)$, which the RSU verifies by checking that $e(a^r, X) = e(c^r, g_2)$ and $e(d^r, g_2) = e(bc^r, Y)$. Then the RSU can optionally engage in the protocol for key generation and encryption(as decribed in \cite*{Kanchan}), with a unique symmetric key for this authentication, so that the further steps in the authentication protocol happen over a secure channel.\\
+
+\subsubsection*{\textit{Blacklist examination}}\vspace*{-2mm}
+The user obtains the current blacklist BL from the RSU, and after verifying that none of the ticekts in $Q$ have been blacklisted, the user finds $\Delta_{BL} = BL \setminus BL'$, i.e set of newly blacklisted tickets.\\
+
+
+\subsubsection*{\textit{Request for authentication}}\vspace*{-2mm}
+The user generates a new ticket $t^* \rIn \Pi_{l_t}$ and $r \rIn \Delta(l_N, \delta_r)$, and computes: \vspace*{-7mm}
+\begin{align}
+	t_K &= Q'[K] \\
+	Q &= Q'.Enq(t^*).Deq() \\
+	C &= Commit(Q, r) \\
+	V &= Accumulate(V', \Delta_{BL}) \\
+	w_i &= WitnessUpdate(w'_i, Q'[i], V', \Delta_{BL}) \ \forall \ i \in [0, K-1]
+\end{align}
+The user then sends $(t_K, C)$ to the RSU, and after the RSU verifies that $t_K$ is a fresh prime in $\Pi_{l_t}$, it adds $t_K$ to the ticket-list $TL$.\\
+
+\texttt{Proof of correctness:} The user then engages in the below ZKPoK with the RSU to convince the RSU that he hasn't been revoked yet, $t_K$ is a well formed ticket, and that $C$ is a well formed commitment on the user's next queue.
+\begin{align}
+	PK \lbrace (Q', \sigma_q', (w_i)_{i=0}^{K-1}, t^*, &Q, r):\nonumber\\ 
+	t_K &= Q'[K] &&\land\qquad\nonumber\\ 
+	1 &= Verify(Q', \sigma_q') &&\land\qquad\nonumber\\ 
+	\land_{i=0}^{K-1}\ 1 &= IsNonMember(Q'[i], V, w_i) &&\land\qquad\nonumber\\ 
+	Q &= Q'.Enq(t^*).Deq() &&\land\qquad\nonumber\\ 
+	C &= Commit(Q', r) &&\land\qquad\nonumber\\ 
+	Q &\in \mathcal{Q} \ \land\ t^* \in \mathcal{T} &&\qquad\rbrace
+\end{align}
+Above protocol can be built using the individual protocols from the previous sections. 
+
+\subsubsection*{\textit{Refreshment issuing}}\vspace*{-2mm}
+The RSU then computes and shares the following with the user:
+\begin{align}
+	\tilde{\sigma_q} &= Sign(t^*, sk_{acc}) \\ 
+	w^* &= ComputeWitness(V, t^*, sk_{acc})
+\end{align}
+
+
+\subsubsection*{\textit{Credential refreshment}}\vspace*{-2mm}
+The user finalizes the signature $\sigma_q$ as 
+\begin{align}
+	\sigma_q = Finalize(\tilde{\sigma}_q, Q, r)
+\end{align}
+and checks for correctness by verifying that $1 = Verify(Q, \sigma_q)$ and $1 = IsNonMember (t^*, V, w^*)$ hold. Then the user updates its credentials as $cred = (\sigma_{bp}, (Q', \sigma_q), (w'_i)_{i=0}^{K-1}, BL', V')$, where:
+\begin{align*}
+	(Q', \sigma_q') &\leftarrow (Q, \sigma_q)\\
+	(w_0', w_1', \dots, w_{K-2}') &\leftarrow (w_1', w_2', \dots, w_{K-1}')\\
+	w_{K-1}' &\leftarrow w^*\\
+	(BL', V') &\leftarrow (BL, V)
+\end{align*}
+
+
+\subsection{Revocation}
+To blacklist a misbehaving user who provided $t_k$, the RSU/IA updates the blacklist as $BL' = BL\,\cup\,\{ t_k \}$, and updates the accumulator as $V' = Accumulate(V, t_k)$.
+The next time the misbehaving user tries to authenticate, he will be unable to prove that $t_k$ from his queue is not in the accumulator. Hence he won't be authenticated.
+
+
+\subsection{Key generation and Encryption Scheme}
+After the authentication in the above steps, the rest of the construction for key generation and sharing of encrypted CAMs can be done similarly to the original scheme \cite*{Kanchan}.
+
+
+\pagebreak
+\section{Conclusion}
+We have shown that the original scheme\cite*{Kanchan} can be extended to support revocation for malicious users while still preserving the privacy of the users. However, the currently proposed scheme significantly impacts the efficiency of the scheme during the authentication phase, since for each authentication, the user now has to perform a ZKPoK for each value in his queue, siginificantly increasing the computation and communication overheads. These overheads might not be acceptable for V2X applications.
+
+\printbibliography
+
+\end{document}

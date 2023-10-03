@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.8.17">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLVM: llvm::LoopUnrollPass Class Reference</title>
+<link href="./LLVM_ llvm__LoopUnrollPass Class Reference_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/jquery.js"></script>
+<script type="text/javascript" src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/dynsections.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/MathJax.js"></script>
+<link href="./LLVM_ llvm__LoopUnrollPass Class Reference_files/doxygen.css" rel="stylesheet" type="text/css">
+</head>
+<body data-new-gr-c-s-check-loaded="14.1086.0" data-gr-ext-installed="">
+<!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#pub-methods">Public Member Functions</a> |
+<a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">llvm::LoopUnrollPass Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="https://llvm.org/doxygen/classllvm_1_1Loop.html" title="Represents a single loop in the control flow graph.">Loop</a> unroll pass that will support both full and partial unrolling.  
+ <a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#details">More...</a></p>
+
+<p><code>#include "<a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html">llvm/Transforms/Scalar/LoopUnrollPass.h</a>"</code></p>
+<div class="dynheader">
+Inheritance diagram for llvm::LoopUnrollPass:</div>
+<div class="dyncontent">
+<div class="center"><img src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/classllvm_1_1LoopUnrollPass__inherit__graph.png" border="0" usemap="#llvm_1_1LoopUnrollPass_inherit__map" alt="Inheritance graph"></div>
+<map name="llvm_1_1LoopUnrollPass_inherit__map" id="llvm_1_1LoopUnrollPass_inherit__map">
+<area shape="rect" title="Loop unroll pass that will support both full and partial unrolling." alt="" coords="5,200,164,227">
+<area shape="rect" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html" title=" " alt="" coords="9,109,160,151">
+<area shape="rect" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html" title="A CRTP mix-in to automatically provide informational APIs needed for passes." alt="" coords="10,5,159,47">
+</map>
+<center><span class="legend">[<a href="https://llvm.org/doxygen/graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for llvm::LoopUnrollPass:</div>
+<div class="dyncontent">
+<div class="center"><img src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/classllvm_1_1LoopUnrollPass__coll__graph.png" border="0" usemap="#llvm_1_1LoopUnrollPass_coll__map" alt="Collaboration graph"></div>
+<map name="llvm_1_1LoopUnrollPass_coll__map" id="llvm_1_1LoopUnrollPass_coll__map">
+<area shape="rect" title="Loop unroll pass that will support both full and partial unrolling." alt="" coords="5,200,164,227">
+<area shape="rect" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html" title=" " alt="" coords="9,109,160,151">
+<area shape="rect" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html" title="A CRTP mix-in to automatically provide informational APIs needed for passes." alt="" coords="10,5,159,47">
+</map>
+<center><span class="legend">[<a href="https://llvm.org/doxygen/graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tbody><tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2e1907c5ba529e1a6778611df03fa07b"><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#a2e1907c5ba529e1a6778611df03fa07b">LoopUnrollPass</a> (<a class="el" href="https://llvm.org/doxygen/structllvm_1_1LoopUnrollOptions.html">LoopUnrollOptions</a> UnrollOpts={})</td></tr>
+<tr class="memdesc:a2e1907c5ba529e1a6778611df03fa07b"><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This uses the target information (or flags) to control the thresholds for different unrolling stategies but supports all of them.  <a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#a2e1907c5ba529e1a6778611df03fa07b">More...</a><br></td></tr>
+<tr class="separator:a2e1907c5ba529e1a6778611df03fa07b"><td class="memSeparator" colspan="2">&nbsp;</td></tr>
+<tr class="memitem:a62ed17cf8aa893362e6c3c1f6d8a0898"><td class="memItemLeft" align="right" valign="top"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1PreservedAnalyses.html">PreservedAnalyses</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#a62ed17cf8aa893362e6c3c1f6d8a0898">run</a> (<a class="el" href="https://llvm.org/doxygen/classllvm_1_1Function.html">Function</a> &amp;<a class="el" href="https://llvm.org/doxygen/MD5_8cpp.html#a96d73bbd7af15cb1fc38c3f4a3bd82e9">F</a>, <a class="el" href="https://llvm.org/doxygen/namespacellvm.html#a4a70de23b004aba5c0fb0193a43062bb">FunctionAnalysisManager</a> &amp;AM)</td></tr>
+<tr class="separator:a62ed17cf8aa893362e6c3c1f6d8a0898"><td class="memSeparator" colspan="2">&nbsp;</td></tr>
+<tr class="memitem:ac318cdc3433689772c5cce5abdb39472"><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#ac318cdc3433689772c5cce5abdb39472">printPipeline</a> (<a class="el" href="https://llvm.org/doxygen/classllvm_1_1raw__ostream.html">raw_ostream</a> &amp;OS, <a class="el" href="https://llvm.org/doxygen/classllvm_1_1function__ref.html">function_ref</a>&lt; <a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>(<a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>)&gt; MapClassName2PassName)</td></tr>
+<tr class="separator:ac318cdc3433689772c5cce5abdb39472"><td class="memSeparator" colspan="2">&nbsp;</td></tr>
+<tr class="inherit_header pub_methods_structllvm_1_1PassInfoMixin"><td colspan="2" onclick="javascript:toggleInherit(&#39;pub_methods_structllvm_1_1PassInfoMixin&#39;)"><img src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/closed.png" alt="-">&nbsp;Public Member Functions inherited from <a class="el" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html">llvm::PassInfoMixin&lt; LoopUnrollPass &gt;</a></td></tr>
+<tr class="memitem:aa4cc9f41bee4680f8bc4dce320d8f7c7 inherit pub_methods_structllvm_1_1PassInfoMixin"><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html#aa4cc9f41bee4680f8bc4dce320d8f7c7">printPipeline</a> (<a class="el" href="https://llvm.org/doxygen/classllvm_1_1raw__ostream.html">raw_ostream</a> &amp;OS, <a class="el" href="https://llvm.org/doxygen/classllvm_1_1function__ref.html">function_ref</a>&lt; <a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>(<a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>)&gt; MapClassName2PassName)</td></tr>
+<tr class="separator:aa4cc9f41bee4680f8bc4dce320d8f7c7 inherit pub_methods_structllvm_1_1PassInfoMixin"><td class="memSeparator" colspan="2">&nbsp;</td></tr>
+</tbody></table><table class="memberdecls">
+<tbody><tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_structllvm_1_1PassInfoMixin"><td colspan="2" onclick="javascript:toggleInherit(&#39;pub_static_methods_structllvm_1_1PassInfoMixin&#39;)"><img src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/closed.png" alt="-">&nbsp;Static Public Member Functions inherited from <a class="el" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html">llvm::PassInfoMixin&lt; LoopUnrollPass &gt;</a></td></tr>
+<tr class="memitem:a630e2eac0694bcbcfed653c6a7f616e3 inherit pub_static_methods_structllvm_1_1PassInfoMixin"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html#a630e2eac0694bcbcfed653c6a7f616e3">name</a> ()</td></tr>
+<tr class="memdesc:a630e2eac0694bcbcfed653c6a7f616e3 inherit pub_static_methods_structllvm_1_1PassInfoMixin"><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the name of the pass we are mixed into.  <a href="https://llvm.org/doxygen/structllvm_1_1PassInfoMixin.html#a630e2eac0694bcbcfed653c6a7f616e3">More...</a><br></td></tr>
+<tr class="separator:a630e2eac0694bcbcfed653c6a7f616e3 inherit pub_static_methods_structllvm_1_1PassInfoMixin"><td class="memSeparator" colspan="2">&nbsp;</td></tr>
+</tbody></table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="https://llvm.org/doxygen/classllvm_1_1Loop.html" title="Represents a single loop in the control flow graph.">Loop</a> unroll pass that will support both full and partial unrolling. </p>
+<p>It is a function pass to have access to function and module analyses. It will also put loops into canonical form (simplified and LCSSA). </p>
+
+<p class="definition">Definition at line <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00133">133</a> of file <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html">LoopUnrollPass.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2e1907c5ba529e1a6778611df03fa07b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#a2e1907c5ba529e1a6778611df03fa07b">◆&nbsp;</a></span>LoopUnrollPass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tbody><tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tbody><tr>
+          <td class="memname">llvm::LoopUnrollPass::LoopUnrollPass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="https://llvm.org/doxygen/structllvm_1_1LoopUnrollOptions.html">LoopUnrollOptions</a>&nbsp;</td>
+          <td class="paramname"><em>UnrollOpts</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </tbody></table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</tbody></table>
+</div><div class="memdoc">
+
+<p>This uses the target information (or flags) to control the thresholds for different unrolling stategies but supports all of them. </p>
+
+<p class="definition">Definition at line <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00139">139</a> of file <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html">LoopUnrollPass.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac318cdc3433689772c5cce5abdb39472"></a>
+<h2 class="memtitle"><span class="permalink"><a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#ac318cdc3433689772c5cce5abdb39472">◆&nbsp;</a></span>printPipeline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tbody><tr>
+          <td class="memname">void LoopUnrollPass::printPipeline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1raw__ostream.html">raw_ostream</a> &amp;&nbsp;</td>
+          <td class="paramname"><em>OS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1function__ref.html">function_ref</a>&lt; <a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>(<a class="el" href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a>)&gt;&nbsp;</td>
+          <td class="paramname"><em>MapClassName2PassName</em>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </tbody></table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8cpp_source.html#l01643">1643</a> of file <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8cpp_source.html">LoopUnrollPass.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00062">llvm::LoopUnrollOptions::AllowPartial</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00063">llvm::LoopUnrollOptions::AllowPeeling</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00066">llvm::LoopUnrollOptions::AllowProfileBasedPeeling</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00064">llvm::LoopUnrollOptions::AllowRuntime</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00065">llvm::LoopUnrollOptions::AllowUpperBound</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00067">llvm::LoopUnrollOptions::FullUnrollMaxCount</a>, <a class="el" href="https://llvm.org/doxygen/None_8h_source.html#l00024">llvm::None</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00068">llvm::LoopUnrollOptions::OptLevel</a>, and <a class="el" href="https://llvm.org/doxygen/Optional_8h_source.html#l00313">llvm::Optional&lt; T &gt;::value()</a>.</p>
+
+</div>
+</div>
+<a id="a62ed17cf8aa893362e6c3c1f6d8a0898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="https://llvm.org/doxygen/classllvm_1_1LoopUnrollPass.html#a62ed17cf8aa893362e6c3c1f6d8a0898">◆&nbsp;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tbody><tr>
+          <td class="memname"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1PreservedAnalyses.html">PreservedAnalyses</a> LoopUnrollPass::run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="https://llvm.org/doxygen/classllvm_1_1Function.html">Function</a> &amp;&nbsp;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="https://llvm.org/doxygen/namespacellvm.html#a4a70de23b004aba5c0fb0193a43062bb">FunctionAnalysisManager</a> &amp;&nbsp;</td>
+          <td class="paramname"><em>AM</em>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </tbody></table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8cpp_source.html#l01557">1557</a> of file <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8cpp_source.html">LoopUnrollPass.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="https://llvm.org/doxygen/PassManager_8h_source.html#l00158">llvm::PreservedAnalyses::all()</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00062">llvm::LoopUnrollOptions::AllowPartial</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00063">llvm::LoopUnrollOptions::AllowPeeling</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00066">llvm::LoopUnrollOptions::AllowProfileBasedPeeling</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00064">llvm::LoopUnrollOptions::AllowRuntime</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00065">llvm::LoopUnrollOptions::AllowUpperBound</a>, <a class="el" href="https://llvm.org/doxygen/LoopUtils_8cpp_source.html#l01525">llvm::appendLoopsToWorklist()</a>, <a class="el" href="https://llvm.org/doxygen/AMDGPUISelLowering_8h_source.html#l00432">llvm::AMDGPUISD::BFI</a>, <a class="el" href="https://llvm.org/doxygen/PassManagerImpl_8h_source.html#l00036">llvm::AnalysisManager&lt; IRUnitT, ExtraArgTs &gt;::clear()</a>, <a class="el" href="https://llvm.org/doxygen/PriorityWorklist_8h_source.html#l00067">llvm::PriorityWorklist&lt; T, SmallVector&lt; T, N &gt;, SmallDenseMap&lt; T, ptrdiff_t &gt; &gt;::empty()</a>, <a class="el" href="https://llvm.org/doxygen/LoopInfo_8h_source.html#l00970">llvm::LoopInfoBase&lt; BlockT, LoopT &gt;::empty()</a>, <a class="el" href="https://llvm.org/doxygen/MD5_8cpp_source.html#l00055">F</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00078">llvm::LoopUnrollOptions::ForgetSCEV</a>, <a class="el" href="https://llvm.org/doxygen/LCSSA_8cpp_source.html#l00410">llvm::formLCSSARecursively()</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00067">llvm::LoopUnrollOptions::FullUnrollMaxCount</a>, <a class="el" href="https://llvm.org/doxygen/namespacellvm.html#a8c861ddf753ab3690437dceaadf5c7e1add722bdf19fff3e686f559790c6124d8">llvm::FullyUnrolled</a>, <a class="el" href="https://llvm.org/doxygen/PassManager_8h_source.html#l00793">llvm::AnalysisManager&lt; IRUnitT, ExtraArgTs &gt;::getCachedResult()</a>, <a class="el" href="https://llvm.org/doxygen/LoopAnalysisManager_8cpp_source.html#l00137">llvm::getLoopPassPreservedAnalyses()</a>, <a class="el" href="https://llvm.org/doxygen/LoopInfo_8h_source.html#l00890">llvm::Loop::getName()</a>, <a class="el" href="https://llvm.org/doxygen/LoopInfo_8h_source.html#l00113">llvm::LoopBase&lt; BlockT, LoopT &gt;::getParentLoop()</a>, <a class="el" href="https://llvm.org/doxygen/PassManager_8h_source.html#l00774">llvm::AnalysisManager&lt; IRUnitT, ExtraArgTs &gt;::getResult()</a>, <a class="el" href="https://llvm.org/doxygen/PassBuilderBindings_8cpp_source.html#l00058">LAM</a>, <a class="el" href="https://llvm.org/doxygen/None_8h_source.html#l00024">llvm::None</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00073">llvm::LoopUnrollOptions::OnlyWhenForced</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html#l00068">llvm::LoopUnrollOptions::OptLevel</a>, <a class="el" href="https://llvm.org/doxygen/PriorityWorklist_8h_source.html#l00153">llvm::PriorityWorklist&lt; T, SmallVector&lt; T, N &gt;, SmallDenseMap&lt; T, ptrdiff_t &gt; &gt;::pop_back_val()</a>, <a class="el" href="https://llvm.org/doxygen/LoopSimplify_8cpp_source.html#l00708">llvm::simplifyLoop()</a>, <a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8cpp_source.html#l01122">tryToUnrollLoop()</a>, <a class="el" href="https://llvm.org/doxygen/namespacellvm.html#a8c861ddf753ab3690437dceaadf5c7e1aac5e6ff0bb9cd22f9f55570e7b318c84">llvm::Unmodified</a>, and <a class="el" href="https://llvm.org/doxygen/LoopInfoImpl_8h_source.html#l00302">llvm::LoopBase&lt; BlockT, LoopT &gt;::verifyLoop()</a>.</p>
+
+</div>
+</div>
+<hr>The documentation for this class was generated from the following files:<ul>
+<li>include/llvm/Transforms/Scalar/<a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8h_source.html">LoopUnrollPass.h</a></li>
+<li>lib/Transforms/Scalar/<a class="el" href="https://llvm.org/doxygen/LoopUnrollPass_8cpp_source.html">LoopUnrollPass.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"><address class="footer"><small>
+Generated on Tue Nov 8 2022 17:30:57 for LLVM by &nbsp;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="./LLVM_ llvm__LoopUnrollPass Class Reference_files/doxygen.png" alt="doxygen">
+</a> 1.8.17
+</small></address>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

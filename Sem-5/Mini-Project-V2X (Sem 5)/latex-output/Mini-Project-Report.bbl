@@ -1,0 +1,162 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{CL}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ad51a952bb60bd4fdbee223e2e5b2d6c}{%
+           family={Camenisch},
+           familyi={C\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e39e0c950abcc817153272b7d6e48130}{%
+           family={Lysyanskaya.},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e59a7eb2ba052352e5f5ac2247bf8a61}
+      \strng{fullhash}{e59a7eb2ba052352e5f5ac2247bf8a61}
+      \strng{bibnamehash}{e59a7eb2ba052352e5f5ac2247bf8a61}
+      \strng{authorbibnamehash}{e59a7eb2ba052352e5f5ac2247bf8a61}
+      \strng{authornamehash}{e59a7eb2ba052352e5f5ac2247bf8a61}
+      \strng{authorfullhash}{e59a7eb2ba052352e5f5ac2247bf8a61}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SCN}
+      \field{title}{A Signature Scheme with Efficient Protocols.}
+      \field{volume}{2576}
+      \field{year}{2002}
+    \endentry
+    \entry{Camenisch}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ad51a952bb60bd4fdbee223e2e5b2d6c}{%
+           family={Camenisch},
+           familyi={C\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5d5eb36cec4b686a220d6a91980c8c0d}{%
+           family={Stadler.},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{be776d63203f8a7cef8dcf64673d990a}
+      \strng{fullhash}{be776d63203f8a7cef8dcf64673d990a}
+      \strng{bibnamehash}{be776d63203f8a7cef8dcf64673d990a}
+      \strng{authorbibnamehash}{be776d63203f8a7cef8dcf64673d990a}
+      \strng{authornamehash}{be776d63203f8a7cef8dcf64673d990a}
+      \strng{authorfullhash}{be776d63203f8a7cef8dcf64673d990a}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{CRYPTO}
+      \field{title}{Efficient group signature schemes for large groups}
+      \field{volume}{1294}
+      \field{year}{1997}
+    \endentry
+    \entry{Kanchan}{article}{}
+      \name{author}{1}{}{%
+        {{hash=87f07cb420d0d5d6bffbe53614afa674}{%
+           family={Kanchan},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{87f07cb420d0d5d6bffbe53614afa674}
+      \strng{fullhash}{87f07cb420d0d5d6bffbe53614afa674}
+      \strng{bibnamehash}{87f07cb420d0d5d6bffbe53614afa674}
+      \strng{authorbibnamehash}{87f07cb420d0d5d6bffbe53614afa674}
+      \strng{authornamehash}{87f07cb420d0d5d6bffbe53614afa674}
+      \strng{authorfullhash}{87f07cb420d0d5d6bffbe53614afa674}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Lightweight Privacy Preserving Authentication and Encryption Scheme for V2X}
+      \field{year}{2022}
+    \endentry
+    \entry{Li}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ef065b28c31984323fd6d3483d29aafd}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7683dc4384a659a650a0afecef2cda41}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=00be60ce30b2cad0aa7db59247e6bbe1}{%
+           family={Xue},
+           familyi={X\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{8644edf87f29c47aea728cb4d2ea4db6}
+      \strng{fullhash}{8644edf87f29c47aea728cb4d2ea4db6}
+      \strng{bibnamehash}{8644edf87f29c47aea728cb4d2ea4db6}
+      \strng{authorbibnamehash}{8644edf87f29c47aea728cb4d2ea4db6}
+      \strng{authornamehash}{8644edf87f29c47aea728cb4d2ea4db6}
+      \strng{authorfullhash}{8644edf87f29c47aea728cb4d2ea4db6}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Universal accumulators with efficient nonmembership proofs}
+      \field{year}{2007}
+    \endentry
+    \entry{perea}{article}{}
+      \name{author}{3}{}{%
+        {{hash=958a794c6b0ce6eb6658bcc11037b477}{%
+           family={Tsang},
+           familyi={T\bibinitperiod},
+           given={Patrick\bibnamedelima P.},
+           giveni={P\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=95de74919cbc69df0d11500abe7e6da9}{%
+           family={Apu},
+           familyi={A\bibinitperiod},
+           given={Man\bibnamedelimb Ho\bibnamedelima Au},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=d8c7f07a551f154cf04ecc0c019befa6}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Kapadia\bibnamedelimb Sean\bibnamedelima W.},
+           giveni={K\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{0364487ce14c0a2c15a6aa00770461d2}
+      \strng{fullhash}{0364487ce14c0a2c15a6aa00770461d2}
+      \strng{bibnamehash}{0364487ce14c0a2c15a6aa00770461d2}
+      \strng{authorbibnamehash}{0364487ce14c0a2c15a6aa00770461d2}
+      \strng{authornamehash}{0364487ce14c0a2c15a6aa00770461d2}
+      \strng{authorfullhash}{0364487ce14c0a2c15a6aa00770461d2}
+      \field{sortinit}{T}
+      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{PEREA: Towards Practical TTP-Free Revocation in Anonymous Authentication}
+      \field{year}{2009}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

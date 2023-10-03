@@ -1,0 +1,33 @@
+DROP TABLE instructor;
+DROP TABLE student;
+
+CREATE TABLE instructor (
+name TEXT,
+course_id TEXT
+);
+
+INSERT INTO instructor (name, course_id)
+VALUES
+('Amy','CS1000'),
+('Aaron','CS700'),
+('Anne','CS400');
+
+CREATE TABLE student (
+name TEXT,
+course_id TEXT
+);
+
+INSERT INTO student (name, course_id)
+VALUES
+('Jack','CS800'),
+('Jones','CS1000'),
+('Jason', 'CS450');
+
+SELECT instructor.name, instructor.course_id, student.name, student.course_id
+FROM student
+LEFT JOIN instructor USING (course_id)
+UNION ALL
+SELECT instructor.name, instructor.course_id, student.name, student.course_id
+FROM instructor
+LEFT JOIN student USING (course_id)
+WHERE student.course_id is NULL;

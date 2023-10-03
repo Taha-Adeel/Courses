@@ -1,0 +1,165 @@
+/* This file is based on 'Tranquille' by Dave Shea */
+/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
+/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
+/* Your images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
+
+
+/* basic elements */
+html {
+	margin: 0;
+	padding: 0;
+	}
+body { 
+	font: 105% georgia, sans-serif;
+	line-height: 2; /* line-height: 1.88889; 95% font*/
+	color: #252743; 
+	background: #fff url(blossoms.jpg) no-repeat bottom right; 
+	margin: 10; 
+	padding: 0;
+	}
+p { 
+	margin-top: 0; 
+	font-size:130%;
+	text-align: justify;
+	}
+h3 { 
+	font: normal 1.4em georgia, sans-serif;
+	letter-spacing: 1px; 
+	margin-bottom: 0; 
+	color: #AD473C;
+	}
+a:link { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #9785BF;
+	}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #B4ADBC;
+	}
+a:hover, a:active { 
+	text-decoration: underline; 
+	color: #9685BA;
+	}
+acronym {
+	border-bottom: none;
+	}
+
+/*Cool Menu*/
+
+#coolMenu,
+#coolMenu ul {
+    list-style: none;
+}
+#coolMenu {
+    float: left;
+}
+#coolMenu > li {
+    float: left;
+}
+#coolMenu li a {
+display: block;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1.5em;
+    text-decoration: none;
+}
+#coolMenu ul {
+    position: absolute;
+    display: none;
+z-index: 999;
+}
+#coolMenu ul li a {
+    width: 80px;
+}
+#coolMenu li:hover ul {
+    display: block;
+}
+
+
+/* specific divs */
+#container { 
+	background: url(zen-bg.jpg) no-repeat top left; 
+	padding: 0 175px 0 110px;  
+	margin: 0; 
+	position: relative;
+	}
+
+#intro { 
+	min-width: 470px;
+	}
+
+/* using an image to replace text in an h1. This trick courtesy Douglas Bowman, http://www.stopdesign.com/articles/css/replace-text/ */
+#pageHeader h1 { 
+	background: transparent url(h1.gif) no-repeat top left; 
+	margin-top: 10px; 
+	width: 219px; 
+	height: 87px; 
+	float: left;
+	}
+
+#linkList h3.select { 
+	background: transparent url(h3.gif) no-repeat top left; 
+	margin: 10px 0 5px 0; 
+	width: 97px; 
+	height: 16px; 
+	}
+#linkList h3.select span {
+	display:none
+	}
+#linkList h3.favorites { 
+	background: transparent url(h4.gif) no-repeat top left; 
+	margin: 25px 0 5px 0; 
+	width: 60px; 
+	height: 18px; 
+	}
+#linkList h3.favorites span {
+	display:none
+	}
+#linkList h3.archives { 
+	background: transparent url(h5.gif) no-repeat top left; 
+	margin: 25px 0 5px 0; 
+	width:57px; 
+	height: 14px; 
+	}
+#linkList h3.archives span {
+	display:none
+	}
+#linkList h3.resources { 
+	background: transparent url(h6.gif) no-repeat top left; 
+	margin: 25px 0 5px 0; 
+	width:63px; 
+	height: 10px; 
+	}
+#linkList h3.resources span {
+	display:none
+	}
+
+#linkList ul {
+	margin: 0;
+	padding: 0;
+	}
+#linkList li {
+	line-height: 2.5ex; 
+	background: transparent url(cr1.gif) no-repeat top center; 
+	display: block; 
+	padding-top: 5px; 
+	margin-bottom: 5px;
+	list-style-type: none;
+	}
+#linkList li a:link {
+	color: #988F5E;
+	}
+#linkList li a:visited {
+	color: #B3AE94;
+	}
+
+#extraDiv1 {
+	background: transparent url(cr2.gif) top left no-repeat; 
+	position: absolute; 
+	top: 40px; 
+	right: 0; 
+	width: 148px; 
+	height: 110px;
+	}

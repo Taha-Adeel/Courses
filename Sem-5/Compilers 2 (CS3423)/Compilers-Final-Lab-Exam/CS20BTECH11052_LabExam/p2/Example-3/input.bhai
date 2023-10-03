@@ -1,0 +1,15 @@
+hi bhai
+  bhai ye hai a = 0;
+  jab tak bhai (a < 10) {
+   a = a + 1;
+   agar bhai (a == 5) {
+    bol bhai "andar se bol bhai ", a;
+    agla dekh bhai;
+   }
+   agar bhai (a == 6) {
+    bas kar bhai;
+   }
+   bol bhai a;
+  }
+  bol bhai "done";
+bye bhai

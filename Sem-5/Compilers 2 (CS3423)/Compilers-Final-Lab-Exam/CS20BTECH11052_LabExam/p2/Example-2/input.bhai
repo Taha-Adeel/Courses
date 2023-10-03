@@ -1,0 +1,10 @@
+hi bhai
+  bhai ye hai a = 10;
+  agar bhai (a < 20) {
+    bol bhai "a is less than 20";
+  } nahi to bhai ( a < 25 ) {
+    bol bhai "a is less than 25";
+  } warna bhai {
+    bol bhai "a is greater than or equal to 25";
+  }
+bye bhai

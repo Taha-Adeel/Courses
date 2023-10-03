@@ -1,0 +1,9 @@
+digraph G {
+size ="4,4"
+rankdir="BT"
+A
+B
+C
+edge [color=green]
+A -> B
+}

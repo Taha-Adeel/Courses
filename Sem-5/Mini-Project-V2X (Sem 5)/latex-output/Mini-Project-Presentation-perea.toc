@@ -1,0 +1,9 @@
+\beamer@sectionintoc {1}{Additional Design Goals}{4}{0}{1}
+\beamer@sectionintoc {2}{High Level Overview}{6}{0}{2}
+\beamer@sectionintoc {3}{Building Blocks}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{Preliminaries}{15}{0}{3}
+\beamer@subsectionintoc {3}{4}{Tickets and Queues}{18}{0}{3}
+\beamer@subsectionintoc {3}{5}{Accumulator Scheme for Tickets}{21}{0}{3}
+\beamer@subsectionintoc {3}{6}{Protocol for Queue Signing}{27}{0}{3}
+\beamer@sectionintoc {4}{Modified Scheme Construction}{35}{0}{4}
+\beamer@sectionintoc {5}{Limitations}{40}{0}{5}

@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"*.tcc": "c",
+		"bitset": "c",
+		"fstream": "c",
+		"type_traits": "c",
+		"algorithm": "c",
+		"memory": "c",
+		"new": "c",
+		"numeric": "c",
+		"system_error": "c",
+		"core": "c"
+	}
+}
