@@ -1,0 +1,1 @@
+This folder contains screenshots of the results of running the various attacks described in the report. These attacks were carried out on the servers provided by portswigger in its various labs and using the burp suite.

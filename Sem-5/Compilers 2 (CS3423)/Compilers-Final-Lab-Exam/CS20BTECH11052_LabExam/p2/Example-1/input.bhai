@@ -1,0 +1,10 @@
+hi bhai
+  bhai ye hai a = 10;
+  bhai ye hai b = 10 + (15*20);
+  bhai ye hai c = "two";
+  bhai ye hai d = 'ok';
+  bhai ye hai e = nalla;
+  bhai ye hai f = sahi;
+  bhai ye hai g = galat;
+  a = a + 1;
+bye bhai

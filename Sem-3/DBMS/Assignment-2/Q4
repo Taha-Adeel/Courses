@@ -1,0 +1,21 @@
+DROP TABLE X;
+
+CREATE TABLE X (
+id_num INTEGER,
+id_str TEXT
+);
+
+INSERT INTO X (id_num, id_str)
+VALUES
+(1,'A'),
+(2,'B'),
+(3,'C'),
+(4,'D'),
+(5,'E');
+
+
+SELECT x1.id_num, x2.id_num, x3.id_num, x1.id_str, x2.id_str, x3.id_str
+FROM X AS x1, X AS x2, X AS x3
+WHERE x1.id_num < x2.id_num AND x2.id_num < x3.id_num
+
+

@@ -1,0 +1,148 @@
+\documentclass{beamer}
+\usepackage{listings}
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tkz-euclide} % loads  TikZ and tkz-base
+%\usetkzobj{all}
+\usetikzlibrary{calc,math}
+\usepackage{float}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\abs}[1]{\vert#1\vert}
+\providecommand{\fourier}{\overset{\mathcal{F}}{ \rightleftharpoons}}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\sbrak}[1]{\ensuremath{{}\left[#1\right]}}
+\usepackage[export]{adjustbox}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+\addtolength{\leftmargini}{\labelsep}
+\title{V2X Paper Presentation}
+\author{Taha Adeel Mohammed - CS20BTECH11052}
+\institute{IITH(CSE)}
+\date{\today}
+\begin{document}
+
+\section{Title}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}%{An Accumulator Based on Bilinear Maps and Efficient Revocation for Anonymous Credentials}
+    \begin{block}{Title}
+    An Accumulator Based on Bilinear Maps and Efficient Revocation for Anonymous Credentials.
+    \end{block}
+    \begin{block}{Authors}
+    \begin{itemize}
+        \item Jan Camenisch, IBM Research Zurich
+        \item Markulf Kohlweiss, Katholieke Universiteit Leuven
+        \item  Claudio Soriente, University of California, Irvine
+    \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Abstract}
+\begin{frame}{Abstract}
+    \begin{itemize}
+        \justifying
+        \item The paper considers the problem of revocation for certificate-based privacy-protecting authentication systems.
+        \item To date, the most efficient solutions for revocation for such systems are based on cryptographic accumulators, which involve accumulating all currently valid certificates and publishing it.
+        \item Each user holds a \textit{witness} enabling them to prove the validity of their anonymous credential while retaining anonymity. Unfortunately, the user's witness must be updated each time a credential is revoked.
+        \item For known solutions, these updates are computationally very expensive for the user and/or certificate issuer.
+        \item This paper proposes a new dynamic accumulator scheme based on bilinear maps and shows how to apply it to the problem of revocation of anonymous credentials. In this approach, validating a user and updating the user's witnesses happen with virtually no cost for the user and verifier.   
+    \end{itemize}
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{Introduction}
+    \begin{itemize}
+        \justifying
+        \item The current technologies for privacy-preserving authentication include anonymous credential systems, pseudonym systems, anonymous e-cash, or direct anonymous attestation, most of which have a common architecture of certificate issuers, users and certificate verifiers.
+        \item To support revocation of authentication, typically traditional certificates publish a blacklist of revoked certificates or issue certificates with short lifetime. This doesn't work for anonymous certificates as the first method violates privacy, and the second would involve frequent very hectic issuing processes.
+        \item In principle, it is also possible to maintain a blacklist for anonymous certificates if the user can prove in zero-knowledge that they are not on the blacklist. However this would normally be at least logarithmic in the list size.
+        \item Two solutions for this are verifier local revocation, and using cryptographic accumulators, which we shall discuss here.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prerequisites}\vspace{-2mm}
+\begin{block}{Cryptographic Accumulators}
+    \begin{itemize}\justifying
+        \item Accumulators allow one to hash a large set of inputs in a single short value, the \textit{accumulator}, and then provide evidence by an accumulator witness that a given value is indeed contained in the accumulator.
+        \item Thus, the serial numbers of all currently valid credentials are accumulated and the resulting value is published. Users can then show to verifiers that their credential is still valid, by using their witness to prove (in zero-knowledge) that their credential’s serial number is contained in the published accumulator.
+        \item However each time a revocation happens, the users would need to update their accumulator witnesses and an update requires at least one modular exponentiation for each newly revoked credential.
+        \item In this paper, the authors propose revocation solutions that incur (virtually) no cost to the verifier and the users, and only limited costs to the issuer, using a novel dynamic accumulator based on bilinear maps.
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Prerequisites}
+    \begin{block}{Bilinear Pairings}
+    Let $G$ and $G_T$ be groups of prime order $q$. A map $e : G \times G \rightarrow G_T$ must satisfy the following properties:
+    \begin{itemize}
+        \justifying
+        \item \textit{Bilinearity}: a map $e : G \times G \rightarrow G_T$ is bilinear if $e(a^x, b^y)t = e(a, b)^{xy}$;
+        \item \textit{Non-degeneracy:} for all generators $g, h \in G, e(g, h)$ generates $G_T$ ;
+        \item Efficiency: There exists an efficient algorithm $BMGen(1^k)$ that outputs $(q, G, GT , e, g)$ to generate the bilinear map and an efficient algorithm to compute $e(a, b)$ for any $a, b \in G$.
+    \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Assumptions}
+    \justify
+    The security of our scheme is based on the following number-theoretic assumptions. Our accumulator construction is based on the Diffie-Hellman Exponent assumption. The unforgeability of credentials is based on the Strong Diffie-Hellman assumption. And the credential revocation proof is based on our new Hidden Strong Diffie-Hellman Exponent (SDHE) assumption.
+    \begin{block}{Diffie-Hellman Exponent ($n$ - DHE) assumption}
+    \begin{itemize}
+        \justifying
+        \item  The $n$-DHE problem in a group $G$ of prime order $q$ is defined as follows: Let $g_i = g_{\gamma^i}, \gamma \leftarrow_R \mathbb{Z}_q$. On input $\{g, g_1, g_2,...,g_n, g_{n+2},...,g_{2n}\} \in G_{2n}$, output $g_{n+1}$. The $n$-DHE assumption states that this problem is hard to solve.
+        \item Boneh, Boyen, and Goh introduced the Bilinear Diffie-Hellman Exponent ($n$-BDHE) assumption that is defined over a bilinear map. Here the adversary has to compute $e(g, h)_\gamma^{n+1} \in G_T$ .
+    \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Assumptions}
+    \begin{block}{Strong Diffie-Hellman assumption}
+    \begin{itemize}
+        \justifying
+        \item  On input $g, g_x, g_{x^2} ,...,g_{x^n} \leftarrow G$, it is computationally infeasible to output $(g^{1/(x+c)}, c)$.
+    \end{itemize}
+    \end{block}
+    \begin{block}{Hidden Strong Diffie-Hellman Exponent assumption ($n$ - HSDHE)}
+    \begin{itemize}
+        \justifying
+        \item  Given $g, g^x, u \in G, {g^{1/(x+\gamma^i)}, {g^\gamma}^i, {u^\gamma}^i}_{i=1...n}$, and $\{{g^\gamma}^i \}_{i=n+2...2n}$, it is infeasible to compute a new tuple $(g^{1/(x+c)}, g^c, u^c)$.
+    \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Known Results}
+    The following well known results will be used in the paper: 
+    \begin{itemize}
+        \justifying
+        \item Proof of knowledge add some stuff of a discrete logarithm modulo a prime
+        \item Proof of knowledge of equality of some elements in different representation
+        \item Proof that a commitment opens to the product of two other committed values
+        \item Proof of the disjunction or conjunction of any two of the previous.
+    \end{itemize}
+    
+    \textbf{Notation:} $PK\{(\alpha, \beta, \delta) : y = g^{\alpha\beta} \land y' = g'^\alpha h'^\delta\}$ denotes "zero-knowledge Proof of Knowledge of integers $\alpha, \beta, and \delta$ such that $y = g^{\alpha\beta}$ and $y' = g'^\alpha h'^\delta$ holds". 
+\end{frame}
+
+\end{document}

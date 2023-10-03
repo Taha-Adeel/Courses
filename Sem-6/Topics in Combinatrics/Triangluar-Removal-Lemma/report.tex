@@ -1,0 +1,277 @@
+\documentclass[10pt]{beamer}
+% \beamerdefaultoverlayspecification{<+->}
+\usepackage[utf8]{inputenc}
+
+\usepackage{multirow,rotating}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{mathtools,nccmath}%
+\usepackage{etoolbox, xparse} 
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+% set colors
+\definecolor{myNewColorA}{RGB}{158, 27,50}
+\definecolor{myNewColorB}{RGB}{158, 27,50}
+\definecolor{myNewColorC}{RGB}{158, 27,50} % {130,138,143}
+\setbeamercolor*{palette primary}{bg=myNewColorC}
+\setbeamercolor*{palette secondary}{bg=myNewColorB, fg = white}
+\setbeamercolor*{palette tertiary}{bg=myNewColorA, fg = white}
+\setbeamercolor*{titlelike}{fg=myNewColorA}
+\setbeamercolor*{title}{bg=myNewColorA, fg = white}
+\setbeamercolor*{item}{fg=myNewColorA}
+\setbeamercolor*{caption name}{fg=myNewColorA}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+
+%------------------------------------------------------------
+% \titlegraphic{\includegraphics[height=0.75cm]{ua_eng_logo.png}} 
+
+% logo of my university
+
+
+
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamerfont{institute}{size=\footnotesize}
+\title[Combinatorics]{Triangle Removal Lemma}%title
+%\subtitle{ }%%subtitle
+\author[PS, TAM, KS]{Prashanth Sriram, Taha Adeel Mohammed, Ketan Sabne}%%authors
+
+\institute[IITH]{Indian Institute of Technology Hyderabad}
+\date[\textcolor{white}{}]
+{\today}
+
+
+
+%------------------------------------------------------------
+%This block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+%\AtBeginSection[]
+%{
+%  \begin{frame}
+%    \frametitle{Contents}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+% ------Contents below------
+%------------------------------------------------------------
+
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+	\begin{block}{Theorem (Triangle Removal Lemma)}
+		For every $\epsilon > 0$, there is a $\delta > 0$ such that if $G$ is a simple and undirect graph which can be made free of triangles by making atleast $\epsilon n^2$ deletions, then $G$ has atleast $\delta n^3 $ triangles.
+	\end{block}
+
+	\begin{block}{Motivation}
+		We can easily conclude that $G$ contains at least $\epsilon n^2$ triangles. But the strength of the triangle removal lemma is that, instead of quadratic, the number of triangles is cubic. It was first proved by Ruzsa and Szemeredi, who also observed it implies Roth's theorem.
+	\end{block}
+\end{frame}
+
+
+\section{Preliminaries}
+\begin{frame}{Notation}
+	\begin{block}{}
+			First we fix some notation. For us, a graph $G = (V, E)$ is simple
+		and undirected, with vertex set $V$ and edge set $E$. For two disjoint
+		subsets $A$ and $B$ of $V$, we define $e(A, B)$ to be the number of
+		edges across the two sets.
+	\end{block}
+
+	\begin{block}{Definition (Edge Density)}
+		For disjoint subsets $A$ and $B$ of $V$, we define the edge density as follows:
+		\begin{align*} \vspace*{-4mm}
+			d(A, B) = \frac{e(A, B)}{|A||B|}
+		\end{align*}
+	\end{block}
+
+	\begin{block}{Definition ($\epsilon$-regular pair (A,B))}
+		The above pair is called $\epsilon$-regular if for every $X \subset A$ and $Y \subset B$ with $|X| \geq \epsilon |A|$ and $|Y| \geq \epsilon |B|$, we have $|d(X, Y) - d(A, B)| < \epsilon$.
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}{Notation (Contd)}
+	\begin{block}{Definition ($\epsilon$ regular partition)}
+		The partition $V = V_0 \cup V_1 \cup \dots \cup V_k$ is called $\epsilon$-regular if 
+		\begin{itemize}
+			\item $|V_0| \leq \epsilon n$
+			\item $|V_1| = |V_2| = \dots = |V_k|$
+			\item At most $\epsilon k^2$ pairs $(V_i, V_j)$ are not $\epsilon$-regular.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Szemeredi's Regularity Lemma}
+	\begin{block}{Theorem (Szemeredi's Regularity Lemma)}
+		For every $\epsilon > 0$ and every positive integer $t$, there exists integers $T(\epsilon, t)$ and $N(\epsilon, t)$ such that every graph $G$ with $n \geq N$ vertices contains a $\epsilon$-regular partition $V = V_0 \cup V_1 \cup \dots \cup V_k$ with $t \leq k \leq T$.
+	\end{block}
+
+	The crucial aspect of this theorem is the fact the k given here is
+	bounded above.
+	In other words, this theorem could be taken to mean that any large
+	enough graph can “roughly” be decomposed into boundedly many
+	equi-sized clusters, which “roughly” behave “randomly” with each
+	other.
+	
+\end{frame}
+
+\section{Proof}
+\begin{frame}{Theorem}
+
+    \begin{theorem} \label{thm:theorem1}
+      (Triangle removal lemma). For any $0 < \epsilon < 1$, there is $\delta = \delta(\epsilon) > 0 $
+such that, whenever $G = (V, E)$ is $\epsilon$-far from being triangle-free, then it contains
+at least $\delta |V|^{3}$
+triangles.
+    \end{theorem}
+
+    \begin{proof}
+     Let $G = (V, E)$ be an $\epsilon$-far from being triangle-free graph and $|V| = n$. We
+can assume $ n > N(\frac{\epsilon}{4}, \lfloor \frac{4}{\epsilon} \rfloor)$ by just taking $\delta$ sufficiently small so that
+	\begin{align*}
+		\delta \cdot N(\frac{\epsilon}{4}, \lfloor \frac{4}{\epsilon} \rfloor)^3 < 1
+	\end{align*} 
+	Now consider the $\frac{\epsilon}{4}$-regular partition $U = {V_{0}, V_{1}, \dots V_{k}}$ given by Szemeredi’s regularity lemma. Let
+	$c = |V_{1}| = \dots = |V_{k}|$ and G' be a graph obtained from G by deleting the following edges:
+	\end{proof}
+\end{frame}    
+
+\begin{frame}{Proof(contd..)}
+    \begin{proof}
+        \begin{itemize}
+            \item All edges which are incident in $V_{0}$: there are at most $\frac{\epsilon n^2}{4}$ edges
+            \item All edges inside the clusters $V_{1},\dots , V_{k}$: the number of edges is at most
+            \begin{center}
+                $ c^2k < \frac{n^2}{k} < \frac{\epsilon n^2}{4}$
+            \end{center}
+            
+            \item All edges that lie in irregular pairs: there are less than
+            \begin{center}
+                $(\frac{\epsilon}{4}.k^2).c^2 < \frac{\epsilon n^2}{4}$ edges.
+            \end{center}
+
+            \item All edges lying in a pair of clusters whose density is less than $\frac{\epsilon}{2}$: their cardinality
+is at most $ k \choose 2$ $\frac{\epsilon c^2}{2} < \frac{\epsilon. n^2}{4}$.
+        \end{itemize}
+        As we can see if we sum up number of deleted edges from above 4 conditions then we can say that number of deleted edges is less than $\epsilon n^2$. So, from lemma, we can say that G' contains a triangle.Means some cases are left let's find out.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Proof(contd..)}
+\begin{proof}
+The three vertices of such triangle belong to three remaining distinct clusters
+, let's assume it as $V_{1}, V_{2}, V_{3}$. We’ll show that in fact these clusters support many triangles.Assume a vertex $v_{1} \in V_{1}$ typical if it has at least $\frac{\epsilon c}{4}$ adjacent vertices in $V_{2}$ and at
+least $\frac{\epsilon c}{4}$  adjacent vertices in $V_{3}$ . So, by hypothesis,
+\begin{equation} \label{eqn:bound}
+    d(V'_{i},V'_{j}) \geq \frac{\epsilon}{4}
+\end{equation}
+
+\end{proof}
+    
+\end{frame}
+
+
+\begin{frame}{A Lower Bound on number of Typical vertices}
+    \begin{itemize}
+        \item Observe that (the number of vertices in $V_1$ with at least $\dfrac{\epsilon c}{4}$ adjacent vertices in $V_2$) $\geq (1-\epsilon/4)\cdot c$. Why? \begin{itemize}
+            \item Assume that this is not the case $\Rightarrow$ atleast $\dfrac{\epsilon c}{4}$ vertices in $V_1$ have less than $\dfrac{\epsilon c}{4}$ neighbours in $V_2$. 
+            \item Consider the set of these vertices in $V_1$ as $V_1'$. Now, the number of edges between $V_1'$ and $V_2$ is less than $|V_1'|\cdot \dfrac{\epsilon c}{4}$.
+            \item So, \begin{align}
+                d(V_1', V2) &< \dfrac{|V_1'|\cdot \dfrac{\epsilon c}{4}}{|V_1'|\cdot|V2|} \\
+                &=\dfrac{\epsilon}{4}
+            \end{align}
+            \item But, since $V_1'$ has $\geq \dfrac{\epsilon c}{4}$ vertices, it should satisfy (\ref{eqn:bound}), contradicting our assumption
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\begin{frame}{Lower Bound on number of Typical vertices (contd)}
+\begin{itemize}
+    \item Applying similar logic for the number of vertices in $V_1$ with atleast $\dfrac{\epsilon c}{4}$ adjacent vertices in $V_3$, we have: \begin{itemize}
+        \item At max, $\dfrac{\epsilon c}{4}$ vertices in $V_!$ doesn't have more than $\dfrac{\epsilon c}{4}$ neighbours in $V_2$
+        \item At max, $\dfrac{\epsilon c}{4}$ vertices in $V_!$ doesn't have more than $\dfrac{\epsilon c}{4}$ neighbours in $V_3$
+    \end{itemize}
+    \item Thus, the number of typical vertices in $V_1$ is atleast 
+    \begin{align}
+        (1-2\dfrac{\epsilon}{4})\cdot c &= (1-\dfrac{\epsilon}{2})\cdot c \\
+        &>\dfrac{c}{2} \quad \text{(Since $\epsilon < 1$)}
+    \end{align}
+    \item The number of typical vertices in $V_1$ is atleast $\dfrac{c}{2}$
+\end{itemize}
+\end{frame}
+\begin{frame}{Triangles formed by a typical vertex}
+Let $v_1 \in V_1$ be a typical vertex. Let $V_2' \subset V_2$ and $V_3' \subset V_3$ be the vertices adjacent to $v_1$
+    \begin{figure}
+        \centering
+        \includegraphics[width=9cm]{image.png}
+        \caption{Triangles formed by a typical vertex (Src: Yuri Lima's notes on Szemeredi's regularity Lemma)}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+\begin{frame}{Triangles formed by a Typical vertex}
+\begin{itemize}
+    \item As you can observe, every edge between $V_2'$ and $V_3'$ generate a triangle with $v_1$ as the third point
+    \item Number of such triangles with $v_1$ as a vertex is equal to the number of edges across $V_2'$ and $V_3'$ \begin{align}
+       e(V_2', V_3') &= d(V_2', V_3') \cdot |V_2'| \cdot |V_3'| \\
+        &\geq \dfrac{\epsilon}{4} \cdot |V_2'| \cdot |V_3'| \\
+        &\geq \dfrac{\epsilon^3 c^2}{4^3}
+    \end{align}
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Triangles formed by Typical Vertices}
+    \begin{itemize}
+        \item Summing this over all such $v_1 \in V_1$ typical, $G'$ has atleast \begin{align}
+            &>\dfrac{c}{2} \cdot \dfrac{\epsilon^3 c^2}{4^3} = \dfrac{\epsilon^3 c^3}{2 \cdot 4^3} \\
+            &> (\dfrac{\epsilon c}{4})^3
+        \end{align} many triangles
+    \item Since $c > \dfrac{N}{2T(\epsilon/4, \lfloor 4/\epsilon \rfloor)}$, the above quantity is $\geq$ \begin{align}
+        (\dfrac{\epsilon}{4} \cdot \dfrac{n}{2\cdot T(\epsilon/4, \lfloor 4/\epsilon \rfloor)})^3 = (\dfrac{\epsilon}{8\cdot T(\epsilon/4, \lfloor 4/\epsilon \rfloor)})^3\cdot n^3 \\
+        =\delta(\epsilon)\cdot n^3
+    \end{align}
+    \end{itemize}
+    %%%%DON'T KNOW WHY THE LAST POINT IS TRUE BTW!!!!!%%%%%
+\end{frame}
+
+\begin{frame}
+\textcolor{myNewColorA}{\huge{\centerline{Thank you!}}}
+\vspace*{0.5cm}
+
+\textcolor{myNewColorA}{\Large{\centerline{Roll: cs20btech11039, cs20btech11052, cs20btech11043}}}
+
+\end{frame}
+
+\end{document}
+
+
+

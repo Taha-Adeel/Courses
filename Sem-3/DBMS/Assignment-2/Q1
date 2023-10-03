@@ -1,0 +1,4 @@
+SELECT substring(artists.Name, 1, 1), count(artists.ArtistID)
+FROM artists
+LEFT JOIN albums using (ArtistId)
+GROUP BY substring(artists.Name, 1, 1);

@@ -1,0 +1,23 @@
+#program to check if a string is palindrome
+
+driver<: :>
+(:
+    var string word := "malayalam";
+    var int len := word>>size();
+    var int count := 0;
+    for(var int i := 0; i < len; i:= i + 1)
+    (:
+        if(word[i] = word[len-i-1])
+        (:
+            count := count + 1;
+        :)
+    :)
+    if(count = len)
+    (:
+        print(word + " is palindrome\n");
+    :)
+    else
+    (:
+        print(word + " is not palindrome\n");
+    :)
+:)

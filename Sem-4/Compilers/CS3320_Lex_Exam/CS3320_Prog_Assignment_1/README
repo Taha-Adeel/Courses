@@ -1,0 +1,28 @@
+Roll No.:
+Name:
+
+--------------------------------------------------------------------------------
+
+P1: Chess
+---------
+Assumptions / Comments (if any):
+	
+# Is the program complete? Are there any assumptions made? Any other comments?
+Program is complete. We assume that all chess moves given to the parser are valid, as we dont check for the validity of the moves.
+
+Approach :
+# How do you solve this problem?
+We define substitution rules for the peices, rows and columns in the definition section.
+Then in the rules section, we write a pattern to match to a move(and also patterns to match the s. no and whitespaces), and when this pattern is matched, we make the changes to the global variable board(2D array) which hold our configuration.
+Then when the program ends, yywrap is called and we display our board.
+
+P2: Calculator
+--------------
+Assumptions / Comments (if any):
+	
+# Is the program complete? Are there any assumptions made? Any other comments?
+If else feature and reading input from user hasnt been implemented yet.
+
+Approach :
+# How do you solve this problem?
+

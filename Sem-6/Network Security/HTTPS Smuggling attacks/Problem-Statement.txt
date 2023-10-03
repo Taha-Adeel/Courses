@@ -1,0 +1,31 @@
+Problem Statement 4: Understanding and mitigating HTTP Request Smuggling attacks
+
+Description: 
+   HTTP Request Smuggling (HRS) attack is a discovered vulnerability of HTTP where some header fields of HTTP header are exploited to smuggle the request. This vulnerability was exploited in 2005 itself but since then there are many ways and methodologies that are also explored which can launch this attack in numerous ways. Due to the significant amount of research done in this field, there are labs and repositories available to do hands-on practice. As part of the project, students are expected to understand, perform HSR attack practically, detecting it and deploying one mitigation technique.
+
+Steps to be performed:-
+   1. Understanding of HTTP Web Smuggling attack.
+   2. Using existing labs/techniques to carry out attacks in a sandbox environment.
+   3. Simulating the attack and check vulnerability of servers supporting HTTP 1.1 and HTTP 1.2. You should able to answer the following questions:-
+      a. How do you exploit HTTP 1.1 server with HRS?
+      b. Are you able to exploit HTTP 1.2  server with HRS?
+      c. Do you need a different payload/technique for both HTTP 1.1 and HTTP 1.2?
+   4. Deploy mitigation techniques (your own proposed or from the existing solutions) to HRS.
+
+Deliverables:-
+   1. Code/tools/commands used to simulate/emulate HRS.
+   2. Demonstration of attacks both in HTTP 1.1 and HTTP 1.2
+   3. Demonstration of mitigation techniques
+   4. Detailed report with methodology, observations, discussion and results.
+   5. To check the impact of HRS on HTTP/3. To find possible vectors of HRS in HTTP/3 or to list down factors that secure it against HRS.
+
+References
+   https://www.hindawi.com/journals/scn/2022/3121177/
+   https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9626191
+   https://i.blackhat.com/USA-20/Wednesday/us-20-Klein-HTTP-Request-Smuggling-In-2020-New-Variants-New-Defenses-And-New-Challenges-wp.pdf
+
+Labs/Repositories
+   https://github.com/ZeddYu/HTTP-Smuggling-Lab            
+   https://github.com/SafeBreach-Labs/HRS
+   https://github.com/irsdl/httpninja/blob/master/Results_v0.1.xlsx
+   https://github.com/SafeBreach-Labs/RSFW

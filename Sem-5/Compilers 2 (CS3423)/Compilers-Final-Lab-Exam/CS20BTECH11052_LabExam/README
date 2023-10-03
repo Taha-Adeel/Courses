@@ -1,0 +1,55 @@
+Roll No.:
+Name:
+
+--------------------------------------------------------------------------------
+
+P1: Mini-Doxygen
+--------------------------------
+Instructions to run:
+
+# Instructions to run, such as list of commands, or script, or Makefile
+
+Assumptions / Comments (if any):
+	
+# Is the program complete? Are there any assumptions made? Any other comments?
+Incomplete. The grammar rules and actions are incomplete. The constructor for a class imports the member variables from its parents.
+Then once the class signatures are obtained, they can be added to the documentation.
+
+
+P2: Bhai-lang
+----------------------------------------
+Instructions to run:
+# Instructions to run, such as list of commands, or script, or Makefile
+cd p2
+make
+./p2.out Eaxample-1/input.bhai
+
+Assumptions / Comments (if any):
+The transcription is done by the lexer alone. Hence the main function is in the lexer
+The executable can take input from stdin or from the filename given as argument while executing.
+The transcribed python code is outputted into "out.py"
+
+# Is the program complete? Are there any assumptions made? Any other comments?
+Yes the program is mostly complete.
+Assumptions:
+	The tokens are single spaced. To account for any amount spacing, we can replace the spaces in the lexer rules with [ \t]+, but that would bloat the rules.
+	Also it is assummed that the input is a valid syntactically correct code.
+	Assumes that the input contains only ascii characters
+
+
+P3: Tic-tac-toe
+---------
+Instructions to run:
+# Instructions to run, such as list of commands, or script, or Makefile
+cd p3
+make
+./p3.out
+
+Assumptions / Comments (if any):
+The program takes input from stdin. To finish the scanning and print the result, press ctrl+D (==EOF signal)
+The input can be taken directly without using the parser or lexer, but appropriate patterns and rules have been provided to parse the input.
+	
+# Is the program complete? Are there any assumptions made? Any other comments?
+Yes the program is complete.
+Assumptions:
+	Input is correct, N >= 1, input is read till EOF
