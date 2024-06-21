@@ -1,0 +1,34 @@
+%%%
+% Author: Yihong Liu (https://liu-yihong.github.io/)
+% Repository:
+% License: GNU GPL v3.0
+% This repository contains an unofficial LaTex beamer template for the University of Texas at Dallas.
+% Copyright (c) 2022 Yihong Liu
+%%%
+% https://tex.stackexchange.com/questions/443659/how-to-remove-date-from-footnote-of-madrid-theme-of-beamer-and-use-that-space-fo
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+      {CS4055}
+    %  \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~\insertshortinstitute}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.77\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+  }%
+  \begin{beamercolorbox}[wd=.08\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}%
+    \usebeamertemplate{page number in head/foot}%
+    \hspace*{2ex}
+  \end{beamercolorbox}
+  \vskip0pt%
+}
+\makeatother
+%gets rid of bottom navigation symbols
+\setbeamertemplate{navigation symbols}{}
+%gets rid of bottom navigation bars
+% \setbeamertemplate{footline}[frame number]{}
+%gets rid of footer
+% \setbeamertemplate{footline}{}

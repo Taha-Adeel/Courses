@@ -1,0 +1,123 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\slideentry {0}{0}{3}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@sectionpages {1}{3}}
+\headcommand {\beamer@subsectionpages {1}{3}}
+\headcommand {\sectionentry {1}{Introduction}{4}{Introduction}{0}}
+\headcommand {\slideentry {1}{0}{1}{4/4}{}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\beamer@subsectionpages {4}{4}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{5}{CCN}}
+\headcommand {\slideentry {1}{1}{1}{5/5}{CCN}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\beamer@subsectionpages {5}{5}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{6}{Motivation and Terminology}}
+\headcommand {\slideentry {1}{2}{1}{6/6}{Motivation and Terminology}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{7}{High Level Overview}}
+\headcommand {\slideentry {1}{3}{1}{7/7}{High Level Overview}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@sectionpages {4}{7}}
+\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\sectionentry {2}{System Description}{8}{System Description}{0}}
+\headcommand {\slideentry {2}{0}{1}{8/8}{}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {2}{0}{2}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {2}{0}{3}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {2}{0}{4}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@sectionpages {8}{11}}
+\headcommand {\beamer@subsectionpages {8}{11}}
+\headcommand {\sectionentry {3}{Single Node Cache Analysis}{12}{Single Node Cache Analysis}{0}}
+\headcommand {\slideentry {3}{0}{1}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{13}{Introduction}}
+\headcommand {\slideentry {3}{1}{1}{13/13}{Introduction}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{14}{Markov Chain Model}}
+\headcommand {\slideentry {3}{2}{1}{14/14}{Markov Chain Model}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{15}{Transition Probabilities}}
+\headcommand {\slideentry {3}{3}{1}{15/15}{Transition Probabilities}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {3}{3}{2}{16/16}{Transition Probabilities}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {3}{3}{3}{17/17}{Transition Probabilities}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsectionpages {15}{17}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{18}{Stationary Distribution}}
+\headcommand {\slideentry {3}{4}{1}{18/18}{Stationary Distribution}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\slideentry {3}{4}{2}{19/19}{Stationary Distribution}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {3}{4}{3}{20/20}{Stationary Distribution}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\slideentry {3}{4}{4}{21/21}{Stationary Distribution}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@sectionpages {12}{21}}
+\headcommand {\beamer@subsectionpages {18}{21}}
+\headcommand {\sectionentry {4}{Multiple Nodes System}{22}{Multiple Nodes System}{0}}
+\headcommand {\slideentry {4}{0}{1}{22/22}{}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@subsectionpages {22}{22}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{23}{Outgoing Miss Stream}}
+\headcommand {\slideentry {4}{1}{1}{23/23}{Outgoing Miss Stream}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\beamer@subsectionpages {23}{23}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{24}{Incoming Miss Stream}}
+\headcommand {\slideentry {4}{2}{1}{24/24}{Incoming Miss Stream}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\beamer@subsectionpages {24}{24}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{25}{Adjusting $p_r$}}
+\headcommand {\slideentry {4}{3}{1}{25/25}{Adjusting $p_r$}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\beamer@sectionpages {22}{25}}
+\headcommand {\beamer@subsectionpages {25}{25}}
+\headcommand {\sectionentry {5}{Experimental Simulations}{26}{Experimental Simulations}{0}}
+\headcommand {\slideentry {5}{0}{1}{26/26}{}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\beamer@subsectionpages {26}{26}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{27}{Tools and parameters}}
+\headcommand {\slideentry {5}{1}{1}{27/27}{Tools and parameters}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\beamer@subsectionpages {27}{27}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{28}{Variables / Topologies}}
+\headcommand {\slideentry {5}{2}{1}{28/28}{Variables / Topologies}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\beamer@subsectionpages {28}{28}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{29}{Results}}
+\headcommand {\slideentry {5}{3}{1}{29/29}{Results}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\beamer@sectionpages {26}{29}}
+\headcommand {\beamer@subsectionpages {29}{29}}
+\headcommand {\sectionentry {6}{Our Work}{30}{Our Work}{0}}
+\headcommand {\slideentry {6}{0}{1}{30/30}{}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\beamer@subsectionpages {30}{30}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{31}{Average Number of Hops for a Request}}
+\headcommand {\slideentry {6}{1}{1}{31/31}{Average Number of Hops for a Request}{0}}
+\headcommand {\beamer@framepages {31}{31}}
+\headcommand {\beamer@subsectionpages {31}{31}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{32}{Advanced Topologies Simulations}}
+\headcommand {\slideentry {6}{2}{1}{32/32}{Advanced Topologies Simulations}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {6}{2}{2}{33/33}{Advanced Topologies Simulations}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\slideentry {6}{2}{3}{34/34}{Advanced Topologies Simulations}{0}}
+\headcommand {\beamer@framepages {34}{34}}
+\headcommand {\slideentry {6}{2}{4}{35/35}{Advanced Topologies Simulations}{0}}
+\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\beamer@partpages {1}{35}}
+\headcommand {\beamer@subsectionpages {32}{35}}
+\headcommand {\beamer@sectionpages {30}{35}}
+\headcommand {\beamer@documentpages {35}}
+\headcommand {\gdef \inserttotalframenumber {35}}

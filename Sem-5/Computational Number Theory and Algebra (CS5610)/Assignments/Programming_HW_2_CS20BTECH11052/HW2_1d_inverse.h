@@ -10,7 +10,7 @@ BigInt inverse(BigInt& a, const BigInt& n){
 	auto [x, y, g] = extended_euclidean_algo(a, n, gcd(a, n));
 	if(g != 1) throw "a doesnt have an inverse in Zn";
 
-	x = (x%n + n) % n; // Normalizing x to Zn
+	x = (x % n + n) % n; // Normalizing x to Zn
 	return x;
 }
 

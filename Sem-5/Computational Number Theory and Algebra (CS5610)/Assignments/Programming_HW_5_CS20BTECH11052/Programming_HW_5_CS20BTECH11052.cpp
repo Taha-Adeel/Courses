@@ -230,7 +230,7 @@ public:
 	/**
 	 * @brief Partitions the square free part of f into factors fi(x), where fi(x) is the product of all monic irreducible factors of g(x) that have degree equal to i. 
 	 * 
-	 * Finds f1(x),f2(x),... where fi(x) is the product of monic irreducible factors of f(x) of degree i in Zp[x].
+	 * Finds f1(x), f2(x), ... where fi(x) is the product of monic irreducible factors of f(x) of degree i in Zp[x].
 	 * 
 	 * @return std::vector<Polynomial> 
 	 */

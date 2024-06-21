@@ -1,0 +1,14 @@
+\beamer@sectionintoc {1}{Preliminaries}{4}{0}{1}
+\beamer@subsectionintoc {1}{1}{Anonymous Credentials}{5}{0}{1}
+\beamer@subsectionintoc {1}{2}{Threshold Signatures}{6}{0}{1}
+\beamer@sectionintoc {2}{BBS+ Signature Scheme}{8}{0}{2}
+\beamer@subsectionintoc {2}{1}{Key Generation}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{Signing}{11}{0}{2}
+\beamer@subsectionintoc {2}{3}{Verification}{12}{0}{2}
+\beamer@sectionintoc {3}{Thresholdizing the BBS+ Protocol}{13}{0}{3}
+\beamer@subsectionintoc {3}{1}{High Level Overview}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Key Generation}{15}{0}{3}
+\beamer@subsectionintoc {3}{3}{Signing}{16}{0}{3}
+\beamer@sectionintoc {4}{Weak Partially-Blind Signing}{17}{0}{4}
+\beamer@sectionintoc {5}{Applications}{19}{0}{5}
+\beamer@sectionintoc {6}{Implementation and Benchmarks}{21}{0}{6}

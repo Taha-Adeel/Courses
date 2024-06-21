@@ -1,0 +1,5 @@
+[0] Config.pm:304> INFO - This is Biber 2.14 (beta)
+[0] Config.pm:307> INFO - Logfile is 'latex-output/hw1.blg'
+[59] biber:322> INFO - === Mon Sep  4, 2023, 01:48:37
+[77] Biber.pm:415> INFO - Reading 'latex-output/hw1.bcf'
+[126] Utils.pm:293> WARN - No data sources defined!
