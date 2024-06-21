@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{blkarray}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+% Set your name and assignment details here
+\renewcommand{\author}{Taha Adeel Mohammed}
+\newcommand{\rollnumber}{CS20BTECH11052}
+\newcommand{\course}{AI3000/CS5500: Reinforcement Learning}
+\newcommand{\assignment}{Assignment 2}
+
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\Rhat}{\hat{\mathcal{R}}}
+
+\renewcommand{\thesection}{Problem \arabic{section}:\!\!\!\!}
+\renewcommand{\thesubsection}{(\alph{subsection})\!\!\!}
+% \titleformat{\subsection}{\normalfont}{\thesubsection}{0.5em}{}
+
+% Page setup
+\geometry{a4paper, margin=1in}
+\lfoot{\myname}
+\rfoot{AI3000/CS5500}
+\cfoot{\assignment}
+\rfoot{\thepage}
+
+% Title
+\renewcommand{\maketitle}{
+	\begin{center}
+		\line(1,0){450} \\
+		\vspace*{1ex}
+        \Large{\textbf{\course}} \\
+        \Large{\textbf{\assignment}} \\
+    \end{center}
+	\large{\author}
+	\begin{flushright}
+		\vspace*{-5ex}
+		\rollnumber \\
+	\end{flushright}
+	\begin{center}
+		\vspace*{-1ex}
+		\line(1,0){450}
+	\end{center}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Value Iteration}
+
+\subsection{Prove that the Bellman optimality operator is a contraction under the max-norm. (5 points)}
+
+
+
+\subsection{Prove that the iterative policy evalution algorithm converges geometrically. (3 points)}
+
+
+
+\subsection{Let M be an infinite horizon MDP and $V^*$ be its optimal value function. Suppose if the value iteration algorithm is terminated after $k + 1$ iterations as $\|V_{k+1} - V_k\|_\infty < \epsilon$ for some chosen $\epsilon > 0$, how far is the estimate $V_{k+1}$ from the optimal value function $V^*$? Provide details of your derivation. (5 points)}
+
+
+
+\section{Programming Value Iteration}
+
+\subsection{Implement value iteration and policy iteration algorithm. Modularize the implementation to contain separate functions for policy evalution, value iteration and policy improvement. Test the implementation on the 4 x 4 Frozen Lake environment available in Gymnasium (formerly known as Open AI Gym).The stochastic version of the environment is default which can be changed by modifying the is-slippery flag. (8 points)}
+
+Reinforcement Learning algorithms are implemented in \texttt{rl.py} and the code for the Frozen Lake environment is in \texttt{frozen\_lake.ipynb}.
+
+\subsection{Document your findings with number of iterations needed for both algorithms to converge (or nearly converge) to optimal policy on the Frozen Lake envrionment. Further, provide a snapshot of the optimal policy obtained via the two algorithms. (4 points)}
+
+
+\subsection{Are there any stochastic optimal policies? If so, does any of the algorithms find any stochastic optimal policy? If not, why not? (3 points)}
+
+\subsection{Noisy Environment}
+
+\textbf{(i) Implement the above environment in Python 3.8+. (8 points)}
+\vspace*{2mm}
+
+Implemented in \texttt{noisy\_frozen\_lake.ipynb}.
+
+\,
+
+\noindent
+\textbf{(ii) Use any of the DP algorithms implemented above on this environment and observe the optimal paths for various choices of $\gamma$ and $\eta$. Identify what values of $\gamma$ and $\eta$ that could lead the agent to each of the optimal paths listed and explain the reasoning for the answer obtained. (8 points)} 
+
+\,
+
+
+\noindent
+\textbf{(iii) After solving this grid world example, please re-visit your answer to question 2(h) of Assignment 1 (1 point)}
+
+
+\end{document}

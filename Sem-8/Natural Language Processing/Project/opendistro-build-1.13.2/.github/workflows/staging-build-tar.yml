@@ -1,0 +1,133 @@
+name: Process TAR Artifacts
+
+on:
+#  schedule:
+#    - cron: '0 10 * * *'
+  repository_dispatch:
+    types: [staging-build-tar]
+
+jobs:
+  plugin-availability:
+    name: Check Plugin Availability
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Required Packages
+        run: ./release-tools/scripts/required_packages.sh
+      - name: Run check_plugin scripts
+        run: ./release-tools/scripts/check_plugin.sh; exit `cat /tmp/plugin_status.check`
+
+  Provision-Runners:
+    needs: [plugin-availability]
+    name: Provision-Runners
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_EC2_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_EC2_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - name: AWS Cli Processing
+        run: |
+          #!/bin/bash
+          # Please add comma at the end of the RUNNERS strings
+          # Don't add space after commas
+          RUNNERS="odfe-tar-build-es-arm64,odfe-tar-build-kibana-arm64"
+          release-tools/scripts/setup_runners.sh run $RUNNERS ${{ secrets.ODFE_RELEASE_BOT_PUBLIC_PRIVATE_READ_WRITE_TOKEN }} ami-03f8a33a16290a84c
+
+  build-es-artifacts-x64:
+    needs: [plugin-availability]
+    name: Build ES Artifacts X64
+    runs-on: [ubuntu-18.04]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Required Packages
+        run: ./release-tools/scripts/required_packages.sh
+      - name: Build tar
+        run: set -u; ./elasticsearch/linux_distributions/opendistro-tar-build.sh linux x64
+
+  build-es-artifacts-arm64:
+    needs: [plugin-availability, Provision-Runners]
+    name: Build ES Artifacts ARM64
+    runs-on: [self-hosted, Linux, ARM64, odfe-tar-build-es-arm64]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Required Packages
+        run: ./release-tools/scripts/required_packages.sh
+      - name: Build tar
+        run: set -u; ./elasticsearch/linux_distributions/opendistro-tar-build.sh linux arm64
+
+  build-kibana-artifacts-x64:
+    needs: [plugin-availability]
+    name: Build KIBANA Artifacts X64
+    runs-on: [ubuntu-18.04]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Required Packages
+        run: ./release-tools/scripts/required_packages.sh
+      - name: Build Kibana
+        run: ./kibana/linux_distributions/opendistro-kibana-build.sh tar linux x64
+
+  build-kibana-artifacts-arm64:
+    needs: [plugin-availability, Provision-Runners]
+    name: Build KIBANA Artifacts ARM64
+    runs-on: [self-hosted, Linux, ARM64, odfe-tar-build-kibana-arm64]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Required Packages
+        run: ./release-tools/scripts/required_packages.sh
+      - name: Build Kibana
+        run: ./kibana/linux_distributions/opendistro-kibana-build.sh tar linux arm64
+
+  CleanUp-Runners:
+    needs: [build-es-artifacts-arm64, build-kibana-artifacts-arm64]
+    if: always()
+    name: CleanUp-Runners
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_EC2_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_EC2_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - name: AWS Cli Processing
+        run: |
+          #!/bin/bash
+          # Please add comma at the end of the RUNNERS strings
+          # Don't add space after commas
+          RUNNERS="odfe-tar-build-es-arm64,odfe-tar-build-kibana-arm64"
+          release-tools/scripts/setup_runners.sh terminate $RUNNERS ${{ secrets.ODFE_RELEASE_BOT_PUBLIC_PRIVATE_READ_WRITE_TOKEN }}

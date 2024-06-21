@@ -1,0 +1,58 @@
+name: Check Plugin Availability Main
+
+on:
+#  schedule:
+#    - cron: '0 0,15 * * *'
+  repository_dispatch:
+    types: [check-plugin]
+
+jobs:
+  plugin-availability-main:
+    name: Check Plugin Availability Main
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Required Packages
+        run: release-tools/scripts/required_packages.sh
+
+      - name: Checking Availability
+        run: |
+          #!/bin/bash
+          set -e
+          release-tools/scripts/check_plugin.sh
+          echo 'CHIME_MESSAGE<<EOF' >> $GITHUB_ENV
+            cat /tmp/chime_message.md >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          exit `cat /tmp/plugin_status.check`
+
+      - name: Send Slack Message
+        if: ${{ always() }}
+        uses: peterzhuamazon/github-slack-action@master
+        with:
+          text: ${{ env.CHIME_MESSAGE }}
+          webhook: ${{ secrets.SLACK_ODFE_RELEASE }}
+
+      - name: Send mail
+        if: ${{ always() }}
+        uses: dawidd6/action-send-mail@master
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          #subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
+          subject: ODFE Plugin Status
+          # Read file contents as body:
+          body: file:///tmp/message.md
+          to: odfe-release-process@amazon.com
+          from: Opendistro Elasticsearch
+          # Optional content type:
+          content_type: text/html
+

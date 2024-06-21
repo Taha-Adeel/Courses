@@ -1,0 +1,180 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\usepackage{bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Other Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Computational Number Theory}
+\author{HW 2}
+\date{CS20BTECH11042}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+    
+\section{Question 1}
+\begin{itemize}
+    \item Using Chinese Remainder Theorem, we can say that solutions of $x^2 -1$ in $\mathbb{Z}_{17}$ and $x^2 -1$ in $\mathbb{Z}_{19}$ are the solutions we require.
+    \item  $\mathbb{Z}_{17}$
+    \begin{align*}
+        (x-1)(x+1) = 0 \mod 17 \\
+        \Rightarrow x = 1, 16 \mod 17
+    \end{align*}
+    \item  $\mathbb{Z}_{19}$
+    \begin{align*}
+        (x-1)(x+1) = 0 \mod 19 \\
+        \Rightarrow x = 1, 18 \mod 19
+    \end{align*}
+    \item  $\mathbb{Z}_{17 \times 19}$
+    \begin{itemize}
+        \item $x = 1 \mod 17$ and $x = 1 \mod 19 \Rightarrow x = 1 \mod {17 \times 19}$
+        \item $x = 16 \mod 17$ and $x = 1 \mod 19 \Rightarrow x = 305 \mod {17 \times 19}$
+        \item $x = 1 \mod 17$ and $x = 18 \mod 19 \Rightarrow x = 18 \mod {17 \times 19}$
+        \item $x = 16 \mod 17$ and $x = 18 \mod 19 \Rightarrow x = 322 \mod {17 \times 19}$
+    \end{itemize}
+    \item Therefore, the roots of $x^2 -1$ in $\mathbb{Z}_{17 \times 19}$ are $\{1, 18, 305, 322\}$
+\end{itemize}
+
+
+\section{Question 2}
+    \begin{itemize}
+        \item We observe that 41 is a prime number and $7 \nmid 41$
+        \item Using Euclids lemma, we find k=23 satisfies the equation, $7k = 1 \mod 40$
+        \item Now, raising both sides of $x^7 = 2 \mod 41$ to the power of 23, we get,
+        \begin{align*}
+            x^{7 \times 23} &= 2^{23} \mod 41 \\
+            x^{161} &= 2^{23} \mod 41 \\
+            x &= 2^{23} \mod 41 \ (\because \text{Fermat's Little Theorem})\\
+            x &= 8 \mod 41 
+        \end{align*}
+    \end{itemize}
+
+\section{Question 3}
+\begin{itemize}
+    \item Given, p is an odd prime number and $d | (p-1)$
+    \item Let $S : \{a \in \mathbb{Z}_p : a^d = 1\}$
+    \item Let $T : \{a^{(p-1)/d} : a \in \mathbb{Z}_p\}$. Here, since p is prime, $\mathbb{Z}_p = \mathbb{Z}^{*}_p$
+    \item Now, for every element $x \in T$, we can see that $x^d = {(a^{(p-1)/d})}^d = a^{p-1} = 1$. Therefore, $\forall x \in T, x \in S \Rightarrow T \subset S$
+    \item Consider the equation $x^{d} - 1 = 0$, which has $p-1$ roots in $\mathbb{Z}_p$, denoted by the set $S$.
+    \item We know that this equation has d distinct roots in $\mathbb{Z}_p$ and we see that 
+\end{itemize}
+\section{Question 4}
+\subsection{Part a}
+\begin{itemize}
+    \item Given \( dk \equiv 0 \mod n \), it implies \( n \) divides \( dk \). Therefore, \( k \) must be a multiple of \( \frac{n}{\text{gcd}(d, n)} \).
+    \item Hence, let \( f(d) \) represents the count of multiples of \( \frac{n}{\text{gcd}(d, n)} \) within the range \( 0 \leq k \leq n-1 \).
+    \item The count of multiples of \( m \) within \( 0 \leq k \leq n-1 \) is given by \( \left\lfloor \frac{n}{m} \right\rfloor \).
+    \item \( \implies f(d) = \left\lfloor \frac{n}{\frac{n}{\text{gcd}(d, n)}} \right\rfloor = \text{gcd}(d, n) \).
+    \item Therefore, \( |\{ 0 \leq k \leq n-1 : dk \equiv 0 \mod n \}| = \text{gcd}(d, n) \).
+\end{itemize}
+
+\subsection{Part b}
+\begin{itemize}
+    \item Given that $x^d = 1 \mod p$
+    \item We raise both sides by k to get: $x^{dk} = 1 \mod p$
+    \item $\implies dk = \gcd(d, p - 1) \mod p - 1\$ 
+    \item From part a, we know that the number of solutions to above equation is $\gcd(d, p - 1)$
+    \item That is if we find an arbitrary solution as a primitive root, then the rest of the solutions are powers of the primitive root.
+    \item Therefore, the number of roots of $x^d - 1$ in Zp is $\gcd(d, p - 1)$
+\end{itemize}
+
+\section{Question 5}
+\begin{itemize}
+    \item We need to find the roots of the equation $x^2 - 4$ in $\mathbb{Z}_{343}$
+    \item $\mathbb{Z}_{7}$
+    \begin{align*}
+        (x-2)(x+2) = 0 \mod 7 \\
+        \Rightarrow x = 2, 5 \mod 7
+    \end{align*}
+    \item  $\mathbb{Z}_{49}$, we use \textbf{Hensel Lifting},
+    \begin{itemize}
+        \item Let x be of the form $7y+b$ where $b \in \{2,5\}$
+        \item Now, when b = 2,
+        \begin{align*}
+            x^2 &= 4 \mod 49 \\
+            \Rightarrow {(7y+2)}^2 &= 4\mod 49 \\
+            \Rightarrow 28y + 4 &= 4 \mod 49 \\
+            \Rightarrow 28y &= 0 \mod 49 \\
+            \Rightarrow y &= 7k, k \in \mathbb{Z} \\
+            \Rightarrow x &= 2
+        \end{align*}
+        \item Now, when b = 5,
+        \begin{align*}
+            x^2 &= 4 \mod 49 \\
+            \Rightarrow {(7y+5)}^2 &= 4\mod 49 \\
+            \Rightarrow 70y + 25 &= 4 \mod 49 \\
+            \Rightarrow 70y &= -21 \mod 49 \\
+            \Rightarrow 10y &= -3 \mod 7 \\
+            \Rightarrow y &= 7k +6 \\
+            \Rightarrow x &= 47
+        \end{align*}
+    \end{itemize}
+    \item $\mathbb{Z}_{343}$, we use \textbf{Hensel Lifting} again
+    \begin{itemize}
+        \item Let x be of the form $49y+b$ where $b \in \{2,47\}$
+        \item Now, when b = 2,
+        \begin{align*}
+            x^2 &= 4 \mod 343 \\
+            \Rightarrow {(49y+2)}^2 &= 4\mod 343 \\
+            \Rightarrow 98y + 4 &= 4 \mod 343 \\
+            \Rightarrow 98y &= 0 \mod 343 \\
+            \Rightarrow y &= 7k, k \in \mathbb{Z} \\
+            \Rightarrow x &= 2
+        \end{align*}
+        \item Now, when b = -2, we can see that $x = 341 \mod 343$
+    \end{itemize}
+\end{itemize}
+
+Therefore, the roots of $x^2 - 4$ in $\mathbb{Z}_{343}$ are $\{2, 341\}$
+
+\end{document}

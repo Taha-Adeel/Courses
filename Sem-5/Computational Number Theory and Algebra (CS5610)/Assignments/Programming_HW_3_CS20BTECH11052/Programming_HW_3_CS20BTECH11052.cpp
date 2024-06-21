@@ -5,8 +5,8 @@
 using BigInt = mpz_class;
 
 // Overloads modulo to always return value in {0...(N-1)}
-BigInt operator % (const BigInt& a, const BigInt N){BigInt result = a - N * (a/N); return (result < 0) ? result + N : result;}
-BigInt operator % (const BigInt& a, const int N){return a%(BigInt)N;}
+BigInt operator % (const BigInt& a, const BigInt N){BigInt result = a - N * (a / N); return (result < 0) ? result + N : result;}
+BigInt operator % (const BigInt& a, const int N){return a % (BigInt)N;}
 
 // Class to perform operations in Zn = {0...(N-1)}
 struct Zn{
@@ -14,7 +14,7 @@ struct Zn{
 	BigInt val; 
 
 	// Constructors to allow impilicit type conversions
-	Zn(const BigInt& z) {if(N == -1) val = z; else val = z%N;}
+	Zn(const BigInt& z) {if(N == -1) val = z; else val = z % N;}
 	Zn(const int& z = 0): Zn((BigInt)z) {}
 	static void set_N(BigInt _N){N = _N;}
 
@@ -37,7 +37,7 @@ struct Zn{
 
 	// Returns inverse of x in Zn using Fermat's little theorem. Assumes that n is prime.
 	Zn inverse() const {
-		return this->pow(N-2);
+		return this->pow(N - 2);
 	}
 
 	bool operator == (const Zn& b) const {return val == b.val;}
@@ -186,7 +186,7 @@ int main(){
 	auto q = f/g, r = f%g;
 	std::cout << "q(x) = f(x) / g(x) = " << q << std::endl;
 	std::cout << "r(x) = f(x) % g(x) = " << r << std::endl;
-	std::cout << "q(x) * g(x) + r(x) = " << q*g + r << " = f(x)" << std::endl;
+	std::cout << "q(x) * g(x) + r(x) = " << q * g + r << " = f(x)" << std::endl;
 	std::cout << std::endl;
 
 	// Part 4 and 5

@@ -1,0 +1,439 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{blkarray}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+% Set your name and assignment details here
+\renewcommand{\author}{Taha Adeel Mohammed}
+\newcommand{\rollnumber}{CS20BTECH11052}
+\newcommand{\course}{CS5160: Topics in Computing}
+\newcommand{\assignment}{Problem Set 2}
+
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\Rhat}{\hat{\mathcal{R}}}
+
+\renewcommand{\thesection}{Problem \arabic{section}:\!\!\!\!}
+\renewcommand{\thesubsection}{\arabic{subsection}.\!\!\!}
+\renewcommand{\thesubsubsection}{}
+\titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{0.5em}{}
+
+% Page setup
+\geometry{a4paper, margin=1in}
+\lfoot{\myname}
+\rfoot{AI3000/CS5500}
+\cfoot{\assignment}
+\rfoot{\thepage}
+
+% Title
+\renewcommand{\maketitle}{
+	\begin{center}
+		\line(1,0){450} \\
+		\vspace*{1ex}
+        \Large{\textbf{\course}} \\
+        \Large{\textbf{\assignment}} \\
+    \end{center}
+	\large{\author}
+	\begin{flushright}
+		\vspace*{-5ex}
+		\rollnumber\\
+	\end{flushright}
+	\begin{center}
+		\vspace*{-1ex}
+		\line(1,0){450}
+	\end{center}
+}
+
+\begin{document}
+
+\maketitle
+
+\textit{(Crediting the course)}
+
+\subsection{\boldmath{Compute the Fourier representation of the following functions:}}
+\subsubsection{\boldmath{(a) The \textit{not-all-equal} function $\text{NAE}_n: {\{-1, 1\}}^n \rightarrow \{-1, 1\}$, defined by $\text{NAE}_n(x) = -1$ if and only if the bits $x_1,\ldots, x_n$ are not all equal. \begin{flushright} (3 points) \end{flushright}}}
+\vspace*{-8mm}
+
+We can write the equivalent $\text{NAE}^b_n(x): {\{0, 1\}}^n \rightarrow \{0, 1\}$ as:
+\begin{align*}
+	\text{NAE}^b_n(x) &= 1 - \left(\prod_{i=1}^n x_i + \prod_{i=1}^n (1 - x_i)\right)
+\end{align*}
+
+\noindent
+Hence we have $\text{NAE}_n(x): {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ as:
+\begin{align*}
+	\text{NAE}_n(x) &= 2 \cdot \left(\prod_{i=1}^n \frac{1 + x_i}{2} + \prod_{i=1}^n \frac{1 - x_i}{2} \right) - 1 \\
+	&= \frac{2}{2^n} \cdot \left(2 + \sum_{\phi \neq S \subseteq [n]}\left(1 + {(-1)}^{|S|+1} \right) \chi_s(x) \right) - 1 \\
+\implies \text{NAE}_n(x) &= \boxed{\left(\frac{4}{2^n} - 1\right) + \sum_{\phi \neq S \subseteq [n]} \frac{ \left(1 + {(-1)}^{|S|+1} \right)}{2^{n - 1}}\chi_s(x),} \text{ where } \chi_s(x) = \prod_{i \in S} x_i
+\end{align*}
+
+\noindent
+Comparing this with the Fourier representation of the NAE function given by
+\begin{align*}
+	\text{NAE}_n(x) &= \sum_{S \subseteq [n]} \hat{f}(S) \chi_s(x),
+\end{align*}
+we have the Fourier coefficients of the NAE function as:
+\begin{align*}
+	\hat{f}(S) &= \frac{ \left(1 + {(-1)}^{|S|+1} \right)}{2^{n - 1}}, \quad \forall\ S \subseteq [n], S \neq \phi, \text{ and} \\
+	\hat{f}(\phi) &= \left(\frac{4}{2^n} - 1\right) \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsubsection{\boldmath{(b) The \textit{minimum} function $\min_n: {\{-1, 1\}}^n \rightarrow \{-1, 1\}$, defined by $\min_n(x)\\ = \min_{i=1}^n\{x_i\}$. 
+\begin{flushright}\vspace*{-7mm} (2 points) \end{flushright}}}
+\vspace*{-8mm}
+
+We can write the equivalent $\min^b_n(x): {\{0, 1\}}^n \rightarrow \{0, 1\}$ as:
+\begin{align*}
+	\text{min}^b_n(x) &= \prod_{i=1}^n x_i
+\end{align*}
+
+\noindent
+Hence, we have $\min_n(x): {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ as:
+\begin{align*}
+	\min_n(x) &= 1 - 2 \cdot \prod_{i=1}^n \frac{1 - x_i}{2} \\
+\implies \min_n(x) &= \boxed{\left(1 - \frac{2}{2^n}\right) + \sum_{\phi \neq S \subseteq [n]} \frac{{(-1)}^{|S| + 1}}{2^{n - 1}}\chi_s(x)}
+\end{align*}
+
+\,\\
+
+\noindent
+Hence we have the Fourier coefficients of the minimum function as:
+\begin{align*}
+	\hat{f}(S) &= \frac{{(-1)}^{|S| + 1}}{2^{n - 1}}, \quad \forall\ S \subseteq [n], S \neq \phi, \text{ and} \\
+	\hat{f}(\phi) &= \left(1 - \frac{2}{2^n}\right) \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsubsection{\boldmath{(c) The \textit{sortedness} function $\text{sort}: {\{-1, 1\}}^4 \rightarrow \{-1, 1\}$, defined by $\text{sort}(x)\\ = -1$ if and only if $x_1 \leq x_2 \leq x_3 \leq x_4$ or $x_1 \geq x_2 \geq x_3 \geq x_4$. \begin{flushright}
+\vspace*{-8mm} (3 points) \end{flushright}}}
+\vspace*{-8mm}
+
+We have the equivalent $\text{sort}^b_4(x): {\{0, 1\}}^4 \rightarrow \{0, 1\}$ as:
+\begin{align*}
+	% Cases
+	\text{sort}^b_4(x) &= \begin{cases}
+		1, & \text{if } x \in \{0000, 0001, 0011, 0111, 1111, 1110, 1100, 1000\} \\
+		0, & \text{otherwise}
+	\end{cases} \\
+\therefore\ \text{sort}^b_4(x) &= \prod_{i=1}^j x_i \cdot \prod_{j=i+1}^4 (1 - x_i) + \prod_{i=1}^j (1 - x_i) \cdot \prod_{j=i+1}^4 x_i \\
+	&= x_1 x_2 x_3 x_4 + x_1 x_2 x_3 (1 - x_4) + x_1 x_2 (1 - x_3) (1 - x_4) \\
+	&\qquad+ x_1 (1 - x_2) (1 - x_3) (1 - x_4) + (1 - x_1) (1 - x_2) (1 - x_3) (1 - x_4) \\
+	&\qquad+ (1 - x_1) (1 - x_2) (1 - x_3) x_4 + (1 - x_1) (1 - x_2) x_3 x_4 + (1 - x_1) x_2 x_3 x_4 \\
+\therefore \text{sort}^b_4(x) &= 1 - x_2 - x_3 + x_1 x_2 + x_2 x_3 + x_3 x_4 - x_1 x_4 \\
+\end{align*}
+
+\noindent
+Hence we can now write $\text{sort}(x): {\{-1, 1\}}^4 \rightarrow \{-1, 1\}$ as:
+\begin{align*}
+	\text{sort}_4(x) &= 1 - 2 \cdot \text{sort}^b_4\left(\frac{1+x_1}{2}, 
+	\frac{1+x_2}{2}, \frac{1+x_3}{2}, \frac{1+x_4}{2}\right) \\
+	&= 1 - 2 \cdot (1 - \frac{1 + x_2}{2} - \frac{1 + x_3}{2} + \frac{(1 + x_1)(1 + x_2)}{4} + \frac{(1 + x_2)(1 + x_3)}{4} \\ 
+	& \qquad\qquad\qquad + \frac{(1 + x_3)(1 + x_4)}{4} - \frac{(1 + x_1)(1 + x_4)}{4}) \\ 
+\implies \text{sort}_4(x) &= \boxed{\frac{x_1 x_4}{2} - \frac{x_1 x_2}{2} - 
+\frac{x_2 x_3}{2} - \frac{x_3 x_4}{2}} \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+
+\subsection{\boldmath{How many boolean functions $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ have exactly 1 nonzero Fourier coefficient? Also, prove that there are no boolean functions $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ with exactly 2 nonzero Fourier coefficients. \begin{flushright}\vspace*{-2mm} (2+10 points) \end{flushright}}}
+\vspace*{-8mm}
+
+Let $\widehat{f}(S) = c$ for some $S \subseteq [n]$ be our nonzero Fourier coefficient. Then, by Parseval's Identity, we have
+\begin{align*}
+	\sum_{T \subseteq [n]} \widehat{f}(T)^2 &= 1 \\
+	\implies c^2 &= 1 \\
+	\implies\ \, c &= \pm 1
+\end{align*}
+
+\noindent
+Therefore we can see that our nonzero Fourier coefficient can only take two values, $\pm 1$. Since our Fourier basis has $2^n$ dimensions, we can set any one of these dimensions to $c = \pm 1$ and the rest to $0$ and get a unique boolean function. Hence, we have 
+\begin{align*}
+	\boxed{2^{n+1} \text{ boolean functions }}
+\end{align*}
+with exactly 1 nonzero Fourier coefficient. \\
+
+
+\noindent
+\underline{\textbf{To prove:}} There are no boolean functions $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ with exactly 2 nonzero Fourier coefficients. \\
+
+\noindent 
+\textit{Proof by Contradiction:} \\
+
+Let there exist $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ s.t. $\widehat{f}(S) = c_1 \neq 0$ and $\widehat{f}(T) = c_2 \neq 0$ for some $S, T \subseteq [n]$, and $\widehat{f}(U) = 0$ for all $U \subseteq [n]$ s.t. $U \neq S, T$. i.e 
+\begin{align*}
+	f(x) &= c_1 \chi_s(x) + c_2 \chi_T(x)
+\end{align*}
+
+We know that $f(x), \chi_s(x), \chi_T(x) \in \{-1, 1\}$ and $c_1^2 + c_2^2 = 1$ by Parseval's Identity. Now w.l.o.g. consider $x_1, x_2$ s.t. $\chi_s(x_1) = \chi_T(x_1) = 1,$ and $\chi_s(x_2) = 1$, $\chi_T(x_2) = -1$. Therefore
+\begin{align*}
+	f(x_1) &= c_1 + c_2 \\
+	f(x_2) &= c_1 - c_2 \\
+\end{align*}
+
+Solving for $c_1, c_2$ we get
+\begin{align*}
+	c_1 &= \frac{f(x_1) + f(x_2)}{2} \\
+	c_2 &= \frac{f(x_1) - f(x_2)}{2} \\
+\end{align*}
+
+Now since $f(x) \in \{-1, 1\}$, either:
+\begin{align*}
+	f(x_1) &= f(x_2) &\implies c_1 = \pm 1, c_2 = 0 \\
+	\text{or } f(x_1) &= -f(x_2) &\implies c_1 = 0, c_2 = \pm 1 \\
+\end{align*}
+
+Therefore we reach a contradiction, since we assumed that $c_1, c_2 \neq 0$. Hence, there are no boolean functions $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ with exactly 2 nonzero Fourier coefficients. \begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsection{\boldmath{Given two functions $f : {\{-1, 1\}}^n \rightarrow \mathbb{R}$ and $g : {\{-1, 1\}}^n \rightarrow \mathbb{R}$, we define their convolution $f * g : {\{-1, 1\}}^n \rightarrow \mathbb{R}$ to be another function given as follows 
+\[f * g(x) = \mathbb{E}_{y \sim {\{-1, 1\}}^n}[f(x \circ y)g(y)],\] 
+where $x\, \circ\, y = (x_1 y_1, x_2 y_2, \ldots, x_n y_n)$ i.e., bit-wise product, and $y \sim {\{-1, 1\}}^n$ denotes $y$ is sampled w.r.t uniform distribution. Show that for all $S \subseteq [n]$, 
+\[\widehat{f * g}(S) = \widehat{f}(S) \cdot \widehat{g}(S).\]
+\begin{flushright}\vspace*{-7mm} (10 points) \end{flushright}}}
+\vspace*{-8mm}
+
+Let $z = x \circ y = (x_1 y_1, x_2 y_2, \ldots, x_n y_n)$ and $y \sim {\{-1, 1\}}^n$. Then we have
+\begin{align*}
+	f * g(x) &= \mathbb{E}_{y}[f(z)g(y)] \\
+	&= \mathbb{E}_{y} \left[\sum_{S \subseteq [n]} \widehat{f}(S) \chi_s(z) \cdot \sum_{T \subseteq [n]} \widehat{g}(T) \chi_T(y) \right] \\
+	&= \sum_{S \subseteq [n]} \sum_{T \subseteq [n]} \widehat{f}(S) \widehat{g}(T) \mathbb{E}_{y} \left[\chi_s(z) \chi_T(y) \right] \\
+	&= \sum_{S \subseteq [n]} \sum_{T \subseteq [n]} \widehat{f}(S) \widehat{g}(T) \mathbb{E}_{y} \left[\prod_{i \in S} x_i y_i \prod_{j \in T} y_j \right] \\
+	&= \sum_{S \subseteq [n]} \sum_{T \subseteq [n]} \widehat{f}(S) \widehat{g}(T) 
+	\cdot \prod_{i \in S} x_i \cdot \mathbb{E}_{y} \left[\prod_{i \in S} y_i 
+	\prod_{j \in T} y_j\right] \\
+	&= \sum_{S \subseteq [n]} \sum_{T \subseteq [n]} \widehat{f}(S) \widehat{g}(T)
+	\cdot \chi_s(x) \cdot \mathbb{E}_{y} \left[\chi_s(y)
+	\chi_T(y)\right] \\
+\implies f * g(x) &= \boxed{\sum_{S \subseteq [n]} \widehat{f}(S) \widehat{g}(S) \chi_s(x),} \text{ since } \mathbb{E}_{y} \left[\chi_s(y) \chi_T(y)\right] = 0 \text{ for } S \neq T \\
+\end{align*}
+
+\noindent
+Therefore in above Fourier representaion we can see that the Fourier coefficients of $f * g$ are given by
+\begin{align*}
+	\widehat{f * g}(S) &= \widehat{f}(S) \widehat{g}(S), \quad \forall\ S \subseteq [n] \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsection{\boldmath{Let $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ be a Boolean function. Show that 
+\[\text{as}(f) \geq \text{Var}(f) = 4 \cdot \Pr_x[f(x) = 1] \cdot \Pr_x[f(x) = -1].\] 
+Recall, $\text{as}(f)$ denotes the average sensitivity of $f$ and $\text{Var}(f)$ denotes the variance of $f$ when $x$ is chosen uniformly at random from ${\{-1, 1\}}^n$. Further, recall variance of a random variable $Z$ is defined as $\text{Var}(Z) = \mathbb{E}[{(Z - \mathbb{E}[Z])}^2]$. \begin{flushright}\vspace*{-7mm} (20 points) \end{flushright}}}
+\pagebreak
+\noindent
+\underline{\textbf{To Prove:}} $\text{Var}(f) = 4 \cdot \Pr_x[f(x) = 1] \cdot \Pr_x[f(x) = -1]$\\
+
+\noindent
+\textit{Proof.} \\
+For $f(x) \in \{-1, 1\}$, we have
+\begin{align*}
+	\mathbb{E}(f^2) &= \Pr[f(x) = 1] \cdot 1^2 + \Pr[f(x) = -1] \cdot (-1)^2 \\
+	&= \Pr[f(x) = 1] + \Pr[f(x) = -1] \\
+\implies \mathbb{E}(f^2) &= 1 \\
+\end{align*}
+
+\noindent
+For $\mathbb{E}{[f]}^2$, we have,
+\begin{align*}
+	\mathbb{E}{[f]}^2 &= \left(\Pr[f(x) = 1] \cdot 1 + \Pr[f(x) = -1] \cdot (-1)\right)^2 \\
+	&= \Pr[f(x) = 1]^2 + \Pr[f(x) = -1]^2 - 2 \cdot \Pr[f(x) = 1] \cdot \Pr[f(x) = -1] \\
+	& = (Pr[f(x) = 1] + \Pr[f(x) = -1])^2 - 4 \cdot \Pr[f(x) = 1] \cdot \Pr[f(x) = -1] \\
+\implies \mathbb{E}{[f]}^2 &= 1 - 4 \cdot \Pr[f(x) = 1] \cdot \Pr[f(x) = -1] \\
+\end{align*}
+
+\noindent
+Using above two equations, we have
+\begin{align*}
+	\text{Var}(f) &= \mathbb{E}[{(f - \mathbb{E}[f])}^2] \\
+	&= \mathbb{E}[f^2] - \mathbb{E}[f]^2 \\
+	&= 1 - (1 - 4 \cdot \Pr[f(x) = 1] \cdot \Pr[f(x) = -1]) \\
+\implies \text{Var}(f) &= \boxed{4 \cdot \Pr[f(x) = 1] \cdot \Pr[f(x) = -1]} \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright} 
+
+
+\noindent
+\underline{\textbf{To Prove:}} $\text{as}(f) \geq \text{Var}(f)$\\
+
+\noindent
+\textit{Proof.} \\
+As seen above, $\mathbb{E}[f^2] = 1$ and $\mathbb{E}[f] = \widehat{f}(\phi)$, since $f(x) \in \{-1, 1\}$. Therefore,
+\begin{align*}
+	\text{Var}(f) &= \mathbb{E}[{(f - \mathbb{E}[f])}^2] \\
+	&= \mathbb{E}[f^2] - \mathbb{E}[f]^2 \\
+	&= 1 - \widehat{f}(\phi)^2 \\
+	&= \sum_{\phi \neq S \subseteq [n]} \widehat{f}(S)^2 &\text{using Parseval's identity} \\
+\end{align*}
+
+\noindent
+We also know that,
+\begin{align*}
+	\text{Inf}(f) &= \sum_{S \subseteq [n]} |S| \widehat{f}(S)^2 \\
+	&\geq \sum_{\phi \neq S \subseteq [n]} \widehat{f}(S)^2 & \text{since } |S| \geq 1 \text{ for } S \neq \phi \\
+\implies \text{Inf}(f) &\geq \text{Var}(f) \\
+\therefore \quad \text{as}(f) &\geq \text{Var}(f) &\text{since } \text{as}(f) = \text{Inf}(f) \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+
+\subsection{\boldmath{Let $p :{ \{0, 1\}}^n \rightarrow \mathbb{R}$ and $q :{ \{0, 1\}}^n \rightarrow \mathbb{R}$ be multilinear polynomials of degree at most $d$. Show that if $p(x) = q(x)$ for all $x \in{ \{0, 1\}}^n$ with the Hamming weight of $x$ at most $d$, i.e., $|x| \leq d$, then $p = q$ as a polynomial. Recall the hamming weight of $x$ (denoted $|x|$) is the number of $1$'s in $x$, i.e., $|x| = \sum_{i=1}^n x_i$. \begin{flushright}\vspace*{-8mm} (10 points) \end{flushright}}}
+\vspace*{-8mm}
+
+Let $p(x) = q(x)$ for all $x \in{ \{0, 1\}}^n$ with the Hamming weight of $x$ at most $d$, i.e., $|x| \leq d$. Then we have
+\begin{align*}
+	p(x) &= q(x) \\
+	\implies p(x) - q(x) &= 0 \\
+	\implies p(x) - q(x) &= \sum_{S \subseteq [n]} c_s \prod_{i \in S} x_i - \sum_{S \subseteq [n]} d_s \prod_{i \in S} x_i \\
+	\implies \sum_{S \subseteq [n]} (c_s - d_s) \prod_{i \in S} x_i &= 0 \\
+\end{align*}
+
+\noindent
+Now, we know that the set of all monomials of degree at most $d$ is linearly independent. Therefore, we have
+\begin{align*}
+	c_s - d_s &= 0, \quad \forall\ S \subseteq [n], deg(S) \leq d \\
+\implies c_s &= d_s, \quad \forall\ S \subseteq [n], deg(S) \leq d \\
+\end{align*}
+
+\noindent
+Therefore, we have $p(x) = q(x)$ for all $x \in{ \{0, 1\}}^n$ with the Hamming weight of $x$ at most $d$, i.e., $|x| \leq d$, and $c_s = d_s$ for all $S \subseteq [n], deg(S) \leq d$. Hence, we have $p = q$ as a polynomial. \begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsection{\boldmath{Show that for any Boolean function $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ of degree $d$,}}
+
+\subsubsection{\boldmath{(a) for all $S \subseteq [n]$, either $\widehat{f}(S) = 0$ or $|\widehat{f}(S)| \geq \frac{1}{2^{d-1}}$. \begin{flushright}\vspace*{-5mm} (5 points) \end{flushright}}}
+\vspace*{-8mm}
+
+Let $f^b_n(x): {\{0, 1\}}^n \rightarrow \{0, 1\}$ be the equivalent boolean function of $f(x): {\{-1, 1\}}^n \rightarrow \{-1, 1\}$. Then we have
+\begin{align*}
+	f^b_n(x) &= \sum_{S \subseteq [n]} c_s \prod_{i \in S} x_i \\
+\end{align*}
+
+\noindent
+Writing $f_n(x): {\{0, 1\}}^n \rightarrow \{0, 1\}$ in terms of $f^b_n(x)$, we have
+\begin{align*}
+	f_n(x) &= 1 - 2 \cdot f^b_n(x) \\
+	&= 1 - 2 \cdot \sum_{S \subseteq [n]} c_s \prod_{i \in S} \frac{1 - x_i}{2} \\
+	&= 1 - \sum_{S \subseteq [n]} \frac{c_s}{2^{|S|- 1}} \prod_{i \in S} (1 - x_i) \\
+\end{align*}
+
+\noindent
+Each of the Fourier coefficients of $f_n(x)$ would be a summation of some terms of the above equation. Also, if we construct our $f_n^b$ polynomial from the truth table of $f_n$, each of the $c_s$ coeffectients would be an integer. Therefore, we have
+\begin{align*}
+	|\widehat{f}(S)| &= \sum_{T \subseteq [n], deg(T) \leq d} \frac{c_T}{2^{|T|- 1}} \\
+	&\geq |\frac{1}{2^{|T|- 1}}| \text{ or } 0 \\
+\implies |\widehat{f}(S)| &\geq \frac{1}{2^{d-1}} \text{ or } 0 \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsubsection{\boldmath{(b) the $L_1$-norm of $\widehat{f}$, $\|\widehat{f}\|_1 := \sum_{S \subseteq [n]} |\widehat{f}(S)| \leq 2^{d-1}$. \begin{flushright}\vspace*{-8mm} (5 points) \end{flushright}}}
+\vspace*{-8mm}
+
+We have
+\begin{align*}
+	\|\widehat{f}\|_1 &= \sum_{S \subseteq [n]} |\widehat{f}(S)| \\
+	&\leq \sum_{S \subseteq [n]} \frac{1}{2^{d-1}} \\
+	&= 2^n \cdot \frac{1}{2^{d-1}} \\
+\implies \|\widehat{f}\|_1 &\leq 2^{d-1} \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsection{\boldmath{Show that for any monotone Boolean function $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$, for all $i \in [n]$, $\text{Inf}_i(f) = \widehat{f}(\{i\})$.\\ Let $x, y \in {\{-1, 1\}}^n$. Define $x \leq y$ if and only if for all $i \in [n]$, $x_i \leq y_i$. We then say that a Boolean function $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$ is \textit{monotone} if for any $x, y$ such that $x \leq y$, we have $f(x) \leq f(y)$. \begin{flushright}\vspace*{-8mm} (10 points) \end{flushright}}}
+\vspace*{-8mm}
+
+We have a monotone boolean function $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$. We define $g_i : {\{-1, 1\}}^n \rightarrow \{0, 1\}$ as
+\begin{align*}
+	g_i(f) = \frac{f(x_1, \ldots, x_{i-1}, 1, x_{i+1}, \ldots, x_n) - f(x_1, \ldots, x_{i-1}, -1, x_{i+1}, \ldots, x_n)}{2}
+\end{align*}
+Note that since $f$ is monotone, we have $f(x_1, \ldots, x_{i-1}, 1, x_{i+1}, \ldots, x_n) \geq\\ f(x_1, \ldots, x_{i-1}, -1, x_{i+1}, \ldots, x_n)$. Therefore, $g_i(f) \in \{0, 1\}$. \\
+
+\noindent
+Now computing $\text{Inf}_i(f)$, we get
+\begin{align*}
+	\text{Inf}_i(f) &= \mathbb{E}_x[g_i(x)^2] \\
+	&= \mathbb{E}_x[g_i(x)] &\text{since } {g_i(x)}^2 = g_i(x) \text{ as } g_i(x) \in \{0, 1\} \\
+	&= \mathbb{E}_x \left[\sum_{S\subseteq [n]} \widehat{f}(S) \prod_{j \in S\backslash \{i\}} x_j \right] \\
+	&= \sum_{S\subseteq [n]} \widehat{f}(S) \mathbb{E}_x \left[\prod_{j \in S\backslash \{i\}} x_j \right] \\
+	&= \widehat{f}(\{i\}) + \sum_{S\subseteq [n], S \neq \{i\}} \widehat{f}(S) \mathbb{E}_x \left[\prod_{j \in S\backslash \{i\}} x_j \right] \\
+\implies \text{Inf}_i(f) &= \boxed{\widehat{f}(\{i\})} & \text{since } \mathbb{E}_x \left[\prod_{j \in S\backslash \{i\}} x_j \right] = 0 \text{ for } S \neq \{i\} \\
+\end{align*}
+\vspace*{-16mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsection{\boldmath{We say that a multilinear polynomial $p : {\{0, 1\}}^n \rightarrow \mathbb{R}$ approximates a Boolean function $f : {\{0, 1\}}^n \rightarrow \{0, 1\}$ if $|f (x)-p(x)| \leq 1/3$, for all $x \in {\{0, 1\}}^n$. We define the \textit{approximate degree} of $f$, denoted $\text{deg}(f)$, as the least degree among all multilinear polynomials that approximate $f$. Show that $\text{deg}(f) = \Omega(\sqrt{\text{bs}(f)})$, where $\text{bs}(f)$ is the block-sensitivity of $f$. \begin{flushright}\vspace*{-2mm} (10 points) \end{flushright}}}
+\vspace*{-8mm}
+
+Let $p(x)$ be a multilinear polynomial of degree $d$ that approximates $f(x)$. Then we have
+\begin{align*}
+	|f(x) - p(x)| &\leq \frac{1}{3} \\
+	\implies \left|\sum_{S \subseteq [n]} \widehat{f}(S) \prod_{i \in S} x_i - \sum_{S \subseteq [n]} c_s \prod_{i \in S} x_i \right| &\leq \frac{1}{3} \\
+	\implies \left|\sum_{S \subseteq [n]} (\widehat{f}(S) - c_s) \prod_{i \in S} x_i \right| &\leq \frac{1}{3} \\
+\end{align*}
+
+\noindent
+Now, we know that the set of all monomials of degree at most $d$ is linearly independent. Therefore, we have
+\begin{align*}
+	\left|\sum_{S \subseteq [n]} (\widehat{f}(S) - c_s) \prod_{i \in S} x_i \right| &\leq \frac{1}{3} \\
+	\implies \left|\sum_{S \subseteq [n], deg(S) \leq d} (\widehat{f}(S) - c_s) \prod_{i \in S} x_i \right| &\leq \frac{1}{3} \\
+	\implies \left|\sum_{S \subseteq [n], deg(S) \leq d} \widehat{f}(S) \prod_{i \in S} x_i \right| &\leq \frac{1}{3} \\
+\end{align*}
+
+\noindent
+Now, we know that the block sensitivity of $f$ is given by
+\begin{align*}
+	\text{bs}(f) &= \max_{x \in \{0, 1\}^n} \text{bs}_x(f) \\
+\end{align*}
+
+
+
+
+\subsection{\boldmath{Our goal here is to give a game-theoretic lower bound on the minimum size, $L(f)$, of a decision tree computing a function $f : {\{0, 1\}}^n \rightarrow \{0, 1\}$. There are two players in this game, namely Prover and Delayer. Given an input vector $x \in {\{0, 1\}}^n$, the goal of the Prover is to output $f(x)$. The goal of Delayer is to delay this happening as long as possible. The game proceeds in rounds. In each round, the Prover suggests a variable $x_i$ to be set in this round, and Delayer either chooses a value $0$ or $1$ for $x_i$ or leaves the choice to the Prover. In this last case, the Delayer scores one point, but the Prover can then choose the value of $x_i$. The game is over when the Prover outputs $f(x)$. Let $\text{Score}(f)$ denote the maximal number of points the Delayer can earn in this game independent of what strategy the Prover uses. Show that $L(f) \geq 2^{\text{Score}(f)}$. \begin{flushright}\vspace*{-8mm} (10 points) \end{flushright}}}
+\vspace*{-8mm}
+% Hint: Prove the converse direction: if f can be computed by a decision tree of
+% size S, then the Prover has a strategy under which the Delayer can earn at most
+% log S points.
+
+To prove that $L(f) \geq 2^{\text{Score}(f)}$, we will establish the converse direction: if $f$ can be computed by a decision tree of size $S$, then the Prover has a strategy under which the Delayer can earn at most $\log S$ points. This will help us demonstrate the lower bound on the Prover's score.
+
+
+Let's start by considering a decision tree that computes the function $f:{0,1}^n \rightarrow {0,1}$ with size $S$. This decision tree has $S$ leaves, each corresponding to a specific input $x \in {0,1}^n$, and each leaf provides the output $f(x)$.
+
+
+Now, let's describe the Prover's strategy to minimize the Delayer's score. The Prover will simulate the decision tree traversal in the game with the Delayer as follows:
+\begin{enumerate}
+	\item In each round, the Prover selects a variable $x_i$ that the decision tree uses in its computation. The Prover's goal is to make the Delayer's choice as predictable as possible.
+	\item If the Delayer's choice at this round is consistent with the decision made by the decision tree for the given input $x$, the game proceeds as per the decision tree, and the Prover reaches the corresponding leaf.
+	\item If the Delayer's choice at this round is inconsistent with the decision tree for the given input $x$, the Prover can choose the value of $x_i$ that is consistent with the decision tree path for input $x$. In this case, the Delayer earns one point.
+	\item By following this strategy, the Prover ensures that the Delayer's score is minimized because at each round, the Prover tries to predict the path that the decision tree would take for the given input. If the Delayer deviates from this path, the Prover can correct it by choosing the values that lead to the correct path.
+\end{enumerate}
+
+
+Now, we can compute an upper bound on the Delayer's score. Since there are at most $S$ leaves in the decision tree (and the Prover's strategy can minimize the Delayer's score by ensuring consistency with the decision tree), the Delayer can earn at most $\log_2 S$ points. This is because $S$ leaves correspond to binary strings of length $\log_2 S$, and each inconsistent choice by the Delayer leads to one extra point.
+
+
+
+Hence, we have shown that if $f$ can be computed by a decision tree of size $S$, then the Prover has a strategy under which the Delayer can earn at most $\log_2 S$ points. This establishes the converse direction and shows that $L(f) \geq 2^{\text{Score}(f)}$.
+
+
+
+\end{document}

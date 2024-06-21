@@ -1,0 +1,291 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{blkarray}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+% Set your name and assignment details here
+\renewcommand{\author}{Taha Adeel Mohammed}
+\newcommand{\rollnumber}{CS20BTECH11052}
+\newcommand{\course}{CS5160: Topics in Computing}
+\newcommand{\assignment}{Problem Set 3}
+
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\Rhat}{\hat{\mathcal{R}}}
+\newcommand{\E}[2]{\mathop{\mathbb{E}}_{#1}\left[#2\right]}
+
+\renewcommand{\thesection}{Problem \arabic{section}:\!\!\!\!}
+\renewcommand{\thesubsection}{\arabic{subsection}.\!\!\!}
+\renewcommand{\thesubsubsection}{}
+\titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{0.5em}{}
+
+% Page setup
+\geometry{a4paper, margin=1in}
+\lfoot{\myname}
+\rfoot{AI3000/CS5500}
+\cfoot{\assignment}
+\rfoot{\thepage}
+
+% Title
+\renewcommand{\maketitle}{
+	\begin{center}
+		\line(1,0){450} \\
+		\vspace*{1ex}
+        \Large{\textbf{\course}} \\
+        \Large{\textbf{\assignment}} \\
+    \end{center}
+	\large{\author}
+	\begin{flushright}
+		\vspace*{-5ex}
+		\rollnumber\\
+	\end{flushright}
+	\begin{center}
+		\vspace*{-1ex}
+		\line(1,0){450}
+	\end{center}
+}
+
+\begin{document}
+
+\maketitle
+
+\textit{(Crediting the course)}
+
+\subsection{\boldmath{Given a monotone Boolean function $f : {\{0, 1\}}^n \rightarrow \{0, 1\}$ and an input $x \in {\{0, 1\}}^n$, say that the $i$-th bit $x_i$ of $x$ is ``correct'' for $f$ if $f (x) = x_i$. Let $c(f)$ denote the expected number of ``correct'' bits in a uniformly random string $x$. Show that $c(f) = (n + \text{Inf}(f ))/2$. \begin{flushright}\vspace*{-7mm} (10 points) \end{flushright}}} \vspace*{-8mm}
+% Given that
+% \begin{align}
+% 	\text{if } x \leq y \implies f(x) \leq f(y), \text{ and } \\
+% 	c(f) = \E{x \sim {\{0, 1\}}^n}{\sum_{i=1}^n \mathbb{I}[f(x) = x_i]}.
+% \end{align}
+% $x \leq y$ denotes that $x_i \leq y_i$ for all $i \in [n]$ and $\mathbb{I}$ is the indicator function. \\
+
+% \noindent
+% We also know that
+% \begin{align}
+% 	\text{Inf}(f) &= \sum_{i=1}^n \Pr_{x \sim {\{0, 1\}}^n}[f(x) \neq f(x^{(i)})] \\
+% 	&= \sum_{i=1}^n \frac{1}{2^n} \sum_{x \in {\{0, 1\}}^n} \mathbb{I}[f(x) \neq f(x^{(i)})]
+% \end{align}
+% where $x^{(i)}$ is the string obtained by flipping the $i$-th bit of $x$. \\
+
+For any $x \in {\{0, 1\}}^n$, we have two cases $\forall\ i \in [n]$: \\
+
+\noindent
+\textbf{Case 1: $x_i$ is a sensitive bit} \\
+\textit{Claim:} $f(x) = x_i$, i.e., $x_i$ is a ``correct'' bit for $f$. \\
+\textit{Proof by contradiction:} Assume that $f(x) \neq x_i$.
+\begin{enumerate}
+	\item If $x_i = 0$, then $f(x) = 1$ and $f(x^{(i)}) = 0$. But $f(x) > f(x^{(i)})$ while $x \leq x^{(i)}$
+	\item If $x_i = 1$, then $f(x) = 0$ and $f(x^{(i)}) = 1$. But $f(x) < f(x^{(i)})$ while $x \geq x^{(i)}$
+\end{enumerate}
+In both cases, we get a contradiction, since $f$ is monotone. Hence our claim is true. \\
+
+\noindent
+\textbf{Case 2: $x_i$ is not a sensitive bit} \\
+\textit{Claim:} Either $f(x) = x_i$ or $f(x^{(i)}) = x^{(i)}_i$, i.e., $i$-th bit is correct for one of $x$ or $x^{(i)}$. \\
+\textit{Proof:} Since $x_i$ is not a sensitive bit, we have $f(x) = f(x^{(i)})$.
+\begin{enumerate}
+	\item If $f(x) = f(x^{(i)}) = x_i$, then $i$ is a correct bit for $x$ and not for $x^{(i)}$.
+	\item If $f(x) = f(x^{(i)}) = x^{(i)}_i$, then $i$ is a correct bit for $x^{(i)}$ and not for $x$.
+\end{enumerate}
+Hence our claim is true. i.e. $\E{}{f(x) = x_i | x_i \text{ is not sensitive}} = \frac{1}{2}$. \\
+
+\noindent
+Now we can write the expected number of correct bits, $c(f)$, as
+\begin{align}
+	c(f) &= \E{x \sim {\{0, 1\}}^n}{\sum_{i=1}^n \mathbb{I}[f(x) = x_i]} \\
+	&= \frac{1}{2^n} \sum_{x \in {\{0, 1\}}^n} \left( s(f, x) + (n - s(f, x)) \cdot \mathbb{E}[f(x_i) = x_i | x_i \text{ is not sensitive}]\right) \\
+	&= \frac{1}{2^n} \sum_{x \in {\{0, 1\}}^n} \left( s(f, x) + \frac{(n - s(f, x))}{2}\right) \\
+	&= \frac{1}{2^n} \sum_{x \in {\{0, 1\}}^n} \frac{n + s(f, x)}{2} \\
+\implies c(f) &= \frac{n + as(f)}{2} = \frac{n + \text{Inf}(f)}{2}
+\end{align}
+\vspace*{-8mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\subsection{\boldmath{Let $f : {\{-1, 1\}}^n \rightarrow \{-1, 1\}$. Give a Fourier formula for the expression 
+\[\mathbb{E}_{x,y,z \sim {\{-1, 1\}}^n} [f (x)f (y)f (z)f (w)],\]
+where $x, y, z$ are chosen uniformly at random from ${\{-1, 1\}}^n$ and $w = x \oplus y \oplus z$, i.e., $w_i = x_i y_i z_i$ for all $i \in [n]$. \begin{flushright}\vspace*{-5mm} (10 points) \end{flushright}}} \vspace*{-8mm}
+
+Substituting the Fourier representation of $f$ in the given expression, we have
+\begin{align*}
+	&\E{x,y,z \sim {\{-1, 1\}}^n}{f(x)f(y)f(z)f(w)} \\
+	 &= \E{x,y,z}{\left(\sum_{S \subseteq [n]} \hat{f}(S) \chi_S(x)\right)\!\!\! \left(\sum_{T \subseteq [n]} \hat{f}(T) \chi_T(y)\right)\!\!\! \left(\sum_{U \subseteq [n]} \hat{f}(U) \chi_U(z)\right)\!\!\! \left(\sum_{V \subseteq [n]} \hat{f}(V) \chi_V(w)\right)} \\
+	 &= \E{x,y,z}{\sum_{S,T,U,V} \hat{f}(S)\hat{f}(T)\hat{f}(U)\hat{f}(V) \cdot \prod_{i \in S}x_i \cdot \prod_{i \in T}y_i \cdot \prod_{i \in U}z_i \cdot \prod_{i \in V}(x_i y_i z_i)} \\
+	 &= \E{x,y,z}{\sum_{S,T,U,V} \hat{f}(S)\hat{f}(T)\hat{f}(U)\hat{f}(V) \cdot \prod_{i \in S \Delta V}x_i \cdot\!\! \prod_{i \in T \Delta V}y_i \cdot\!\! \prod_{i \in U \Delta V}z_i}(\text{wlog, if } i \in S \cap V, x_i^2 = 1) \\
+	 &= \sum_{S,T,U,V} \hat{f}(S)\hat{f}(T)\hat{f}(U)\hat{f}(V) \cdot \E{x,y,z}{\prod_{i \in S \Delta V}x_i \cdot\!\! \prod_{i \in T \Delta V}y_i \cdot\!\! \prod_{i \in U \Delta V}z_i} (\text{linearity of expectation}) \\
+	 &= \sum_{S,T,U,V} \hat{f}(S)\hat{f}(T)\hat{f}(U)\hat{f}(V)\!\!\! \prod_{i \in S \Delta V}\!\!\!\E{x}{x_i} \!\! \prod_{i \in T \Delta V}\!\!\!\E{y}{y_i} \!\! \prod_{i \in U \Delta V}\!\!\!\E{z}{z_i}\ \ (\text{since } x_i, y_i, z_i \text{ independent}) \\
+	 &= \sum_{S} \hat{f}(S)^4 \qquad\qquad\qquad\quad\ (\text{since } \E{x}{x_i} = 0, \text{then if } S \Delta V, T \Delta V, U \Delta V \neq \emptyset) \\
+\end{align*}
+
+\noindent
+Therefore we have
+\begin{align*}
+	\boxed{\E{x,y,z \sim {\{-1, 1\}}^n}{f(x)f(y)f(z)f(w)} = \sum_{S} \hat{f}(S)^4}
+\end{align*}
+\vspace*{-12mm}\begin{flushright}\qedsymbol\end{flushright}
+\,
+\subsection{\boldmath{Let $\rho \in [-1, 1]$ and $x \in {\{-1, 1\}}^n$. Recall we say $y \sim N_\rho(x)$ to denote that the random string $y$ is sampled as follows: $y_i = x_i$ with probability $(1 + \rho)/2$ and $y_i = -x_i$ with probability $(1 - \rho)/2$. For a Boolean function $f : {\{-1, 1\}}^n \rightarrow {\{-1, 1\}}$, we define noise stability of $f$ at $\rho$ as follows: 
+\[\text{Stab}_\rho(f) = \mathbb{E}_{x \sim {\{-1, 1\}}^n, y \sim N_\rho(x)} [f (x)f (y)].\] 
+Give a Fourier formula for $\text{Stab}_\rho(f)$. \begin{flushright}\vspace*{-8mm} (10 points) \end{flushright}}} \vspace*{-8mm}
+
+Simplifying the given expression for $\text{Stab}_\rho(f)$, we have
+\begin{align*}
+	\text{Stab}_\rho(f) &= \E{x \sim {\{-1, 1\}}^n, y \sim N_\rho(x)}{f(x)f(y)} \\
+	&= \E{x}{f(x) \cdot \E{y}{f(y)}} & (\text{linearity of expectation}) \\
+	&= \E{x}{f(x) \cdot \E{y}{\sum_{S \subseteq [n]} \hat{f}(S) \cdot \prod_{i \in S}y_i}} & (\text{Fourier representation of } f) \\
+	&= \E{x}{f(x) \cdot \sum_{S \subseteq [n]} \hat{f}(S) \cdot \E{y}{\prod_{i \in S}y_i}} & (\text{linearity of expectation}) \\
+\end{align*}
+
+\noindent
+In class, we have seen that 
+\begin{align*}
+	\E{y \sim N_\rho(x)}{\prod_{i \in S}y_i} = \rho^{|S|} \cdot \chi_s(y)
+\end{align*}
+
+\noindent
+Using this, we can write
+\begin{align*}
+	\text{Stab}_\rho(f) &= \E{x}{f(x) \cdot \sum_{S \subseteq [n]} \hat{f}(S) \cdot \rho^{|S|} \cdot \chi_s(x)} \\
+	&= \sum_{S \subseteq [n]} \hat{f}(S) \cdot \rho^{|S|} \cdot \E{x}{f(x) \cdot \chi_s(x)} & (\text{linearity of expectation}) \\
+	&= \sum_{S \subseteq [n]} \hat{f}(S) \cdot \rho^{|S|} \cdot \hat{f}(S) & (\E{}{\chi_s\chi_t} = 0 \text{ if } S \neq T \text{ and } 1 \text{ otherwise}) \\
+	&= \sum_{S \subseteq [n]} \hat{f}(S)^2 \cdot \rho^{|S|}
+\end{align*}
+
+\noindent
+Therefore we have
+\begin{align*}
+	\boxed{\text{Stab}_\rho(f) = \sum_{S \subseteq [n]} \hat{f}(S)^2 \cdot \rho^{|S|}}
+\end{align*}
+\vspace*{-12mm}\begin{flushright}\qedsymbol\end{flushright}
+
+\,
+\subsection{\boldmath{Let $\epsilon > 0$. Prove that for every Boolean function $f : {\{-1, 1\}}^n \rightarrow {\{-1, 1\}}$, there exists a Boolean function $g : {\{-1, 1\}}^n \rightarrow {\{-1, 1\}}$ depending on at most $2^{O(\text{as}(f )/\epsilon)}$ variables such that $g$ differs from $f$ on at most an $\epsilon$ fraction of inputs. Recall $\text{as}(f )$ denotes the average sensitivity of $f$. \begin{flushright}\vspace*{-5mm} (15 points) \end{flushright}}} \vspace*{-8mm}
+
+
+
+\subsection{\boldmath{A tournament is a directed graph obtained by assigning a direction to each edge in an undirected complete graph. (See Figure 1.) We say that a tournament is acyclic if it contains no directed cycles. Note that a tournament can be represented by a string in ${\{0, 1\}}^{n \choose 2}$, where every edge is represented by a bit and its value represents the orientation of the edge. Thus, we can define the following Boolean function $T_\text{acyclic} : {\{0, 1\}}^{n \choose 2} \rightarrow \{0, 1\}$ such that $T_\text{acyclic}(x) = 1$ if and only if $x$ defines an acyclic tournament. \\
+Prove that $D(T_\text{acyclic}) \geq {n \choose 2} - \frac{n}{2}$. Recall $D(f)$ is the deterministic decision tree complexity of $f$. \begin{flushright}\vspace*{-5mm} (15 points) \end{flushright}}} \vspace*{-8mm}
+
+Consider an input $x \in {\{0, 1\}}^{n \choose 2}$ such that $T_\text{acyclic}(x) = 1$. Since $x$ defines an acyclic tournament, there exists a topological ordering for our given vertices. Let $v_1, v_2, \dots, v_n$ be the vertices in the topological ordering. \\
+
+\noindent
+Now consider the following adversial argument for any deterministic decision tree $T$ that computes $T_\text{acyclic}$. We iteratively tell that while we have not queried all edges, if the edge $(v_i, v_j)$ is queried, then we set $x_{(v_i, v_j)} = 1$ if $i < j$ and $x_{(v_i, v_j)} = 0$ otherwise. \\
+
+\noindent
+We state that after querying for $ i < {n \choose 2} $ edges, there exist inputs $x, y \in {\{0, 1\}}^{n \choose 2}$ such that $T_\text{acyclic}(x) \neq T_\text{acyclic}(y)$ and $T$ has queried for the same set of edges for both $x$ and $y$. \\
+\begin{enumerate}
+	\item For an unqueried edge $(v_i, v_j)$, if $i < j$, and we set $x_{(v_i, v_j)} = 1$, then $T_\text{acyclic}(x) = 0$ since we have a cycle $(v_j, v_i, v_j)$.
+	\item Or else if $x_{(v_i, v_j)} = 0$, then $T_\text{acyclic}(x) = 1$ since we have a topological ordering.
+\end{enumerate}
+
+Therefore we need to query all the edges to get the correct answer. Hence we have
+\begin{align*}
+	\boxed{D(T_\text{acyclic}) = {n \choose 2}}
+\end{align*}
+\vspace*{-12mm}\begin{flushright}\qedsymbol\end{flushright}
+
+
+\pagebreak
+\subsection{\boldmath{Let $T$ be a tournament and $v$ be a vertex of $T$. We say that $v$ is a \textit{source} if all edges incident on $v$ are directed \textit{away} from it. Not every tournament has a source. Therefore we can consider the following Boolean function $\text{SRC} : {\{0, 1\}}^{n \choose 2} \rightarrow \{0, 1\}$ defined as $\text{SRC}(x) = 1$ if and only if the tournament given by $x$ has a source. Show that $D(\text{SRC}) = O(n)$. \begin{flushright}\vspace*{-5mm} (15 points) \end{flushright}}} \vspace*{-8mm}
+
+We propose the following algorithm for querying the edges of the tournament $T$ to find a source:
+\begin{enumerate}
+	\item We maintain two sets $Possible$ and $Rejected$ containing the vertices that are possible sources and rejected sources respectively. Initially, $Possible = \{1, 2, \dots, n\}$ and $Rejected = \emptyset$.
+	\item While $|Possible| > 1$: Take two vertices $u, v \in Possible$ and query the edge $(u, v)$.
+	\item (Correctness proof) Whatever the direction of the edge $(u, v)$, we can reject one of $u$ or $v$ as a possible source. Hence we remove one of them from $Possible$ and add it to $Rejected$.
+	\item Therefore, w.l.o.g. if $(u, v)$ is directed from $u$ to $v$, update $Possible = Possible \setminus \{v\}$ and $Rejected = Rejected \cup \{v\}$.
+	\item Once $|Possible| = 1$, we query all the edges incident on the vertex in $Possible$ and check if all of them are directed away from it. If so, we have found a source and $\text{SRC}(T) = 1$. Otherwise, $\text{SRC}(T) = 0$.
+\end{enumerate}
+
+\noindent
+Analyzing the number of queries made by the algorithm, we have that step 2 does $n-1$ queries, since in each iteration we remove one vertex from $Possible$. In step 5, we query at most $n-1$ edges. Hence the total number of queries is $2n-2 = O(n)$.\\
+
+\noindent
+Hence, since we have that max cost of the algorithm is $2n-2$, we have that the Deterministic Decision Tree complexity $\leq 2n-2 = O(n)$. Therefore we have
+\begin{align*}
+	\boxed{D(\text{SRC}) = O(n)}
+\end{align*}
+\vspace*{-12mm}\begin{flushright}\qedsymbol\end{flushright}
+
+\,
+\subsection{\boldmath{For $1 \leq t \leq n$, let $\text{Tht} : {\{0, 1\}}^n \rightarrow \{0, 1\}$ be the threshold function defined as follows:
+\begin{align*}
+    \text{Tht}(x) = \begin{cases}
+        1 & \text{if } \sum_{i=1}^n x_i \geq t \\
+        0 & \text{otherwise}
+    \end{cases}
+\end{align*}
+Prove that $\text{deg}(\text{Tht}) = n$, i.e., any polynomial representing $\text{Tht}$ must have full degree $n$. \begin{flushright}\vspace*{-5mm} (15 points) \end{flushright}}} \vspace*{-8mm}
+
+In class, we have seen that
+\begin{align}
+	\text{deg}(f) = n \text{ iff } |X^\text{even}| \neq |X^\text{odd}|
+\end{align}
+where $X^\text{even} = \{x | f(x) = 1 \text{ and } |x| \text{ is even}\}$ and $X^\text{odd} = \{x | f(x) = 1 \text{ and } |x| \text{ is odd}\}$. \\
+
+\noindent
+Let $\text{Tht}_t$ be the threshold function for $t \in [n]$. We have that
+\begin{align}
+	\text{Tht}_t(x) = \begin{cases}
+		1 & \text{if } \sum_{i=1}^n x_i \geq t \\
+		0 & \text{otherwise}
+	\end{cases}
+\end{align}
+
+\noindent
+This implies that
+\begin{align*}
+	X^\text{even} &= \{x | \sum_{i=1}^n x_i \geq t \text{ and } |x| \text{ is even}\} \\
+	X^\text{odd} &= \{x | \sum_{i=1}^n x_i \geq t \text{ and } |x| \text{ is odd}\}
+\end{align*}
+
+\noindent
+By choosing $2k$ or $2k+1$ bits from $n$ bits and setting them to $1$, while the rest are set to $0$, we can get all the elements of $X^\text{even}$ and $X^\text{odd}$ respectively. Hence we have 
+\begin{align*}
+	|X^\text{even}| &= \sum_{k = \lceil t/2 \rceil}^{\lfloor n/2 \rfloor} {n \choose 2k} \\
+	|X^\text{odd}| &= \sum_{k = \lfloor t/2 \rfloor}^{\lfloor (n-1)/2 \rfloor} {n \choose 2k+1}
+\end{align*}
+
+\noindent
+Therefore we have
+\begin{align*}
+	|X^\text{even}| - |X^\text{odd}| &= \sum_{i = t}^n {(-1)^i \cdot {n \choose i}} \\
+\implies |X^\text{even}| - |X^\text{odd}| &= \sum_{i = 0}^{n-t} {(-1)^i \cdot {n \choose i}} & (\text{using } {n \choose i} = {n \choose n-i}) \\
+\end{align*}
+
+\noindent
+Hence to prove $X^\text{even} \neq X^\text{odd}$, we need to show that
+\begin{align}
+	\sum_{i = 0}^{k} {(-1)^i \cdot {n \choose i}} \neq 0, \text{ where } k = n- t, \forall\ t \in [n], \text{ i.e. } 0 \leq k \leq n - 1;
+\end{align}
+
+\noindent
+We can prove this by induction on $n$. \\
+\underline{Base case:} For k = 0, it holds trivially. \\
+\underline{Induction hypothesis:} Assume that it holds for some $k \in [n-2]$. Then for $k+1$, we have
+\begin{align*}
+	\sum_{i=0}^{k+1}(-1)^i\binom{n}{i} &= (-1)^{k+1}\binom{n}{k+1}+\sum_{i=0}^{k}(-1)^i\binom{n}{i} \\
+	&= (-1)^{k+1}\binom{n}{k+1}+(-1)^k\binom{n-1}{k} \\
+	&= (-1)^{k+1}\left\{\binom{n}{k+1}-\binom{n-1}{k}\right\} \\
+	&= (-1)^{k+1}\binom{n-1}{k+1}
+\end{align*}
+Hence the induction hypothesis holds. \\
+
+\noindent
+Therefore we have that $|X^\text{even}| \neq |X^\text{odd}|$ for all $t \in [n]$. Hence deg $(\text{Tht}_t) = n\ \forall\ t \in [n]$.
+
+\end{document}
